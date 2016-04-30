@@ -1,0 +1,22 @@
+<template name="User">
+  <h2>{{profile.name}}</h2>
+
+  <div class="notes-panel">
+    <h4>Notes</h4>
+    <ul class="notes-list">
+      {{#each notes}}
+        <li class="note-item">
+          <div class="body">
+            {{#linkTo route='note'}}
+              {{body}}
+            {{/linkTo}}
+          </div>
+        </li>
+      {{else}}
+        <li class="note-item empty">
+          No notes yet.
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>

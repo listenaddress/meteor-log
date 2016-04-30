@@ -1,0 +1,18 @@
+<template name="NotesList">
+  <h2>Notes</h2>
+  {{> CreateNote}}
+  <div class="notes-panel">
+    <br>
+    <ul class="notes-list">
+      {{#each notes}}
+        <li class="note-item {{isPrivateClass}}">
+          {{> NotePreview}}
+        </li>
+      {{else}}
+        <li class="note-item empty">
+          No notes yet.
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>

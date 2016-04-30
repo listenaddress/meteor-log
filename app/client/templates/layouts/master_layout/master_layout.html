@@ -1,0 +1,19 @@
+<template name="MasterLayout">
+  <div class="row">
+    <div class="login">
+      {{#if currentUser}}
+        {{currentUser.profile.name}} - <a data-logout>Logout</a>
+      {{else}}
+        {{#if loggingIn}}
+          Logging in...
+        {{else}}
+          <a data-login>Login with Meteor</a>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="row">
+    <a href="/">Home</a>
+  </div>
+  {{> yield}}
+</template>

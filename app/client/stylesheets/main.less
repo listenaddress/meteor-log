@@ -1,0 +1,153 @@
+body {
+  font-size: 14pt;
+  color: #777;
+}
+
+.box-sizing(@value) {
+  box-sizing: @value;
+  -webkit-box-sizing: @value;
+  -moz-box-sizing: @value;
+}
+
+.border-radius(@value) {
+  border-radius: @value;
+  -webkit-border-radius: @value;
+  -moz-border-radius: @value;
+}
+
+.container {
+  margin: 20px auto;
+  max-width: 940px;
+}
+
+.login {
+  margin: 20px 0px;
+  float: right;
+}
+
+form {
+  background: #fff;
+  overflow: hidden;
+  .border-radius(6px);
+
+  input[type=text], textarea {
+    width: 100%;
+    .box-sizing(border-box);
+  }
+
+  input[type=text] {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 18pt;
+    height: 24pt;
+    line-height: 24pt;
+  }
+
+  textarea {
+    height: 100px;
+    line-height: 1em;
+    padding: 5px;
+    font-size: 14pt;
+  }
+}
+
+.create-note {
+}
+
+.edit-note {
+}
+
+.notes-count {
+  clear: both;
+  overflow: hidden;
+  margin: 20px 0px;
+  color: lighten(#777, 20%);
+}
+
+.list {
+  list-style: none;
+  clear: both;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+.notes-list {
+  &:extend(.list);
+}
+
+.note-item {
+  clear: both;
+  float: left;
+  padding: 10px 0px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+
+  &.done {
+    .title {
+      text-decoration: line-through;
+    }
+  }
+
+  .done {
+    float: left;
+  }
+
+  .title {
+    float: left;
+    padding-left: 20px;
+  }
+
+  .action {
+    float: right;
+  }
+}
+
+.comments {
+  border: 1px solid #ccc;
+  margin-top: 50px;
+
+  h3 {
+    background: #eee;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .new-comment {
+    padding: 10px;
+    textarea {
+      width: 99%;
+      height: 75px;
+    }
+
+    .actions {
+    }
+  }
+
+  ul {
+    &:extend(.list);
+
+    li.comment {
+      clear: both;
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .user {
+        font-size: .7em;
+        color: #777;
+        float: right;
+      }
+
+      .body {
+        color: #262626;
+        font-size: .9em;
+      }
+    }
+  }
+}
