@@ -25,3 +25,4 @@ accounts-meteor-developer
 service-configuration
 momentjs:moment
 jshint
+aldeed:collection2

@@ -1,5 +1,20 @@
 Notes = new Mongo.Collection('notes');
 
+var Schemas = {};
+
+Schemas.Note = new SimpleSchema({
+  body: {
+    type: String
+  },
+  userId: {
+    type: String
+  },
+  createdAt: {
+    type: Date
+  }
+});
+
+Notes.attachSchema(Schemas.Note);
 
 if (Meteor.isServer) {
   Notes.allow({
