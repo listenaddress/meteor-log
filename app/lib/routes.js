@@ -30,3 +30,10 @@ Router.route('/user/:_id', {
   action: 'detail',
   where: 'client'
 });
+
+Router.route('/user/:_id/notifications', {
+  name: 'notifications',
+  controller: 'NotificationController',
+  action: 'detail',
+  where: 'client'
+});

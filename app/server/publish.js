@@ -23,3 +23,39 @@ Meteor.publish('user', function (userId) {
     Notes.find({userId: userId})
   ];
 });
+
+Meteor.publishComposite('notifications', function (id) {
+  return {
+    find: function () {
+      return Notifications.find({userId: id});
+    },
+    children: [
+      {
+        // Find note from notification
+        find: function(notification) {
+          return Notes.find({_id: notification.noteId});
+        },
+        children: [
+          {
+            find: function(notification, note) {
+              return Meteor.users.find({_id: note.userId}, {fields: { profile: 1 }});
+            }
+          }
+        ]
+      },
+      {
+        // Find comment from notification
+        find: function(notification) {
+          return Comments.find({_id: notification.commentId});
+        },
+        children: [
+          {
+            find: function(notification, comment) {
+              return Meteor.users.find({_id: comment.userId}, {fields: { profile: 1 }});
+            }
+          }
+        ]
+      }
+    ]
+  }
+});

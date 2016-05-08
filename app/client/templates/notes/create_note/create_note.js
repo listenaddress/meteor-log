@@ -4,10 +4,8 @@ Template.CreateNote.events({
 
     var body = tmpl.find('textarea[name=body]').value;
 
-    Notes.insert({
-      body: body,
-      createdAt: new Date,
-      userId: Meteor.userId()
+    Meteor.call('saveNote', {
+      body: body
     });
 
     tmpl.find('form').reset();

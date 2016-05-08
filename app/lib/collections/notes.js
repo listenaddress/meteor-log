@@ -9,6 +9,10 @@ Schemas.Note = new SimpleSchema({
   userId: {
     type: String
   },
+  subscribers: {
+    type: [String],
+    optional: true
+  },
   createdAt: {
     type: Date
   }

@@ -2,15 +2,13 @@ Template.CommentsList.events({
   'submit form#new-comment': function (e, tmpl) {
     e.preventDefault();
 
-    var note = this;
-    var body = tmpl.find('textarea[name=body]').value;
     var form = tmpl.find('form');
+    var body = tmpl.find('textarea[name=body]').value;
+    var note = this;
 
-    Comments.insert({
-      noteId: note._id,
-      createdAt: new Date,
-      userId: Meteor.userId(),
-      body: body
+    Meteor.call('saveComment', {
+      body: body,
+      noteId: note._id
     });
 
     form.reset();
