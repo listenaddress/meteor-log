@@ -13,7 +13,7 @@
 
   {{#if get 'isEditing'}}
     <form id="edit-note" class="form edit-note">
-      <textarea name="body" placeholder="Body">{{body}}</textarea>
+      {{> froalaReactive getContext _value=body}}
       <input type="submit" class="btn" value="Save"/>
       {{#linkTo route='note'}}
         Cancel
@@ -21,7 +21,7 @@
     </form>
   {{else}}
     <p>
-      {{body}}
+      {{{body}}}
     </p>
 
     {{#if isMyNote}}

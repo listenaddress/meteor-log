@@ -1,11 +1,10 @@
 <template name="CreateNote">
-  <form class="create-note">
+  <div class="create-note">
     {{#if currentUser}}
-      <span>New note</span>
-      <textarea name="body" placeholder="⛩"></textarea>
-      <input type="submit" class="btn" value="Save"/>
+      {{> froalaReactive getContext}}
+      <input type="submit" class="btn save" value="Save"/>
     {{else}}
       <input type="text" placeholder="Sign in to create notes..." readonly />
     {{/if}}
-  </form>
+  </div >
 </template>

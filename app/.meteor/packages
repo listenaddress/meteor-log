@@ -28,3 +28,4 @@ jshint
 aldeed:collection2
 reywood:publish-composite
 raix:handlebar-helpers
+froala:editor-reactive

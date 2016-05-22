@@ -8,7 +8,14 @@ Meteor.methods({
     note.createdAt = new Date;
 
     if(note.userId) {
-      Notes.insert(note);
+      return Notes.insert(note, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          return response;
+        }
+      });
     }
   },
   'saveComment': function (comment) {
