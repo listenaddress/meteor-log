@@ -24,6 +24,20 @@ Router.route('/note/:_id/edit', {
   where: 'client'
 });
 
+Router.route('/now/:_id', {
+  name: 'now',
+  controller: 'NowController',
+  action: 'detail',
+  where: 'client'
+});
+
+Router.route('/now/:_id/edit', {
+  name: 'now.edit',
+  controller: 'NowController',
+  action: 'edit',
+  where: 'client'
+});
+
 Router.route('/user/:_id', {
   name: 'user',
   controller: 'UserController',

@@ -1,0 +1,24 @@
+<template name="Now">
+  <div class="now">
+    {{#if get 'isEditing'}}
+      <form id="edit-now" class="form edit-now">
+        {{> froalaReactive getContext _value=body}}
+        <input type="submit" class="btn" value="Save"/>
+        {{#linkTo route='now'}}
+          Cancel
+        {{/linkTo}}
+      </form>
+    {{else}}
+      <p>
+        {{{body}}}
+      </p>
+
+      {{#if isMyNow}}
+        {{#linkTo route='now.edit'}}
+          Edit
+        {{/linkTo}}
+      {{/if}}
+    {{/if}}
+    <div>{{timestamp}}</div>
+  </div>
+</template>

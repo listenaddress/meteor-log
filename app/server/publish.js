@@ -59,3 +59,15 @@ Meteor.publishComposite('notifications', function (id) {
     ]
   }
 });
+
+Meteor.publish('nows', function () {
+  return Nows.find();
+});
+
+Meteor.publish('now', function (id) {
+  var now = Nows.findOne({_id: id});
+  return [
+    Meteor.users.find({_id: now.userId}, {fields: {profile: 1}}),
+    Nows.find({_id: id})
+  ];
+});

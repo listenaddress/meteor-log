@@ -18,6 +18,21 @@ Meteor.methods({
       });
     }
   },
+  'saveNow': function (item) {
+    item.userId = Meteor.userId();
+    item.createdAt = new Date;
+
+    if(item.userId) {
+      return Nows.insert(item, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          return response;
+        }
+      });
+    }
+  },
   'saveComment': function (comment) {
     // Save comment
     comment.userId = Meteor.userId();
