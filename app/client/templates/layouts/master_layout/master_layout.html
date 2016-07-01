@@ -1,19 +1,26 @@
 <template name="MasterLayout">
-  <div class="row">
-    <div class="login">
-      {{#if currentUser}}
-        {{currentUser.profile.name}} - <a data-logout>Logout</a>
-      {{else}}
-        {{#if loggingIn}}
-          Logging in...
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <a href="/" class="header item">Log</a>
+      <div class="right menu">
+        {{#if currentUser}}
+          {{#linkTo route="user" _id=currentUser._id}}
+            <a class="item">
+              {{currentUser.profile.name}}
+            </a>
+          {{/linkTo}}
+          <a class="item" href="#" data-logout>Logout</a>
         {{else}}
-          <a data-login>Login with Meteor</a>
+          {{#if loggingIn}}
+            Logging in...
+          {{else}}
+            <a class="item" data-login>Login with Meteor</a>
+          {{/if}}
         {{/if}}
-      {{/if}}
+      </div>
     </div>
   </div>
-  <div class="row">
-    <a href="/">Home</a>
+  <div class="ui main text container" style="margin-top: 7em">
+    {{> yield}}
   </div>
-  {{> yield}}
 </template>

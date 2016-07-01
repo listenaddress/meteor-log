@@ -1,5 +1,5 @@
 Template.CreateNow.events({
-  'click .save': function (e, tmpl) {
+  'click .primary': function (e, tmpl) {
     e.preventDefault();
     var body = tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.get', true);
 

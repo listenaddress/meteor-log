@@ -1,12 +1,25 @@
 <template name="User">
-  <h2>{{profile.name}}</h2>
+  <h2 class="ui header">
+    <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg" class="ui circular image">
+    {{profile.name}}
+  </h2>
 
   <div class="nows-panel">
-    <h4>Now</h4>
+    {{#with now}}
+      {{{body}}}
+      <div>
+        {{#linkTo route='now'}}
+          {{timestamp}}
+        {{/linkTo}}
+      </div>
+    {{/with}}
+  </div>
+  <hr>
+  <div>
     <ul class="nows-list">
+    <h4>History</h4>
       {{#each nows}}
         <li class="now-item">
-          {{{body}}}
           {{#linkTo route='now'}}
             {{timestamp}}
           {{/linkTo}}

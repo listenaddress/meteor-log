@@ -1,8 +1,10 @@
 <template name="CreateNow">
   <div class="create-note">
     {{#if currentUser}}
-      {{> froalaReactive getContext}}
-      <input type="submit" class="btn save" value="Save"/>
+      <div style="margin-bottom: 10px">
+        {{> froalaReactive getContext}}
+      </div>
+      <input type="submit" class="ui primary button" value="Save"/>
     {{else}}
       <input type="text" placeholder="Sign in to update your now..." readonly />
     {{/if}}

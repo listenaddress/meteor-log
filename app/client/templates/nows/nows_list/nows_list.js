@@ -9,7 +9,7 @@ Template.NowsList.events({
 /*****************************************************************************/
 Template.NowsList.helpers({
   nows: function() {
-  	return Nows.find({});
+    return Nows.find({}, {sort: {createdAt: -1}});
   },
 
   timestamp: function () {

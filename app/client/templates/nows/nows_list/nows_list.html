@@ -1,13 +1,11 @@
 <template name="NowsList">
   <div class="nows-list">
-    <h2>Now</h2>
+    <h1>Now</h1>
     {{> CreateNow}}
-    <ul class="nows-list">
+    <div class="nows-list ui items">
       {{#each nows}}
-        <li class="now-item">
-          {{> NowPreview}}
-        </li>
+        {{> NowPreview}}
       {{/each}} 
-    </ul>
+    </div>
   </div>
 </template>

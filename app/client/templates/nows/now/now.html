@@ -1,24 +1,38 @@
-<template name="Now">
-  <div class="now">
-    {{#if get 'isEditing'}}
-      <form id="edit-now" class="form edit-now">
-        {{> froalaReactive getContext _value=body}}
-        <input type="submit" class="btn" value="Save"/>
-        {{#linkTo route='now'}}
-          Cancel
-        {{/linkTo}}
-      </form>
-    {{else}}
-      <p>
-        {{{body}}}
-      </p>
+<template name="Now" class="ui items">
+  <div class="ui items">
+    <div class="now item">
+      <a class="ui tiny image">
+        <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
+      </a>
+      <div class="content">
+        <a class="header">
+          {{#linkTo route='user' _id=userId}}
+            {{userId}}
+          {{/linkTo}}
+        </a>
+        <div>
+          {{#if get 'isEditing'}}
+            <form id="edit-now" class="form edit-now">
+              {{> froalaReactive getContext _value=body}}
+              <input type="submit" class="btn" value="Save"/>
+              {{#linkTo route='now'}}
+                Cancel
+              {{/linkTo}}
+            </form>
+          {{else}}
+            <p>
+              {{{body}}}
+            </p>
 
-      {{#if isMyNow}}
-        {{#linkTo route='now.edit'}}
-          Edit
-        {{/linkTo}}
-      {{/if}}
-    {{/if}}
-    <div>{{timestamp}}</div>
+            {{#if isMyNow}}
+              {{#linkTo route='now.edit'}}
+                Edit
+              {{/linkTo}}
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      <div>{{timestamp}}</div>
+    </div>
   </div>
 </template>
