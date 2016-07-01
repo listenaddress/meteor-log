@@ -2,8 +2,13 @@ Template.User.events({
 });
 
 Template.User.helpers({
-  notes: function () {
+  nows: function () {
     var user = this;
-    return Notes.find({userId: user._id}, {sort: {createdAt: -1}});
+    return Nows.find({userId: user._id}, {sort: {createdAt: -1}});
+  },
+
+  timestamp: function () {
+    var comment = this;
+    return moment(comment.createdAt).fromNow();
   }
 });
