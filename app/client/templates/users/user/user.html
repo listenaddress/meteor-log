@@ -8,7 +8,7 @@
     {{#with now}}
       {{{body}}}
       <div>
-        {{#linkTo route='now'}}
+        {{#linkTo route='now.detail'}}
           {{timestamp}}
         {{/linkTo}}
       </div>
@@ -20,7 +20,7 @@
     <h4>History</h4>
       {{#each nows}}
         <li class="now-item">
-          {{#linkTo route='now'}}
+          {{#linkTo route='now.detail'}}
             {{timestamp}}
           {{/linkTo}}
         </li>
