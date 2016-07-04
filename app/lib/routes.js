@@ -51,3 +51,8 @@ Router.route('/user/:_id/notifications', {
   action: 'detail',
   where: 'client'
 });
+
+Router.route('/account', {
+  name: 'account',
+  template: 'account'
+});
