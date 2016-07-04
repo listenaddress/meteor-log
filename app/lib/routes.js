@@ -10,6 +10,13 @@ Router.route('/', {
   where: 'client'
 });
 
+Router.route('/now', {
+  name: 'now.list',
+  controller: 'HomeController',
+  action: 'listNows',
+  where: 'client'
+});
+
 Router.route('/note/:_id', {
   name: 'note',
   controller: 'NoteController',
@@ -25,7 +32,7 @@ Router.route('/note/:_id/edit', {
 });
 
 Router.route('/now/:_id', {
-  name: 'now',
+  name: 'now.detail',
   controller: 'NowController',
   action: 'detail',
   where: 'client'
