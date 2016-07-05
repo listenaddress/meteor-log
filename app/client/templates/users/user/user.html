@@ -3,7 +3,9 @@
     <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg" class="ui circular image">
     {{profile.name}}
   </h2>
-
+  {{#if isMe}}
+    {{> CreateMessage}}
+  {{/if}}
   <div class="nows-panel">
     {{#with now}}
       {{{body}}}

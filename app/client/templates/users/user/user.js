@@ -12,6 +12,10 @@ Template.User.helpers({
     return Nows.find({userId: user._id}, {sort: {createdAt: -1}});
   },
 
+  isMe: function () {
+    return this._id === Meteor.userId();
+  },
+
   timestamp: function () {
     var comment = this;
     return moment(comment.createdAt).fromNow();

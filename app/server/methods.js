@@ -28,7 +28,43 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
+          Meteor.call('saveEvent', response, 'now_created');
           return response;
+        }
+      });
+    }
+  },
+  'saveMessage': function (item) {
+    item.userId = Meteor.userId();
+    item.createdAt = new Date;
+
+    if(item.userId) {
+      return Messages.insert(item, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          Meteor.call('saveEvent', response, 'message');
+          return response;
+        }
+      });
+    }
+  },
+  'saveEvent': function (id, type) {
+    var item = {
+      userId: Meteor.userId(),
+      refType: type,
+      refId: id,
+      createdAt: new Date
+    };
+
+    if(item.userId) {
+      return Events.insert(item, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          return;
         }
       });
     }
