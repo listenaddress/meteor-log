@@ -12,7 +12,7 @@ Template.Now.events({
       }
     });
 
-    Router.go('now', {_id: id});
+    Router.go('now.detail', {_id: id});
   }
 });
 
