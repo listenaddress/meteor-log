@@ -60,6 +60,28 @@ Meteor.publishComposite('notifications', function (id) {
   }
 });
 
+Meteor.publishComposite('events', function (id) {
+  return {
+    find: function () {
+      return Events.find();
+    },
+    children: [
+      {
+        // Find message from event
+        find: function(item) {
+          return Messages.find({_id: item.messageId});
+        }
+      },
+      {
+        // Find now from event
+        find: function(item) {
+          return Nows.find({_id: item.nowId});
+        }
+      }
+    ]
+  }
+});
+
 Meteor.publish('nows', function () {
   return Nows.find();
 });

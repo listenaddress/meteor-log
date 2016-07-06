@@ -3,6 +3,7 @@ HomeController = RouteController.extend({
     this.subscribe('notes');
     this.subscribe('users');
     this.subscribe('nows');
+    this.subscribe('events');
   },
 
   data: function() {

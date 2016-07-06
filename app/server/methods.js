@@ -28,7 +28,7 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, 'now_created');
+          Meteor.call('saveEvent', response, 'now_created', 'Nows');
           return response;
         }
       });
@@ -44,19 +44,24 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, 'message');
+          Meteor.call('saveEvent', response, 'message_created', 'Messages');
           return response;
         }
       });
     }
   },
-  'saveEvent': function (id, type) {
+  'saveEvent': function (id, type, refType) {
     var item = {
       userId: Meteor.userId(),
-      refType: type,
-      refId: id,
+      type: type,
       createdAt: new Date
     };
+
+    if (refType === 'Messages') {
+      item.messageId = id;
+    } else if (refType === 'Nows') {
+      item.nowId = id;
+    }
 
     if(item.userId) {
       return Events.insert(item, function(error, response) {

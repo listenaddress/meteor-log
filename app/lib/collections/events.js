@@ -6,11 +6,15 @@ Schemas.Event = new SimpleSchema({
   userId: {
     type: String
   },
-  refType: {
+  type: {
     type: String,
     optional: true
   },
-  refId: {
+  messageId: {
+    type: String,
+    optional: true
+  },
+  nowId: {
     type: String,
     optional: true
   },

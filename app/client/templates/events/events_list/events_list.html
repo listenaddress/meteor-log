@@ -1,0 +1,20 @@
+<template name="EventsList">
+  <div class="events-list">
+    {{#each events}}
+      <div class="ui items">
+        {{#if this.messageId}}
+          {{#with message}}
+            {{> MessagePreview}}
+          {{/with}}
+        {{/if}}
+        {{#if this.nowId}}
+          {{#with now}}
+            <p>{{ user.profile.name }} updated the now.</p>
+            {{>NowPreview}}
+          {{/with}}
+        {{/if}}
+      </div>
+      <div class="ui divider"></div>
+    {{/each}}
+  </div>
+</template>
