@@ -45,10 +45,17 @@ Router.route('/now/:_id/edit', {
   where: 'client'
 });
 
-Router.route('/:username', {
+Router.route('/users/:username', {
   name: 'user',
   controller: 'UserController',
   action: 'detail',
+  where: 'client'
+});
+
+Router.route('/users/:username/edit', {
+  name: 'user.edit',
+  controller: 'UserController',
+  action: 'edit',
   where: 'client'
 });
 

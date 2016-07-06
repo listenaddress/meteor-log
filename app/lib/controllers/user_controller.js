@@ -9,5 +9,9 @@ UserController = RouteController.extend({
 
   detail: function () {
     this.render('User', { /* data: {} */});
+  },
+
+  edit: function () {
+    this.render('editUser');
   }
 });
