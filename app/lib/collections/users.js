@@ -9,22 +9,13 @@ Schemas.UserProfile = new SimpleSchema({
         type: String,
         optional: true
     },
-    birthday: {
-        type: Date,
-        optional: true
-    },
-    gender: {
+    name: {
         type: String,
-        allowedValues: ['Male', 'Female'],
         optional: true
     },
     website: {
         type: String,
         regEx: SimpleSchema.RegEx.Url,
-        optional: true
-    },
-    bio: {
-        type: String,
         optional: true
     },
     thumb: {

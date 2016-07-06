@@ -109,5 +109,8 @@ Meteor.methods({
         createdAt: new Date
       });
     })
+  },
+  "userExists": function(username){
+            return !!Meteor.users.findOne({username: username});
   }
 });

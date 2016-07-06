@@ -3,7 +3,7 @@ Template.EventsList.helpers({
     return Meteor.users.findOne(this.userId);
   },
   events: function () {
-    return Events.find();
+    return Events.find({},{sort: {createdAt: -1}});
   },
   now: function() {
     return Nows.findOne(this.nowId);
@@ -15,8 +15,18 @@ Template.EventsList.helpers({
 
 
 Template.EventsList.onCreated(function(){
+
   var self = this; 
   self.autorun(function(){
-    self.subscribe('events');
-  });
+    var controller = Router.current(); 
+
+    var user = Meteor.users.findOne({"username":controller.params.username});
+  
+    if(user) 
+      var userId = user._id;
+  
+    self.subscribe('events', userId);
+  }); 
+
+  
 });

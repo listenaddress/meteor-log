@@ -8,7 +8,7 @@
        <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
       </div>
       <div class="content">
-      <h1 class="header">{{profile.name}}</h1>
+      <h1 class="header">{{profile.firstName}}</h1>
       <div class="description">
         <p>
         {{#linkTo route='user'}}      
@@ -31,24 +31,22 @@
     {{> CreateMessage}}
   {{/if}}
 
-  <div class="nows-panel">
-  <h3>What I am doing now!</h3>
-    {{#with now}}
-      {{{body}}}
-      <div>
-        {{#linkTo route='now.detail'}}
-          {{timestamp}}
-        {{/linkTo}}
-      </div>
+   <div class="nows-panel">
+         <div class="ui segment">
+            <h3>What I am doing now!</h3>
+              {{>CreateNow}}
+              {{>Now}}
+          </div>
 
-      {{#if isMe}}
-        {{#linkTo route='now.edit'}}
-          Edit
-        {{/linkTo}}
-      {{/if}}
+        <div class="ui segment">
+          <h3>My Log</h3>
+          {{>EventsList}}
+        </div>
+    </div>
+    
 
-    {{/with}}
-  </div>
+
+  
   <hr>
   <div>
     <ul class="nows-list">

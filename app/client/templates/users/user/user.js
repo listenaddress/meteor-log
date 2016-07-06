@@ -13,7 +13,6 @@ Template.User.helpers({
   },
 
   isMe: function () {
-    console.log(this._id)
     return this._id === Meteor.userId();
   },
 

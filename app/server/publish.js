@@ -60,10 +60,13 @@ Meteor.publishComposite('notifications', function (id) {
   }
 });
 
-Meteor.publishComposite('events', function (id) {
+Meteor.publishComposite('events', function (userId) {
   return {
     find: function () {
-      return Events.find();
+      if(userId)
+        return Events.find({userId: userId}, {sort: {createdAt: -1}});
+      else 
+        return Events.find({},{sort: {createdAt: -1}});
     },
     children: [
       {
@@ -81,6 +84,7 @@ Meteor.publishComposite('events', function (id) {
     ]
   }
 });
+
 
 Meteor.publish('nows', function () {
   return Nows.find();
