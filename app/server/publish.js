@@ -15,12 +15,12 @@ Meteor.publish('users', function () {
   return Meteor.users.find({}, {fields: { profile: 1 }});
 });
 
-Meteor.publish('user', function (userId) {
-  if (!this.userId) return this.ready();
+Meteor.publish('user', function (username) {
+   var userId = Meteor.users.findOne({username: username}, {fields: {profile: 1}});
 
   return [
-    Meteor.users.find({_id: userId}, {fields: {profile: 1}}),
-    Nows.find({userId: userId})
+    Meteor.users.find({username: username}, {fields: {profile: 1}}),
+    Nows.find({userId: userId._id})
   ];
 });
 
