@@ -13,15 +13,14 @@ Template.NowPreview.helpers({
     return moment(now.createdAt).fromNow();
   },
   user: function() {
-    return Meteor.users.findOne({_id:this.userId}, {fields: {profile: 1}});
+    return Meteor.users.findOne({_id:this.userId}, {fields: {profile: 1, username:1}});
   }
 });
 
 /*****************************************************************************/
 /* NowPreview: Lifecycle Hooks */
 /*****************************************************************************/
-Template.NowPreview.onCreated(function () {
-});
+
 
 Template.NowPreview.onRendered(function () {
 });

@@ -1,9 +1,9 @@
 HomeController = RouteController.extend({
   subscriptions: function() {
-    this.subscribe('notes');
-    this.subscribe('users');
-    this.subscribe('nows');
-    this.subscribe('events');
+    // this.subscribe('notes');
+    // this.subscribe('users');
+    // this.subscribe('nows');
+    // this.subscribe('events');
   },
 
   data: function() {

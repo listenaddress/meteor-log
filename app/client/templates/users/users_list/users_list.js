@@ -6,3 +6,11 @@ Template.UsersList.helpers({
     return Meteor.users.find({});
   }
 });
+
+
+Template.UsersList.onCreated(function(){
+  var self = this; 
+  self.autorun(function(){
+    self.subscribe('users');
+  });
+});

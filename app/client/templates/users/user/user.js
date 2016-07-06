@@ -13,6 +13,7 @@ Template.User.helpers({
   },
 
   isMe: function () {
+    console.log(this._id)
     return this._id === Meteor.userId();
   },
 
@@ -22,6 +23,7 @@ Template.User.helpers({
   },
 
   userProfile: function(){
-    return Meteor.users.findOne();
+    var controller = Router.current();
+    return Meteor.users.findOne({"username": controller.params.username});
   }
 });

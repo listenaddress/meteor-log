@@ -1,6 +1,8 @@
 <template name="Home">
   <h1>Log</h1>
-  {{> CreateMessage}}
+  {{#if currentUser}}
+    {{> CreateMessage}}
+  {{/if}}
   <div class="ui divider"></div>
   {{> EventsList}}
 

@@ -12,3 +12,11 @@ Template.EventsList.helpers({
     return Messages.findOne(this.messageId);
   }
 });
+
+
+Template.EventsList.onCreated(function(){
+  var self = this; 
+  self.autorun(function(){
+    self.subscribe('events');
+  });
+});

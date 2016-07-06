@@ -45,28 +45,45 @@ Router.route('/now/:_id/edit', {
   where: 'client'
 });
 
-Router.route('/users/:username', {
+
+
+Router.route('/account', {
+  before: function () {
+     if (Meteor.user()) {
+       this.redirect('/');
+     }
+     else{
+       this.render('account');
+     }
+ },
+  name: 'account'
+});
+
+Router.onBeforeAction(function() {
+    if (!Meteor.user())
+        this.redirect('/account');
+}, {except: ['account', 'home', 'user']});
+
+
+Router.route('/:username', {
   name: 'user',
   controller: 'UserController',
   action: 'detail',
   where: 'client'
 });
 
-Router.route('/users/:username/edit', {
+Router.route('/:username/edit', {
   name: 'user.edit',
   controller: 'UserController',
   action: 'edit',
   where: 'client'
 });
 
-Router.route('/user/:_id/notifications', {
-  name: 'notifications',
-  controller: 'NotificationController',
-  action: 'detail',
-  where: 'client'
-});
+// Router.route('/user/:_id/notifications', {
+//   name: 'notifications',
+//   controller: 'NotificationController',
+//   action: 'detail',
+//   where: 'client'
+// });
 
-Router.route('/account', {
-  name: 'account',
-  template: 'account'
-});
+

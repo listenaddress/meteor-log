@@ -41,9 +41,11 @@
         {{/linkTo}}
       </div>
 
+      {{#if isMe}}
         {{#linkTo route='now.edit'}}
           Edit
         {{/linkTo}}
+      {{/if}}
 
     {{/with}}
   </div>
