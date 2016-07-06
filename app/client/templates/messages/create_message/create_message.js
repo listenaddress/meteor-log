@@ -27,6 +27,7 @@ Template.CreateMessage.helpers({
       toolbarInline: true,
       initOnClick: false,
       tabSpaces: false,
+      placeholderText: 'What are you working on now...?',
 
       // FE save.before event handler function:
       "_onsave.before": function (e, editor) {

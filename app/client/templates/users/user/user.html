@@ -1,18 +1,38 @@
 <template name="User">
-  <h2 class="ui header">
-    <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg" class="ui circular image">
-    {{profile.name}}
-    <h5>{{username}}</h5> 
-      {{#if isMe}}
-        {{#linkTo route='user.edit'}}
-          <i class="write square icon"></i>
+
+  {{#with userProfile}}
+
+  <div class="ui items">
+  <div class="item">
+      <div class="ui tiny circular image">
+       <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
+      </div>
+      <div class="content">
+      <h1 class="header">{{profile.name}}</h1>
+      <div class="description">
+        <p>
+        {{#linkTo route='user'}}      
+            @{{username}}
         {{/linkTo}}
-      {{/if}}
-  </h2>
+
+          {{#if isMe}}
+            {{#linkTo route='user.edit'}}
+              <i class="write square icon"></i>
+            {{/linkTo}}
+          {{/if}}
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+  {{/with}}
+
   {{#if isMe}}
     {{> CreateMessage}}
   {{/if}}
+
   <div class="nows-panel">
+  <h3>What I am doing now!</h3>
     {{#with now}}
       {{{body}}}
       <div>
@@ -20,6 +40,11 @@
           {{timestamp}}
         {{/linkTo}}
       </div>
+
+        {{#linkTo route='now.edit'}}
+          Edit
+        {{/linkTo}}
+
     {{/with}}
   </div>
   <hr>

@@ -19,7 +19,7 @@ Meteor.publish('user', function (username) {
    var userId = Meteor.users.findOne({username: username}, {fields: {profile: 1}});
 
   return [
-    Meteor.users.find({username: username}, {fields: {profile: 1}}),
+    Meteor.users.find({username: username}, {fields: {profile: 1, username:1}}),
     Nows.find({userId: userId._id})
   ];
 });

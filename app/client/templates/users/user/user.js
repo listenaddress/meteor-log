@@ -19,5 +19,9 @@ Template.User.helpers({
   timestamp: function () {
     var comment = this;
     return moment(comment.createdAt).fromNow();
+  },
+
+  userProfile: function(){
+    return Meteor.users.findOne();
   }
 });

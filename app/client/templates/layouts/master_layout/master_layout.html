@@ -5,7 +5,8 @@
       <a href="/now" class="header item">Now</a>
       <div class="right menu">
         {{#if currentUser}}
-          {{#linkTo route="user" _id=currentUser._id}}
+          {{#linkTo route="user" username=currentUser.username}}
+
             <a class="item">
               {{currentUser.profile.name}}
             </a>
