@@ -1,6 +1,4 @@
 accounts-base@1.2.5
-accounts-meteor-developer@1.0.8
-accounts-oauth@1.1.11
 accounts-password@1.1.7
 accounts-ui@1.1.8
 accounts-ui-unstyled@1.1.11
@@ -65,7 +63,6 @@ logging@1.0.11
 mdg:validation-error@0.2.0
 meteor@1.1.13
 meteor-base@1.0.3
-meteor-developer@1.1.8
 meteortoys:allthings@3.0.0
 meteortoys:authenticate@3.0.0
 meteortoys:autopub@3.0.0
@@ -95,8 +92,6 @@ msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.42
-oauth@1.1.9
-oauth2@1.1.8
 observe-sequence@1.0.10
 ordered-dict@1.0.6
 peerlibrary:assert@0.2.5

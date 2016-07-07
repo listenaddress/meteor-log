@@ -33,3 +33,18 @@
     </div>
   </div>
 </template>
+
+<template name="nowHistory">
+    <div>
+    <ul class="nows-list">
+    <h2>History</h2>
+      {{#each nows}}
+        <li class="now-item">
+          {{#linkTo route='now.detail'}}
+            {{timestamp}}
+          {{/linkTo}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
