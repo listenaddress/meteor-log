@@ -30,19 +30,20 @@
       {{> CreateMessage}}
     {{/if}}
   </div>
-
+  <div class="ui events grid">
     <div class="ui events grid">
-        <div class="ten wide column">
-          <h3>Now</h3>
-          <div class="ui segment">
-              {{>UserNow}}
-          </div>
+      <div class="ten wide column">
+        <h3>Now</h3>
+        <div class="ui segment">
+          {{>UserNow}}
         </div>
-        <div class="six wide column">
-              <h3>Log</h3>
-              <div class="ui segment">
-                {{>EventsList}}
-              </div>
+      </div>
+      <div class="six wide column">
+        <h3>Log</h3>
+        <div class="ui segment">
+          {{>EventsList}}
         </div>
+      </div>
     </div>
+  </div>
 </template>
