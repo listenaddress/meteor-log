@@ -21,7 +21,7 @@ Template.UserNow.helpers({
     var currentNow = Nows.findOne({},{sort: {createdAt: -1}, limit:1});
     if(currentNow)
        var value = currentNow.body
-    else 
+    else
        var value = 'loading';
 
       return {
@@ -46,11 +46,11 @@ Template.UserNow.helpers({
     }
   },
 
-  now(){  
+  now(){
       var currentNow =  Nows.findOne({},{sort: {createdAt: -1}, limit:1});
       if(currentNow)
          return currentNow.body;
-      else 
+      else
          return 'loading';
 
 
@@ -64,12 +64,12 @@ Template.UserNow.helpers({
 
 
 Template.UserNow.onCreated(function(){
-  var self = this; 
+  var self = this;
   self.autorun(function(){
     var controller = Router.current();
-        var user = Meteor.users.findOne({"username":controller.params.username});
-  
-    if(user) 
+    var user = Meteor.users.findOne({"username":controller.params.username});
+
+    if(user)
       var userId = user._id;
 
     self.subscribe('UserNow', userId);
