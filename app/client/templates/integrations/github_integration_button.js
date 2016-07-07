@@ -4,7 +4,7 @@ Template.GithubIntegrationButton.events({
 
     if (Meteor.user()) {
       Meteor.connectWith('github', {
-        requestPermissions: ['user', 'repo', 'read:repo_hook']
+        requestPermissions: ['user', 'read:repo_hook']
       }, function(error) {
         if (error) {
           console.log('github login error:', error);
