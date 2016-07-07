@@ -37,3 +37,5 @@ accounts-password
 
 aldeed:autoform
 peerlibrary:reactive-publish
+accounts-github
+mondora:connect-with
