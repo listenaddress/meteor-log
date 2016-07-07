@@ -1,24 +1,27 @@
 <template name="NowPreview">
-  <div class="ui items">
-    <div class="item">
-      <a class="ui tiny image">
+  <div class="ui comments" style="border: none">
+    <div class="comment">
+      <a class="avatar">
         <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
       </a>
       <div class="content">
-        <a class="header">
+        <a class="author">
           {{#linkTo route='user'}}
             {{user.profile.firstName}}
           {{/linkTo}}
         </a>
-        <div>
+        <div class="metadata">
+          <span class="date">
+              {{timestamp}}
+          </span>
+        </div>
+        <div class="text">
           {{{body}}}
         </div>
-      </div>
-      <div>
-        {{#linkTo route='now.detail'}}
-          {{timestamp}}
-        {{/linkTo}}
       </div>
     </div>
   </div>
 </template>
+
+
+
