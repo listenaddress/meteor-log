@@ -6,8 +6,15 @@
       {{> CreateMessage}}
     {{/if}}
     <div class="ui divider"></div>
-    {{> EventsList}}
 
-    {{> UsersList}}
+        <div class="ui events grid">
+          <div class="thirteen wide column">
+              {{> EventsList}}
+          </div>
+          <div class="three wide column">
+                {{> UsersList}}
+          </div>
+        </div>
+
   </div>
 </template>

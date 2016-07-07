@@ -1,7 +1,6 @@
 <template name="UserNow">
   <div class="create-note">
     {{#if isMe}}
-      <h3>What I am doing now!</h3>
      
         <form id="edit-now" class="form edit-now">
               {{> froalaReactive getContext}}
@@ -20,8 +19,7 @@
 
 
      {{else}}
-      <h3>What I am doing now!</h3>
-      {{{now}}}
+        {{{now}}}
     {{/if}}
   </div >
 </template>
