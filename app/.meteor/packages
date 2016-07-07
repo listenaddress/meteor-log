@@ -20,8 +20,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 iron:router
 less
 accounts-ui
-meteor-developer
-accounts-meteor-developer
 service-configuration
 momentjs:moment
 jshint

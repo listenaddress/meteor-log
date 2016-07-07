@@ -79,6 +79,13 @@ Router.route('/:username/edit', {
   where: 'client'
 });
 
+Router.route('/:username/history', {
+  name: 'now.history',
+  controller: 'UserController',
+  action: 'edit',
+  where: 'client'
+});
+
 // Router.route('/user/:_id/notifications', {
 //   name: 'notifications',
 //   controller: 'NotificationController',

@@ -1,10 +1,13 @@
 <template name="Home">
-  <h1>Log</h1>
-  {{#if currentUser}}
-    {{> CreateMessage}}
-  {{/if}}
-  <div class="ui divider"></div>
-  {{> EventsList}}
+  <div class="ui text container">
 
-  {{> UsersList}}
+    <h1>Log</h1>
+    {{#if currentUser}}
+      {{> CreateMessage}}
+    {{/if}}
+    <div class="ui divider"></div>
+    {{> EventsList}}
+
+    {{> UsersList}}
+  </div>
 </template>

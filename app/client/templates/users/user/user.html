@@ -1,63 +1,53 @@
 <template name="User">
+  
+      <div class="ui text container">
 
-  {{#with userProfile}}
+        {{#with userProfile}}
 
-  <div class="ui items">
-  <div class="item">
-      <div class="ui tiny circular image">
-       <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
-      </div>
-      <div class="content">
-      <h1 class="header">{{profile.firstName}}</h1>
-      <div class="description">
-        <p>
-        {{#linkTo route='user'}}      
-            @{{username}}
-        {{/linkTo}}
+        <div class="ui items">
+        <div class="item">
+            <div class="ui tiny circular image">
+             <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
+            </div>
+            <div class="content">
+            <h1 class="header">
+              {{profile.firstName}}
+            </h1>
+            <div class="description">
+              <p>
+              {{#linkTo route='user'}}      
+                  @{{username}}
+              {{/linkTo}}
 
-          {{#if isMe}}
-            {{#linkTo route='user.edit'}}
-              <i class="write square icon"></i>
-            {{/linkTo}}
-          {{/if}}
-        </p>
-      </div>
-    </div>
-    </div>
-  </div>
-  {{/with}}
-
-  {{#if isMe}}
-    {{> CreateMessage}}
-  {{/if}}
-
-   <div class="nows-panel">
-         <div class="ui segment">
-            <h3>What I am doing now!</h3>
-              {{>CreateNow}}
-              {{>Now}}
+                {{#if isMe}}
+                  {{#linkTo route='user.edit'}}
+                    <i class="write square icon"></i>
+                  {{/linkTo}}
+                {{/if}}
+              </p>
+            </div>
           </div>
+          </div>
+        </div>
+        {{/with}}
 
-        <div class="ui segment">
-          <h3>My Log</h3>
-          {{>EventsList}}
+        {{#if isMe}}
+          {{> CreateMessage}}
+        {{/if}}
+    </div>
+    <div class="ui events grid">
+        <div class="ten wide column">
+          <div class="ui segment">
+              {{>UserNow}}
+          </div>
+        </div>
+        <div class="six wide column">
+              <div class="ui segment">
+                <h3>My Log</h3>
+                {{>EventsList}}
+              </div>
         </div>
     </div>
-    
-
-
-  
-  <hr>
-  <div>
-    <ul class="nows-list">
-    <h4>History</h4>
-      {{#each nows}}
-        <li class="now-item">
-          {{#linkTo route='now.detail'}}
-            {{timestamp}}
-          {{/linkTo}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
 </template>
+
+
