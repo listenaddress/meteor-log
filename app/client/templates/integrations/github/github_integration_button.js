@@ -4,11 +4,14 @@ Template.GithubIntegrationButton.events({
 
     if (Meteor.user()) {
       Meteor.connectWith('github', {
-        requestPermissions: ['user', 'read:repo_hook']
+        requestPermissions: ['repo']
       }, function(error) {
         if (error) {
           console.log('github login error:', error);
         }
+
+        Meteor.call('getRepos');
+        Router.go('/integration/github');
       });
     }
   }

@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bluebird": "3.4.1",
     "meteor-node-stubs": "~0.2.0"
   }
 }

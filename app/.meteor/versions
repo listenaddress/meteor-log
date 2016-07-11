@@ -20,6 +20,7 @@ blaze@2.1.6
 blaze-html-templates@1.0.3
 blaze-tools@1.0.7
 boilerplate-generator@1.0.7
+bruz:github-api@0.2.4_1
 caching-compiler@1.0.3
 caching-html-compiler@1.0.5
 callback-hook@1.0.7
@@ -36,6 +37,7 @@ ecmascript@0.4.2
 ecmascript-runtime@0.2.9
 ejson@1.0.10
 email@1.0.11
+erasaur:meteor-lodash@4.0.0
 es5-shim@4.5.9
 fastclick@1.0.10
 fortawesome:fontawesome@4.4.0_1

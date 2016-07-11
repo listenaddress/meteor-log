@@ -1,0 +1,19 @@
+<template name="GithubIntegration">
+  <div class="github-integration">
+    {{#unless integration.repos}}
+      Looking for repos...
+    {{/unless}}
+    <div class="ui fluid selection dropdown">
+      <input type="hidden" name="user">
+      <i class="dropdown icon"></i>
+      <div class="default text">Select Repo</div>
+      <div class="menu">
+        {{#each integration.repos}}
+          <div class="item" data-value="{{_id}}">
+            {{name}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

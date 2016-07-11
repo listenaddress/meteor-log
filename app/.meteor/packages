@@ -38,3 +38,5 @@ peerlibrary:reactive-publish
 accounts-github
 check
 mondora:connect-with
+erasaur:meteor-lodash
+bruz:github-api
