@@ -111,13 +111,13 @@ Meteor.methods({
       });
     })
   },
-  "userExists": function(username){
+  'userExists': function(username){
     return !!Meteor.users.findOne({username: username});
   },
-  "getRepos": function() {
+  'getRepos': function() {
     // Query Github for users' repos
     // Save integration with repos
-    var GitHub = require("github");
+    var GitHub = require('github');
 
     var user = Meteor.user();
     var github = new GitHub({
@@ -125,7 +125,7 @@ Meteor.methods({
     });
 
     github.authenticate({
-      type: "oauth",
+      type: 'oauth',
       token: user.services.github.accessToken
     });
 
@@ -136,7 +136,7 @@ Meteor.methods({
 
       if (response) {
         P.map(response, Meteor.bindEnvironment(function(item) {
-          return _.pick(item, 'id', 'name', 'full_name', 'html_url');
+          return _.pick(item, 'id', 'name', 'full_name', 'html_url', 'owner');
         })).then(Meteor.bindEnvironment(function(items) {
           var integration = {
             service: 'github',
@@ -159,6 +159,48 @@ Meteor.methods({
         repos: item.repos,
         createdAt: Date.now()
       }
+    });
+  },
+  'addRepoHook': function (repo) {
+    var user = Meteor.user();
+    var GitHub = require('github');
+    var github = new GitHub({
+      version: '3.0.0'
+    });
+
+    github.authenticate({
+      type: 'oauth',
+      token: user.services.github.accessToken
+    });
+
+    github.repos.createHook({
+      name: 'web',
+      active: true,
+      user: repo.owner.login,
+      repo: repo.name,
+      config: {
+        'content_type': 'json',
+        'url': 'http://localhost:3000/integrations/github'
+      },
+      events: [
+        'commit_comment',
+        'create',
+        'delete',
+        'deployment_status',
+        'fork',
+        'issues',
+        'issue_comment',
+        'pull_request',
+        'pull_request_review_comment',
+        'push',
+        'release'
+      ]
+    }, function(error, response) {
+      if (error) {
+        console.log(error);
+      }
+
+      return;
     });
   }
 });

@@ -1,4 +1,5 @@
 <template name="GithubIntegration">
+  <h4>Add repos to your log. When you do something in those repos, it'll show up on your log.</h4>
   <div class="github-integration">
     {{#unless integration.repos}}
       Looking for repos...
@@ -9,10 +10,30 @@
       <div class="default text">Select Repo</div>
       <div class="menu">
         {{#each integration.repos}}
-          <div class="item" data-value="{{_id}}">
+          <div class="item" data-value="{{id}}">
             {{name}}
           </div>
         {{/each}}
+      </div>
+    </div>
+    <button class="ui primary button save" style="margin-top:10px">Add to Log</button>
+    <h3>Connected repos</h3>
+    <div class="ui middle aligned divided list">
+      <div class="item">
+        <div class="right floated content">
+          <div class="ui button">Remove</div>
+        </div>
+        <div class="content">
+          Repo A
+        </div>
+      </div>
+      <div class="item">
+        <div class="right floated content">
+          <div class="ui button">Remove</div>
+        </div>
+        <div class="content">
+          Repo B
+        </div>
       </div>
     </div>
   </div>
