@@ -37,6 +37,15 @@
         <div class="ui segment">
           {{>UserNow}}
         </div>
+
+            {{#if isMe}}
+            <h4>Embed this now in your website</h4>
+            <div class="ui segment">
+              {{HTMLsnippet}}
+             </div>
+
+            {{/if}}
+
       </div>
       <div class="six wide column">
         <h3>Log</h3>

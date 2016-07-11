@@ -24,5 +24,8 @@ Template.User.helpers({
   userProfile: function(){
     var controller = Router.current();
     return Meteor.users.findOne({"username": controller.params.username});
+  },
+  HTMLsnippet(){
+    return '<script src="https://goo.gl/WqhYHa"></script><div id="now" data-username="'+Router.current().params.username+'"></div>';
   }
 });
