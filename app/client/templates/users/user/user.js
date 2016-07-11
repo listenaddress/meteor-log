@@ -1,4 +1,20 @@
+
 Template.User.events({
+  "click .copylabel": function(){
+    var Clipboard = require('clipboard');
+    var clipboard = new Clipboard('.copylabel',{
+        text: function() { 
+            return Session.get('embeded');
+        }
+    });
+    $('.copylabel').popup({
+      content : 'Hello I am a popup',
+      on    : 'click',
+      position: 'top center'
+
+    });
+  }
+
 });
 
 Template.User.helpers({
@@ -6,7 +22,6 @@ Template.User.helpers({
     var user = this;
     return Nows.findOne({userId: user._id}, {sort: {createdAt: -1}, limit: 1});
   },
-
   nows: function () {
     var user = this;
     return Nows.find({userId: user._id}, {sort: {createdAt: -1}});
@@ -26,6 +41,9 @@ Template.User.helpers({
     return Meteor.users.findOne({"username": controller.params.username});
   },
   HTMLsnippet(){
-    return '<script src="https://goo.gl/WqhYHa"></script><div id="now" data-username="'+Router.current().params.username+'"></div>';
+    var code = '<script src="https://goo.gl/WqhYHa"></script><div id="now" data-username="'+Router.current().params.username+'"></div>';
+    Session.set('embeded', code);
+    var result = Prism.highlight(code, Prism.languages.markup);
+    return result;
   }
 });

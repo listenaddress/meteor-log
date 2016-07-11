@@ -6,7 +6,9 @@
   },
   "dependencies": {
     "bluebird": "3.4.1",
+    "clipboard": "^1.5.12",
+    "github": "2.1.0",
     "meteor-node-stubs": "~0.2.0",
-    "github": "2.1.0"
+    "prismjs": "^1.5.1"
   }
 }
