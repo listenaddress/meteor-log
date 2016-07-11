@@ -17,24 +17,19 @@
       </div>
     </div>
     <button class="ui primary button save" style="margin-top:10px">Add to Log</button>
+    {{#if errorMessage}}<div class="ui violet message">That didn't work — {{errorMessage}}</div>{{/if}}
     <h3>Connected repos</h3>
     <div class="ui middle aligned divided list">
-      <div class="item">
-        <div class="right floated content">
-          <div class="ui button">Remove</div>
+      {{#each integration.hooks}}
+        <div class="item">
+          <div class="right floated content">
+            <div class="ui button remove" data-value="{{id}}">Remove</div>
+          </div>
+          <div class="content">
+            {{repo}}
+          </div>
         </div>
-        <div class="content">
-          Repo A
-        </div>
-      </div>
-      <div class="item">
-        <div class="right floated content">
-          <div class="ui button">Remove</div>
-        </div>
-        <div class="content">
-          Repo B
-        </div>
-      </div>
+      {{/each}}
     </div>
   </div>
 </template>

@@ -2,6 +2,33 @@ Integrations = new Mongo.Collection('integrations');
 
 var Schemas = {};
 
+var HookSchema = new SimpleSchema({
+  type: {
+    type: String
+  },
+  id: {
+    type: String
+  },
+  events: {
+    type: [String]
+  },
+  config: {
+    type: Object
+  },
+  updated_at: {
+    type: String
+  },
+  last_response: {
+    type: Object
+  },
+  repo: {
+    type: String
+  },
+  repoOwner: {
+    type: String
+  }
+});
+
 Schemas.Integration = new SimpleSchema({
   userId: {
     type: String
@@ -12,6 +39,10 @@ Schemas.Integration = new SimpleSchema({
   repos: {
     type: [Object],
     blackbox: true
+  },
+  hooks: {
+    type: [HookSchema],
+    optional: true
   },
   createdAt: {
     type: Date

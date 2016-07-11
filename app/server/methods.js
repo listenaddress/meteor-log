@@ -149,8 +149,6 @@ Meteor.methods({
     }));
   },
   'saveIntegration': function (item) {
-    Integrations.remove({userId: Meteor.userId(), service: item.service});
-
     Integrations.upsert({
       userId: Meteor.userId(),
       service: item.service
@@ -173,7 +171,7 @@ Meteor.methods({
       token: user.services.github.accessToken
     });
 
-    github.repos.createHook({
+    return github.repos.createHook({
       name: 'web',
       active: true,
       user: repo.owner.login,
@@ -195,12 +193,43 @@ Meteor.methods({
         'push',
         'release'
       ]
-    }, function(error, response) {
-      if (error) {
-        console.log(error);
-      }
+    }).then(function(response) {
+      var hook = _.pick(response, 'type', 'id', 'events', 'config', 'updated_at', 'last_response');
+      hook.repo = repo.name;
+      hook.repoOwner = repo.owner.login;
+      return Integrations.update(
+        {userId: user._id, service: 'github'},
+        {$push: {'hooks': hook}}
+      );
+    }).catch(function(error) {
+      console.log('error adding repo hook: ', error);
+      throw error;
+    });
+  },
+  'removeRepoHook': function (hook) {
+    var user = Meteor.user();
+    var GitHub = require('github');
+    var github = new GitHub({
+      version: '3.0.0'
+    });
 
-      return;
+    github.authenticate({
+      type: 'oauth',
+      token: user.services.github.accessToken
+    });
+
+    return github.repos.deleteHook({
+      user: hook.repoOwner,
+      repo: hook.repo,
+      id: hook.id
+    }).then(function(response) {
+      return Integrations.update(
+        {userId: user._id, service: 'github'},
+        {$pull: {hooks: {id: hook.id}}}
+      );
+    }).catch(function(error) {
+      console.log('error:', error);
+      throw error;
     });
   }
 });
