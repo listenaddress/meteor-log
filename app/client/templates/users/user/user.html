@@ -30,18 +30,25 @@
       {{> CreateMessage}}
     {{/if}}
   </div>
-  <div class="ui events grid">
     <div class="ui events grid">
       <div class="ten wide column">
-        <h3>Now</h3>
-        <div class="ui segment">
+        <h3>What I am doing now!</h3>
+
+        <div class="ui now segment">
           {{>UserNow}}
         </div>
 
             {{#if isMe}}
             <h4>Embed this now in your website</h4>
-            <div class="ui segment">
-              {{HTMLsnippet}}
+
+            <div class="ui segment codesnippet">
+               <div class="ui bottom right attached label nospacelabel copylabel">
+                  <button class="ui icon copybutton button">
+                    <i class="copy icon"></i>
+                  </button>            
+              </div>
+
+                    {{{HTMLsnippet}}}
              </div>
 
             {{/if}}
@@ -54,5 +61,4 @@
         </div>
       </div>
     </div>
-  </div>
 </template>

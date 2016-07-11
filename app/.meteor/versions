@@ -43,6 +43,7 @@ fastclick@1.0.10
 fortawesome:fontawesome@4.4.0_1
 froala:editor@2.3.0
 froala:editor-reactive@2.3.0
+gadicohen:prism@1.0.4
 geojson-utils@1.0.7
 github@1.1.7
 hot-code-push@1.0.3

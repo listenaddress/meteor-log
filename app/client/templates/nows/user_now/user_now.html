@@ -1,11 +1,8 @@
 <template name="UserNow">
-  <div class="create-note">
-    {{#if isMe}}
-      <h3>What I am doing now!</h3>
-      <form id="edit-now" class="form edit-now">
-        {{> froalaReactive getContext}}
-      </form>
-      <div class="ui floated right">
+ {{#if isMe}}
+
+  <div class="ui top right attached nospacelabel label">
+     <div class="ui floated right">
         <div class="ui icon buttons">
           <button class="ui update button">
             update
@@ -15,6 +12,16 @@
           </button>
         </div>
       </div> 
+  </div>
+
+  {{/if}}
+
+  <div class="create-note">
+    {{#if isMe}}
+      <form id="edit-now" class="form edit-now">
+        {{> froalaReactive getContext}}
+      </form>
+     
       {{else}}
       <h3>What I am doing now!</h3>
       {{{now}}}
