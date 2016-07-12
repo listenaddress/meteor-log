@@ -14,7 +14,18 @@
           <span class="date">{{timestamp}}</span>
         </div>
         <div class="text">
-          {{{content}}}
+          {{#if content}}
+            {{{content}}}
+          {{/if}}
+          {{#if $eq type 'github'}}
+            GH—
+            {{#if data.comment}}
+              {{data.sender.login}} <a href="{{data.comment.html_url}}">commented</a> on 
+            {{/if}}
+            {{#if data.issue}}
+              an issue.
+            {{/if}}
+          {{/if}}
         </div>
       </div>
     </div>

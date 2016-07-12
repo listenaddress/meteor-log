@@ -101,8 +101,12 @@ if (Meteor.isClient) {
 //   where: 'client'
 // });
 
-Router.route( "/integrations/:integrationId", { where: "server" } )
+Router.route( "/integrations/:userId", { where: "server" } )
   .post(function() {
-    console.log(this.request.body);
+    var user = Meteor.users.findOne({_id: this.params.userId});
+
+    if (this.request.body.sender.id === user.services.github.id) {
+      Meteor.call('saveGitHubEvent', this.request.body, user._id)
+    }
     this.response.end('yo yo');
   });

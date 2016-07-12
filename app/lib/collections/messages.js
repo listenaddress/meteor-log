@@ -7,11 +7,17 @@ Schemas.Message = new SimpleSchema({
     type: String
   },
   content: {
-    type: String
+    type: String,
+    optional: true
   },
   type: {
     type: String,
     optional: true
+  },
+  data: {
+    type: Object,
+    optional: true,
+    blackbox: true
   },
   createdAt: {
     type: Date

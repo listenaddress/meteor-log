@@ -29,7 +29,7 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, 'now_created', 'Nows');
+          Meteor.call('saveEvent', response, item.userId, 'now_created', 'Nows');
           return response;
         }
       });
@@ -45,15 +45,15 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, 'message_created', 'Messages');
+          Meteor.call('saveEvent', response, item.userId, 'message_created', 'Messages');
           return response;
         }
       });
     }
   },
-  'saveEvent': function (id, type, refType) {
+  'saveEvent': function (id, userId, type, refType) {
     var item = {
-      userId: Meteor.userId(),
+      userId: userId,
       type: type,
       createdAt: new Date
     };
@@ -178,7 +178,7 @@ Meteor.methods({
       repo: repo.name,
       config: {
         'content_type': 'json',
-        'url': 'http://localhost:3000/integrations/github'
+        'url': 'http://1217ea69.ngrok.io/integrations/' + user._id
       },
       events: [
         'commit_comment',
@@ -230,6 +230,27 @@ Meteor.methods({
     }).catch(function(error) {
       console.log('error:', error);
       throw error;
+    });
+  },
+  'saveGitHubEvent': function(item, userId) {
+    // Create message
+    // Create event
+
+    var message = {
+      userId: userId,
+      type: 'github',
+      data: item,
+      createdAt: new Date
+    };
+
+    Messages.insert(message, function(error, response) {
+      if (error) {
+        console.log('error saving message: ', error);
+        throw error;
+      } else {
+        Meteor.call('saveEvent', response, userId, 'message_created', 'Messages');
+        return response;
+      }
     });
   }
 });
