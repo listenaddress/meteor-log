@@ -86,12 +86,14 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/:username/history', {
-    name: 'now.history',
-    controller: 'UserController',
-    action: 'edit',
+  Router.route('/:username/now/', {
+    name: 'user.nowhistory',
+    controller: 'NowController',
+    action: 'nowhistory',
     where: 'client'
   });
+
+
 }
 
 // Router.route('/user/:_id/notifications', {
