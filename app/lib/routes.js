@@ -104,9 +104,8 @@ if (Meteor.isClient) {
 Router.route( "/integrations/:userId", { where: "server" } )
   .post(function() {
     var user = Meteor.users.findOne({_id: this.params.userId});
-
     if (this.request.body.sender.id === user.services.github.id) {
-      Meteor.call('saveGitHubEvent', this.request.body, user._id)
+      Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
     }
     this.response.end('yo yo');
   });

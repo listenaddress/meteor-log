@@ -10,6 +10,10 @@ Schemas.Message = new SimpleSchema({
     type: String,
     optional: true
   },
+  service: {
+    type: String,
+    optional: true
+  },
   type: {
     type: String,
     optional: true
