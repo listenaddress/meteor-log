@@ -11,12 +11,21 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/now', {
-    name: 'now.list',
-    controller: 'HomeController',
-    action: 'listNows',
+
+  Router.route('/integrations/', {
+    name: 'integration',
+    controller: 'IntegrationController',
+    action: 'dashboard',
     where: 'client'
   });
+
+  Router.route('/integrations/github', {
+    name: 'integration.github',
+    controller: 'IntegrationController',
+    action: 'detail',
+    where: 'client'
+  });
+
 
   Router.route('/note/:_id', {
     name: 'note',
@@ -29,27 +38,6 @@ if (Meteor.isClient) {
     name: 'note.edit',
     controller: 'NoteController',
     action: 'edit',
-    where: 'client'
-  });
-
-  Router.route('/now/:_id', {
-    name: 'now.detail',
-    controller: 'NowController',
-    action: 'detail',
-    where: 'client'
-  });
-
-  Router.route('/now/:_id/edit', {
-    name: 'now.edit',
-    controller: 'NowController',
-    action: 'edit',
-    where: 'client'
-  });
-
-  Router.route('/integration/github', {
-    name: 'integration.github',
-    controller: 'IntegrationController',
-    action: 'detail',
     where: 'client'
   });
 
@@ -86,12 +74,13 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/:username/now/', {
+  Router.route('/:username/now/:_id', {
     name: 'user.nowhistory',
     controller: 'NowController',
     action: 'nowhistory',
     where: 'client'
   });
+
 
 
 }
@@ -106,9 +95,8 @@ if (Meteor.isClient) {
 Router.route( "/integrations/:userId", { where: "server" } )
   .post(function() {
     var user = Meteor.users.findOne({_id: this.params.userId});
-
     if (this.request.body.sender.id === user.services.github.id) {
-      Meteor.call('saveGitHubEvent', this.request.body, user._id)
+      Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
     }
     this.response.end('yo yo');
   });

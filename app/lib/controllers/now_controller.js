@@ -10,9 +10,8 @@ NowController = RouteController.extend({
   detail: function() {
     this.render('Now', { /* data: {} */});
   },
-
-  edit: function () {
-    this.state.set('isEditing', true);
-    this.render('Now');
+  
+  nowhistory: function(){
+    this.render('NowHistory');
   }
 });

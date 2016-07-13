@@ -7,12 +7,35 @@ Template.GithubIntegrationButton.events({
         requestPermissions: ['repo']
       }, function(error) {
         if (error) {
-          console.log('github login error:', error);
+          t.lastError.set(error.error);
+          console.log(error);
         }
-
-        Meteor.call('getRepos');
-        Router.go('/integration/github');
-      });
+        else{
+          Meteor.call('getRepos');
+          Router.go('/integration/github');
+        }
+      })
     }
   }
 });
+
+
+Template.GithubIntegrationButton.helpers({
+  errorMessage: function() {
+    return Template.instance().lastError.get();
+  }
+});
+
+Template.GithubIntegrationButton.onCreated(function() {
+
+    var self = this; 
+    self.lastError = new ReactiveVar(null);
+    self.autorun(function(){  
+    //self.subscribe('githubintegrated');
+  }); 
+
+});
+
+
+
+

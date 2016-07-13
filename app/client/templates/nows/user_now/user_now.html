@@ -7,9 +7,14 @@
           <button class="ui update button">
             update
           </button>
-          <button class="ui button">
-            <i class="right left icon history"></i>
-          </button>
+
+
+              <a href="{{username}}/now/{{now._id}}">
+                <button class="ui button history">
+                  <i class="right left icon history"></i>
+                </button>
+              </a>
+
         </div>
       </div> 
   </div>
@@ -24,7 +29,10 @@
      
       {{else}}
       <h3>What I am doing now!</h3>
-      {{{now}}}
+      {{{body}}}
     {{/if}}
   </div >
+
+
+
 </template>

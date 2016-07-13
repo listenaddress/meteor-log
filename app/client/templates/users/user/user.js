@@ -4,7 +4,7 @@ Template.User.events({
     var Clipboard = require('clipboard');
     var clipboard = new Clipboard('.copylabel',{
         text: function() { 
-            return Session.get('embeded');
+            return Session.get('copyboard');
         }
     });
     $('.copylabel').popup({
@@ -42,7 +42,7 @@ Template.User.helpers({
   },
   HTMLsnippet(){
     var code = '<script src="https://goo.gl/WqhYHa"></script><div id="now" data-username="'+Router.current().params.username+'"></div>';
-    Session.set('embeded', code);
+    Session.set('copyboard', code);
     var result = Prism.highlight(code, Prism.languages.markup);
     return result;
   }

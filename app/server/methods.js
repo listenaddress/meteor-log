@@ -183,15 +183,9 @@ Meteor.methods({
       events: [
         'commit_comment',
         'create',
-        'delete',
-        'deployment_status',
-        'fork',
         'issues',
         'issue_comment',
-        'pull_request',
-        'pull_request_review_comment',
-        'push',
-        'release'
+        'push'
       ]
     }).then(function(response) {
       var hook = _.pick(response, 'type', 'id', 'events', 'config', 'updated_at', 'last_response');
@@ -232,13 +226,14 @@ Meteor.methods({
       throw error;
     });
   },
-  'saveGitHubEvent': function(item, userId) {
+  'saveGitHubEvent': function(item, type, userId) {
     // Create message
     // Create event
 
     var message = {
       userId: userId,
-      type: 'github',
+      service: 'github',
+      type: type,
       data: item,
       createdAt: new Date
     };

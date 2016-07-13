@@ -2,4 +2,7 @@
   <a id="integrateGithub" class="btn btn-default btn-lg btn-login github" href="#">
     <i class="fa fa-github fa-fw"></i> Connect Github repos
   </a>
+
+      {{#if errorMessage}}<div class="ui violet message">That didn't work — {{errorMessage}}</div>{{/if}}
+
 </template>

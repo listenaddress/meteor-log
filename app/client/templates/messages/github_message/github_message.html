@@ -1,0 +1,24 @@
+<template name="GithubMessage">
+  <div class="github-message">
+    <!-- Commit Comment -->
+    {{#if $eq type 'commit_comment'}}
+      {{data.sender.login}} <a target="_blank" href="{{data.comment.html_url}}">commented</a> on a commit.
+    {{/if}}
+    <!-- Create -->
+    {{#if $eq type 'create'}}
+      {{data.sender.login}} created a {{data.ref_type}} in <a target="_blank" href="{{data.repository.html_url}}">{{data.repository.name}}</a>.
+    {{/if}}
+    <!-- Issues -->
+    {{#if $eq type 'issues'}}
+      {{data.sender.login}} {{data.action}} <a target="_blank" href="{{data.issue.html_url}}">an issue</a>.
+    {{/if}}
+    <!-- Issue Comment -->
+    {{#if $eq type 'issue_comment'}}
+      {{data.sender.login}} <a target="_blank" href="{{data.comment.html_url}}">commented</a> on an issue.
+    {{/if}}
+    <!-- Push -->
+    {{#if $eq type 'push'}}
+      {{data.sender.login}} <a target="_blank" href="{{data.head_commit.url}}">pushed</a> {{#if $gt data.commits.length 0}}{{data.commits.length}} commit{{#if $gt data.commits.length 1}}s{{/if}}{{/if}} to <a target="_blank" href="{{data.repository.html_url}}">{{data.repository.name}}</a>.
+    {{/if}}
+  </div>
+</template>

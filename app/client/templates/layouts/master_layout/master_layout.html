@@ -2,10 +2,13 @@
   <div class="ui fixed inverted menu">
     <div class="ui container">
       <a href="/" class="header item">Log</a>
+      {{#linkTo route='integration'}}
+        <a class="item">Integrations</a>
+      {{/linkTo}}
       <div class="right menu">
         {{#if currentUser}}
           {{#linkTo route="user" username=currentUser.username}}
-
+           
             <a class="item">
               {{currentUser.profile.firstName}}
             </a>

@@ -2,49 +2,16 @@
   <div class="ui items">
     <div class="now item">
       <div class="content">
-        <a class="header">
-          {{#linkTo route='user' _id=userId}}
-            {{userId}}
-          {{/linkTo}}
-        </a>
         <div>
-          {{#if get 'isEditing'}}
-            <form id="edit-now" class="form edit-now">
-              {{> froalaReactive getContext _value=body}}
-              <input type="submit" class="btn" value="Save"/>
-              {{#linkTo route='now.detail'}}
-                Cancel
-              {{/linkTo}}
-            </form>
-          {{else}}
+          
             <p>
               {{{body}}}
             </p>
 
-            {{#if isMyNow}}
-              {{#linkTo route='now.edit'}}
-                Edit
-              {{/linkTo}}
-            {{/if}}
-          {{/if}}
+            
         </div>
       </div>
       <div>{{timestamp}}</div>
     </div>
-  </div>
-</template>
-
-<template name="nowHistory">
-    <div>
-    <ul class="nows-list">
-    <h2>History</h2>
-      {{#each nows}}
-        <li class="now-item">
-          {{#linkTo route='now.detail'}}
-            {{timestamp}}
-          {{/linkTo}}
-        </li>
-      {{/each}}
-    </ul>
   </div>
 </template>

@@ -52,12 +52,18 @@ Template.UserNow.helpers({
          return currentNow.body;
       else
          return 'loading';
+  },
 
-
+  now: function(){
+    return Nows.findOne({},{sort: {createdAt: -1}, limit:1});
   },
 
   isMe: function () {
     return this._id === Meteor.userId();
+  },
+
+  username: function(){
+    return Router.current().params.username;
   }
 });
 

@@ -11,6 +11,10 @@ IntegrationController = RouteController.extend({
     this.render('GithubIntegration', { /* data: {} */});
   },
 
+  dashboard: function(){
+    this.render('Integrations')
+  },
+
   edit: function () {
     this.state.set('isEditing', true);
     this.render('Note');
