@@ -12,7 +12,7 @@ Template.GithubIntegrationButton.events({
         }
         else{
           Meteor.call('getRepos');
-          Router.go('/integration/github');
+          Router.go('/integrations/github');
         }
       })
     }
@@ -31,7 +31,7 @@ Template.GithubIntegrationButton.onCreated(function() {
     var self = this; 
     self.lastError = new ReactiveVar(null);
     self.autorun(function(){  
-    //self.subscribe('githubintegrated');
+    self.subscribe('githubintegrated');
   }); 
 
 });

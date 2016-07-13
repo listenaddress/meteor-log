@@ -20,13 +20,6 @@ Meteor.publish('user', function (username) {
   return Meteor.users.find({username: username}, {fields: {profile: 1, username:1}});
 });
 
-Meteor.publish('githubintegrated', function (username) {
-  if(this.userId)
-    var services = Meteor.users.findOne({_id: this.userId}, {fields: {_id:0, services: 1}});  
-  return services.services.hasOwnProperty("github");
-
-});
-
 Meteor.publishComposite('notifications', function (id) {
   return {
     find: function () {
