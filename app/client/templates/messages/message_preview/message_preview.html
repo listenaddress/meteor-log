@@ -6,9 +6,11 @@
       </a>
       <div class="content">
         <a class="author">
-          {{#linkTo route='user'}}
-            {{user.profile.firstName}} 
-          {{/linkTo}} 
+          {{#with user}}
+            {{#linkTo route='user'}}
+              {{profile.firstName}} 
+            {{/linkTo}} 
+          {{/with}}
         </a>
         <div class="metadata">
           <span class="date">{{timestamp}}</span>

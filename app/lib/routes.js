@@ -22,7 +22,14 @@ if (Meteor.isClient) {
   Router.route('/integrations/github', {
     name: 'integration.github',
     controller: 'IntegrationController',
-    action: 'detail',
+    action: 'github',
+    where: 'client'
+  });
+
+  Router.route('/integrations/evernote', {
+    name: 'integration.evernote',
+    controller: 'IntegrationController',
+    action: 'evernote',
     where: 'client'
   });
 

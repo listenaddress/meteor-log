@@ -7,8 +7,12 @@ IntegrationController = RouteController.extend({
     return;
   },
 
-  detail: function() {
+  github: function() {
     this.render('GithubIntegration', { /* data: {} */});
+  },
+
+  evernote: function() {
+    this.render('EvernoteIntegration', { /* data: {} */});
   },
 
   dashboard: function(){
