@@ -20,6 +20,15 @@ Meteor.publish('user', function (username) {
   return Meteor.users.find({username: username}, {fields: {profile: 1, username:1}});
 });
 
+
+Meteor.publish('group', function (id) {
+  return Groups.find({_id:id});
+});
+
+Meteor.publish('groups', function () {
+  return Groups.find({});
+});
+
 Meteor.publishComposite('notifications', function (id) {
   return {
     find: function () {

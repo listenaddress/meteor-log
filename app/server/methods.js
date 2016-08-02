@@ -111,6 +111,27 @@ Meteor.methods({
       });
     })
   },
+  'addNewGroup': function(item){
+
+    check(item.name, String);
+
+    item.userId = Meteor.userId();
+    item.createdAt = new Date;
+
+    if(item.userId) {
+
+      //TODO: check group does not exist
+      return Groups.insert(item, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          Meteor.call('saveEvent', response, item.userId, 'message_created', 'Messages');
+          return response;
+        }
+      });
+    }
+  },
   'userExists': function(username){
     return !!Meteor.users.findOne({username: username});
   },

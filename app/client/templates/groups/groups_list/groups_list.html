@@ -1,0 +1,19 @@
+<template name="GroupsList">
+  
+  <h2>
+    <a href="/group/new">
+      <i class="icon plus"></i>
+    </a>
+    Groups
+  </h2>
+
+  <ul class="list">
+    {{#each groups}}
+      <li>
+        {{#linkTo route="group"}}
+          {{name}}
+        {{/linkTo}}
+      </li>
+    {{/each}}
+  </ul>
+</template>

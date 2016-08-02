@@ -88,6 +88,19 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
+  Router.route('/group/new/', {
+    name: 'group.new',
+    controller: 'GroupController',
+    action: 'new',
+    where: 'client'
+  });
+
+  Router.route('/group/:_id', {
+    name: 'group',
+    controller: 'GroupController',
+    action: 'detail',
+    where: 'client'
+  });
 
 
 }

@@ -1,37 +1,29 @@
-Events = new Mongo.Collection('events');
+Groups = new Mongo.Collection('groups');
 
 var Schemas = {};
 
-Schemas.Event = new SimpleSchema({
-  userId: {
-    type: String
-  },
-  type: {
+Schemas.Group = new SimpleSchema({
+  name: {
     type: String,
     optional: true
   },
-  messageId: {
+  creatorId: {
     type: String,
     optional: true
   },
-  nowId: {
-    type: String,
+  contributors: {
+    type: [String],
     optional: true
   },
   createdAt: {
     type: Date
-  },
-  groupId: {
-    type: String,
-    optional: true
   }
-
 });
 
-Events.attachSchema(Schemas.Event);
+Groups.attachSchema(Schemas.Group);
 
 if (Meteor.isServer) {
-  Events.allow({
+  Groups.allow({
     insert: function (userId, doc) {
       return userId === doc.userId;
     },
