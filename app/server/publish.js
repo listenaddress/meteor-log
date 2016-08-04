@@ -16,8 +16,11 @@ Meteor.publish('users', function () {
 });
 
 Meteor.publish('user', function (username) {
-  var userId = Meteor.users.findOne({username: username}, {fields: {profile: 1}});
   return Meteor.users.find({username: username}, {fields: {profile: 1, username:1}});
+});
+
+Meteor.publish('userInfo', function (userId) {
+  return Meteor.users.find({_id: userId}, {fields: {profile: 1}});
 });
 
 
@@ -65,12 +68,55 @@ Meteor.publishComposite('notifications', function (id) {
   }
 });
 
-Meteor.publishComposite('events', function (userId) {
+Meteor.publishComposite('userEvents', function (userId) {
   return {
     find: function () {
       if(userId)
         return Events.find({userId: userId}, {sort: {createdAt: -1}});
-      else 
+    },
+    children: [
+      {
+        // Find message from event
+        find: function(item) {
+          return Messages.find({_id: item.messageId});
+        }
+      },
+      {
+        // Find now from event
+        find: function(item) {
+          return Nows.find({_id: item.nowId});
+        }
+      }
+    ]
+  }
+});
+
+Meteor.publishComposite('groupEvents', function (groupId) {
+  return {
+    find: function () {
+      if(groupId)
+        return Events.find({groupId: groupId}, {sort: {createdAt: -1}});
+    },
+    children: [
+      {
+        // Find message from event
+        find: function(item) {
+          return Messages.find({_id: item.messageId});
+        }
+      },
+      {
+        // Find now from event
+        find: function(item) {
+          return Nows.find({_id: item.nowId});
+        }
+      }
+    ]
+  }
+});
+
+Meteor.publishComposite('homeEvents', function () {
+  return {
+    find: function () {
         return Events.find({},{sort: {createdAt: -1}});
     },
     children: [
@@ -89,6 +135,8 @@ Meteor.publishComposite('events', function (userId) {
     ]
   }
 });
+
+
 
 Meteor.publish('UserNow', function (userId) {
   return Nows.find({userId: userId}, {sort: {createdAt: -1}, limit: 1})

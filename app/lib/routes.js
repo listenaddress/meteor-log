@@ -95,7 +95,7 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/group/:_id', {
+  Router.route('/group/:groupId', {
     name: 'group',
     controller: 'GroupController',
     action: 'detail',

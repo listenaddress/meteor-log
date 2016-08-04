@@ -1,10 +1,10 @@
 GroupController = RouteController.extend({
   subscriptions: function () {
-    this.subscribe('group', this.params._id);
+    this.subscribe('group', this.params.groupId);
   },
 
   data: function () {
-    return Groups.findOne({_id: this.params._id});
+    return Groups.findOne({_id: this.params.groupId});
   },
 
   detail: function () {

@@ -17,7 +17,7 @@ Template.createGroup.events({
         console.log('error: ', error);
       } 
       else{
-        console.log(response);
+        Router.go('/group/'+response);
       }
     });
 

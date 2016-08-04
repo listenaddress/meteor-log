@@ -8,4 +8,10 @@ Template.MessagePreview.helpers({
   }
 });
 
+Template.MessagePreview.onCreated(function(){
+  var self = this; 
+  self.autorun(function(){
+    self.subscribe('userInfo', self.data.userId);
+  });
+})
 

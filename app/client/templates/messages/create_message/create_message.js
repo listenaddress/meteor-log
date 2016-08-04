@@ -3,9 +3,10 @@ Template.CreateMessage.events({
     e.preventDefault();
     var content = tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.get', true);
 
-    Meteor.call('saveMessage', {
-      content: content
-    }, function(error, response) {
+    var controller = Router.current(); 
+    var groupId = controller.params.groupId; 
+
+    Meteor.call('saveMessage', content, groupId, function(error, response) {
       if (error) {
         console.log('error: ', error);
       } else {

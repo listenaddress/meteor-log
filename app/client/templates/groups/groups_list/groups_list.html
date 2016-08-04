@@ -10,7 +10,7 @@
   <ul class="list">
     {{#each groups}}
       <li>
-        {{#linkTo route="group"}}
+        {{#linkTo route="group" groupId=_id}}
           {{name}}
         {{/linkTo}}
       </li>
