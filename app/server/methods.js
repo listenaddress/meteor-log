@@ -250,7 +250,7 @@ Meteor.methods({
       throw error;
     });
   },
-  'saveGitHubEvent': function(item, type, userId) {
+  'saveGitHubEvent': function(item, type, userId, groupId) {
     // Create message
     // Create event
 
