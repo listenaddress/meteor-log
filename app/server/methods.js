@@ -42,8 +42,6 @@ Meteor.methods({
        content: content
     };
 
-
-
     if(item.userId) {
       return Messages.insert(item, function(error, response) {
         if (error) {
@@ -63,12 +61,9 @@ Meteor.methods({
       createdAt: new Date
     };
 
-    if(groupId){
+    if (groupId) {
       item.groupId = groupId;
     }
-
-        console.log(item);
-
 
     if (refType === 'Messages') {
       item.messageId = id;
@@ -76,7 +71,7 @@ Meteor.methods({
       item.nowId = id;
     }
 
-    if(item.userId) {
+    if (item.userId) {
       return Events.insert(item, function(error, response) {
         if (error) {
           console.log('error: ', error);
