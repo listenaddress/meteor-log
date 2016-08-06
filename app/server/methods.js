@@ -37,12 +37,12 @@ Meteor.methods({
   },
   'saveMessage': function (content, groupId) {
     var item = {
-       userId : Meteor.userId(),
-       createdAt : new Date,
-       content: content
+      userId: Meteor.userId(),
+      createdAt: new Date,
+      content: content
     };
 
-    if(item.userId) {
+    if (item.userId) {
       return Messages.insert(item, function(error, response) {
         if (error) {
           console.log('error: ', error);
@@ -119,21 +119,17 @@ Meteor.methods({
     })
   },
   'addNewGroup': function(item){
-
     check(item.name, String);
-
-    item.userId = Meteor.userId();
+    item.creatorId = Meteor.userId();
     item.createdAt = new Date;
 
-    if(item.userId) {
-
-      //TODO: check group does not exist
+    if (item.creatorId) {
       return Groups.insert(item, function(error, response) {
         if (error) {
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, item.userId, 'message_created', 'Messages');
+          Meteor.call('saveEvent', response, item.creatorId, response, 'group_created', 'Groups');
           return response;
         }
       });
@@ -250,7 +246,7 @@ Meteor.methods({
         {$pull: {hooks: {id: hook.id}}}
       );
     }).catch(function(error) {
-      console.log('error:', error);
+      console.log('error removing github webhook:', error);
       throw error;
     });
   },
@@ -271,7 +267,7 @@ Meteor.methods({
         console.log('error saving message: ', error);
         throw error;
       } else {
-        Meteor.call('saveEvent', response, userId, 'message_created', 'Messages');
+        Meteor.call('saveEvent', response, userId, groupId, 'message_created', 'Messages');
         return response;
       }
     });

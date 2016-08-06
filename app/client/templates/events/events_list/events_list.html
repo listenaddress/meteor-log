@@ -13,6 +13,19 @@
             {{>NowPreview}}
           {{/with}}
         {{/if}}
+
+        {{#if $eq this.type 'group_created'}}
+          {{#with user}}
+            {{#linkTo route='user'}}
+              {{profile.firstName}}
+            {{/linkTo}}
+          {{/with}}
+          started a
+          {{#linkTo route='group' _id=this.groupId}}
+            group.
+          {{/linkTo}}
+          {{timestamp}}
+        {{/if}}
       </div>
     {{/each}}
   </div>
