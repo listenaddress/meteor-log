@@ -59,7 +59,11 @@ Template.User.onCreated(function(){
     if(user) 
       var userId = user._id;
   
-    self.subscribe('userEvents', userId);
+    self.subscribe('userEvents', userId, function(){
+      $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {
+        $( ".loading-wrapper" ).fadeIn( 'slow' );
+      });
+    });
   }); 
 
   

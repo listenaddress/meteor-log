@@ -39,7 +39,11 @@ Template.Home.onCreated(function(){
     if(user) 
       var userId = user._id;
   
-    self.subscribe('homeEvents', userId);
+    self.subscribe('homeEvents', userId, function(){
+      $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {
+        $( ".loading-wrapper" ).fadeIn( 'slow' );
+      });
+    });
   }); 
 
   
