@@ -13,8 +13,23 @@ Template.User.events({
       position: 'top center'
 
     });
-  }
+  },
 
+  "click .showlogs": function(){
+    $( ".mainlog" ).delay( 400 ).fadeOut( 'slow', function() {
+      $('.logs').fadeIn( 'slow' );
+    });
+  },
+
+  "click .showmainlog": function(){
+    $( ".logs" ).delay( 400 ).fadeOut( 'slow', function() {
+      $('.mainlog').fadeIn( 'slow' );
+    });
+  },
+
+  "click .addlog": function(){
+    Router.go('/log/new');
+  }
 });
 
 Template.User.helpers({

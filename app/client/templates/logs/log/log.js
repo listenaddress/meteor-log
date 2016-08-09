@@ -1,0 +1,3 @@
+Template.Log.onCreated(function(){
+
+});

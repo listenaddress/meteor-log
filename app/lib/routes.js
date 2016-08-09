@@ -102,6 +102,20 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
+  Router.route('/log/new/', {
+    name: 'log.new',
+    controller: 'LogController',
+    action: 'new',
+    where: 'client'
+  });
+
+  Router.route('/log/:logId', {
+    name: 'log',
+    controller: 'LogController',
+    action: 'detail',
+    where: 'client'
+  });
+
 
 }
 

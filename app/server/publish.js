@@ -32,6 +32,16 @@ Meteor.publish('groups', function () {
   return Groups.find({});
 });
 
+Meteor.publish('log', function (logId) {
+  return Logs.find({_id:logId});
+});
+
+Meteor.publish('userLogs', function (userId) {
+  return Logs.find({creatorId:userId});
+});
+
+
+
 Meteor.publishComposite('notifications', function (id) {
   return {
     find: function () {
