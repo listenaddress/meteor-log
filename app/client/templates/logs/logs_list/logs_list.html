@@ -1,0 +1,16 @@
+<template name="LogsList">
+  {{>loader}}
+  {{#if Template.subscriptionsReady}}
+    <div class="ui grid ">
+      {{#each logs}}
+        {{#linkTo route="log" logId=_id}}
+          <div class="five column logbox-wrapper">
+            <div class="ui segment logbox">
+                <h5>{{name}}</h5>
+            </div>
+          </div>
+        {{/linkTo}}
+      {{/each}}
+    </div>
+  {{/if}}
+</template>

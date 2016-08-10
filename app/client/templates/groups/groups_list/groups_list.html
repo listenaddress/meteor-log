@@ -7,13 +7,16 @@
     Groups
   </h2>
 
-  <ul class="list">
-    {{#each groups}}
-      <li>
-        {{#linkTo route="group" groupId=_id}}
-          {{name}}
-        {{/linkTo}}
-      </li>
-    {{/each}}
-  </ul>
+  {{>loader}}
+  {{#if Template.subscriptionsReady}}
+    <ul class="list loading-wrapper">
+      {{#each groups}}
+        <li>
+          {{#linkTo route="group" groupId=_id}}
+            {{name}}
+          {{/linkTo}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </template>

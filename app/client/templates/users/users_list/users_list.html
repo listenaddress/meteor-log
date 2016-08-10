@@ -1,7 +1,9 @@
 <template name="UsersList">
   <h2>Users</h2>
+  {{> loader}}
 
-  <ul class="list">
+  {{#if Template.subscriptionsReady}}
+  <ul class="list loading-wrapper">
     {{#each users}}
       <li>
         {{#linkTo route="user"}}
@@ -10,4 +12,5 @@
       </li>
     {{/each}}
   </ul>
+  {{/if}}
 </template>

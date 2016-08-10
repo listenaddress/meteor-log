@@ -118,6 +118,23 @@ Meteor.methods({
       });
     })
   },
+  'addNewLog': function(item){
+    check(item.name, String);
+    item.creatorId = Meteor.userId();
+    item.createdAt = new Date;
+
+    if (item.creatorId) {
+      return Logs.insert(item, function(error, response) {
+        if (error) {
+          console.log('error: ', error);
+          throw error;
+        } else {
+          Meteor.call('saveEvent', response, item.creatorId, response, 'log_created', 'Logs');
+          return response;
+        }
+      });
+    }
+  },
   'addNewGroup': function(item){
     check(item.name, String);
     item.creatorId = Meteor.userId();
