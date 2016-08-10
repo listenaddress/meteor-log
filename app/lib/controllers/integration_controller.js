@@ -11,12 +11,23 @@ IntegrationController = RouteController.extend({
     this.render('GithubIntegration', { /* data: {} */});
   },
 
+  groupGithub: function() {
+    this.state.set('isGroup', true);
+    this.render('GithubIntegration', { /* data: {} */});
+  },
+
   evernote: function() {
     this.render('EvernoteIntegration', { /* data: {} */});
   },
 
   dashboard: function(){
     this.render('Integrations')
+  },
+
+  groupDashboard: function() {
+    this.state.set('isGroup', true);
+    console.log('this', this);
+    this.render('Integrations', { /* data: {} */});
   },
 
   edit: function () {

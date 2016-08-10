@@ -4,7 +4,8 @@ var Schemas = {};
 
 Schemas.Message = new SimpleSchema({
   userId: {
-    type: String
+    type: String,
+    optional: true
   },
   content: {
     type: String,

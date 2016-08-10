@@ -56,22 +56,19 @@ Meteor.methods({
   },
   'saveEvent': function (id, userId, groupId, type, refType) {
     var item = {
-      userId: userId,
       type: type,
       createdAt: new Date
     };
 
-    if (groupId) {
-      item.groupId = groupId;
-    }
-
+    if (userId) item.userId = userId;
+    if (groupId) item.groupId = groupId;
     if (refType === 'Messages') {
       item.messageId = id;
     } else if (refType === 'Nows') {
       item.nowId = id;
     }
 
-    if (item.userId) {
+    if (item.userId || item.groupId) {
       return Events.insert(item, function(error, response) {
         if (error) {
           console.log('error: ', error);
@@ -156,6 +153,7 @@ Meteor.methods({
     return !!Meteor.users.findOne({username: username});
   },
   'getRepos': function() {
+    console.log('tryna snatch');
     // Query Github for users' repos
     // Save integration with repos
     var GitHub = require('github');
@@ -179,6 +177,7 @@ Meteor.methods({
         P.map(response, Meteor.bindEnvironment(function(item) {
           return _.pick(item, 'id', 'name', 'full_name', 'html_url', 'owner');
         })).then(Meteor.bindEnvironment(function(items) {
+          console.log('items', items.length);
           var integration = {
             service: 'github',
             repos: items
@@ -189,19 +188,26 @@ Meteor.methods({
       }
     }));
   },
+
   'saveIntegration': function (item) {
-    Integrations.upsert({
-      userId: Meteor.userId(),
-      service: item.service
-    }, {
+    var userId = Meteor.userId();
+    var updateObj = {userId: userId, service: 'github'};
+
+    Integrations.upsert(
+      updateObj, {
+      // $push: {
+      //   repos: item.repos,
+      // },
       $set: {
         repos: item.repos,
         createdAt: Date.now()
       }
     });
   },
-  'addRepoHook': function (repo) {
+  'addRepoHook': function (repo, groupId) {
     var user = Meteor.user();
+    console.log('user', user);
+    var endpoint;
     var GitHub = require('github');
     var github = new GitHub({
       version: '3.0.0'
@@ -212,6 +218,13 @@ Meteor.methods({
       token: user.services.github.accessToken
     });
 
+    if (groupId) {
+      endpoint = 'http://1217ea69.ngrok.io/integrations/group/' + groupId;
+    } else {
+      endpoint = 'http://1217ea69.ngrok.io/integrations/' + user._id;
+    }
+
+    console.log('adding webhook', repo.id, groupId);
     return github.repos.createHook({
       name: 'web',
       active: true,
@@ -219,7 +232,7 @@ Meteor.methods({
       repo: repo.name,
       config: {
         'content_type': 'json',
-        'url': 'http://1217ea69.ngrok.io/integrations/' + user._id
+        'url': endpoint
       },
       events: [
         'commit_comment',
@@ -229,19 +242,24 @@ Meteor.methods({
         'push'
       ]
     }).then(function(response) {
+      console.log('user agian', user);
+      console.log('add webhook response');
+      var updateObj = {userId: user._id, service: 'github'};
       var hook = _.pick(response, 'type', 'id', 'events', 'config', 'updated_at', 'last_response');
       hook.repo = repo.name;
       hook.repoOwner = repo.owner.login;
+      if (groupId) hook.groupId = groupId;
+      
       return Integrations.update(
-        {userId: user._id, service: 'github'},
-        {$push: {'hooks': hook}}
+        updateObj,
+        {$push: {'hooks': hook}} 
       );
     }).catch(function(error) {
       console.log('error adding repo hook: ', error);
       throw error;
     });
   },
-  'removeRepoHook': function (hook) {
+  'removeRepoHook': function (hook, groupId) {
     var user = Meteor.user();
     var GitHub = require('github');
     var github = new GitHub({
@@ -258,8 +276,14 @@ Meteor.methods({
       repo: hook.repo,
       id: hook.id
     }).then(function(response) {
+      var updateObj = {userId: user._id, service: 'github'};
+      
+      if (groupId) {
+        updateObj.groupId = groupId;
+      }
+      
       return Integrations.update(
-        {userId: user._id, service: 'github'},
+        updateObj,
         {$pull: {hooks: {id: hook.id}}}
       );
     }).catch(function(error) {
@@ -268,16 +292,17 @@ Meteor.methods({
     });
   },
   'saveGitHubEvent': function(item, type, userId, groupId) {
-    // Create message
-    // Create event
+    // Save message then save event
 
+    console.log('saveGitHubEvent', type, userId, groupId);
     var message = {
-      userId: userId,
       service: 'github',
       type: type,
       data: item,
       createdAt: new Date
     };
+
+    if (userId) message.userId = userId;
 
     Messages.insert(message, function(error, response) {
       if (error) {
