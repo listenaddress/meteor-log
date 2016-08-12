@@ -5,3 +5,4 @@ config
 app/node_modules
 app/.meteor/dev_bundle
 app/client/templates/.DS_Store
+dump
