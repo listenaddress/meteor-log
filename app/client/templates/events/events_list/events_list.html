@@ -19,18 +19,20 @@
           {{/with}}
         {{/if}}
 
-        {{#if $eq this.type 'group_created'}}
+
+        {{#if $eq this.type 'log_created'}}
           {{#with user}}
             {{#linkTo route='user'}}
               {{profile.firstName}}
             {{/linkTo}}
           {{/with}}
           started a
-          {{#linkTo route='group' _id=this.groupId}}
-            group.
+          {{#linkTo route='log' _id=this.logId}}
+            log.
           {{/linkTo}}
           {{timestamp}}
         {{/if}}
+
       </div>
     {{/each}}
   </div>

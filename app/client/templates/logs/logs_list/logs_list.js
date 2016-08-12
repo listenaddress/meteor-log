@@ -13,7 +13,6 @@ Template.LogsList.onCreated(function(){
     if(user)
       var userId = user._id;
 
-    console.log(userId);
   self.autorun(function(){
     self.subscribe('userLogs', userId, function(){
       $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {

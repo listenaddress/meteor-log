@@ -35,7 +35,7 @@ Meteor.methods({
       });
     }
   },
-  'saveMessage': function (content, groupId) {
+  'saveMessage': function (content, logId) {
     var item = {
       userId: Meteor.userId(),
       createdAt: new Date,
@@ -48,21 +48,21 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, item.userId, groupId, 'message_created', 'Messages');
+          Meteor.call('saveEvent', response, item.userId, logId, 'message_created', 'Messages');
           return response;
         }
       });
     }
   },
-  'saveEvent': function (id, userId, groupId, type, refType) {
+  'saveEvent': function (id, userId, logId, type, refType) {
     var item = {
       userId: userId,
       type: type,
       createdAt: new Date
     };
 
-    if (groupId) {
-      item.groupId = groupId;
+    if (logId) {
+      item.logId = logId;
     }
 
     if (refType === 'Messages') {

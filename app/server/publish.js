@@ -101,6 +101,31 @@ Meteor.publishComposite('userEvents', function (userId) {
   }
 });
 
+
+Meteor.publishComposite('logEvents', function (logId) {
+  return {
+    find: function () {
+      if(logId)
+        return Events.find({logId: logId}, {sort: {createdAt: -1}});
+    },
+    children: [
+      {
+        // Find message from event
+        find: function(item) {
+          return Messages.find({_id: item.messageId});
+        }
+      },
+      {
+        // Find now from event
+        find: function(item) {
+          return Nows.find({_id: item.nowId});
+        }
+      }
+    ]
+  }
+});
+
+
 Meteor.publishComposite('groupEvents', function (groupId) {
   return {
     find: function () {
