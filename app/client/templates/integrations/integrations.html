@@ -1,21 +1,22 @@
-<template name="integrations"> 
-    <div class="ui segment">
-          <h3>Connected integrations</h3>
-         
-          {{#linkTo route='integration.github'}}
-            <i class="icon github">Github</i>
-          {{/linkTo}}
-    </div>
-
-    <div class="ui segment">
-          <h3>Available integrations</h3> 
-
-          {{#linkTo route='integration.evernote'}}
-            <i class="icon evernote">Evernote</i>
-          {{/linkTo}}
-
-    </div>
-
-
+<template name="Integrations"> 
+  <div class="ui segment">
+    <h3>Connected integrations</h3>
+    {{#if get 'isGroup'}}
+      {{#with currentGroupId}}
+        {{#linkTo route='group.integration.github' groupId=this}}
+          <i class="icon github">Github</i>
+        {{/linkTo}}
+      {{/with}}
+    {{else}}
+      {{#linkTo route='integration.github'}}
+        <i class="icon github">Github</i>
+      {{/linkTo}}
+    {{/if}}
+  </div>
+  <div class="ui segment">
+    <h3>Available integrations</h3> 
+    {{#linkTo route='integration.evernote'}}
+      <i class="icon evernote">Evernote</i>
+    {{/linkTo}}
+  </div>
 </template>
-

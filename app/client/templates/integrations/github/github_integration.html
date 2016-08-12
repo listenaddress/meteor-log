@@ -1,8 +1,5 @@
 <template name="GithubIntegration">
-  
-      {{> GithubIntegrationButton}}
-
-
+  {{> GithubIntegrationButton}}
   <h4>Add repos to your log. When you do something in those repos, it'll show up on your log.</h4>
   <div class="github-integration">
     {{#unless integration.repos}}
@@ -20,7 +17,12 @@
         {{/each}}
       </div>
     </div>
-    <button class="ui primary button save" style="margin-top:10px">Add to Log</button>
+    {{#if get 'isGroup'}}
+      <button class="ui primary button groupSave" style="margin-top:10px">Add to Group Log</button>
+    {{else}}
+      <button class="ui primary button save" style="margin-top:10px">Add to Log</button>
+    {{/if}}
+
     {{#if errorMessage}}<div class="ui violet message">That didn't work — {{errorMessage}}</div>{{/if}}
     <h3>Connected repos</h3>
     <div class="ui middle aligned divided list">

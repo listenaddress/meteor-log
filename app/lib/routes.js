@@ -116,6 +116,19 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
+  Router.route('group/:groupId/integrations/', {
+    name: 'group.integration',
+    controller: 'IntegrationController',
+    action: 'groupDashboard',
+    where: 'client'
+  });
+
+  Router.route('group/:groupId/integrations/github', {
+    name: 'group.integration.github',
+    controller: 'IntegrationController',
+    action: 'groupGithub',
+    where: 'client'
+  });
 
 }
 
@@ -126,11 +139,24 @@ if (Meteor.isClient) {
 //   where: 'client'
 // });
 
-Router.route( "/integrations/:userId", { where: "server" } )
-  .post(function() {
-    var user = Meteor.users.findOne({_id: this.params.userId});
-    if (this.request.body.sender.id === user.services.github.id) {
-      Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
-    }
-    this.response.end('yo yo');
-  });
+if (Meteor.isServer) {
+  Router.route("/integrations/:userId", { where: "server" } )
+    .post(function() {
+      var user = Meteor.users.findOne({_id: this.params.userId});
+      if (this.request.body.sender.id === user.services.github.id) {
+        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
+      }
+
+      this.response.end('yo yo');
+    });
+
+  Router.route("/integrations/group/:groupId", { where: "server" } )
+    .post(function() {
+      var group = Groups.findOne({_id: this.params.groupId});
+
+      if (group._id) {
+        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], null, group._id);
+        this.response.end('yo yo');
+      }
+    });
+}

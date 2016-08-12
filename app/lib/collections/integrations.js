@@ -9,6 +9,10 @@ var HookSchema = new SimpleSchema({
   id: {
     type: String
   },
+  groupId: {
+    type: String,
+    optional: true
+  },
   events: {
     type: [String]
   },

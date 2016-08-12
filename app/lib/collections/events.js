@@ -4,7 +4,8 @@ var Schemas = {};
 
 Schemas.Event = new SimpleSchema({
   userId: {
-    type: String
+    type: String,
+    optional: true
   },
   type: {
     type: String,
