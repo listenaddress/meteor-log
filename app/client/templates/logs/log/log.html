@@ -1,5 +1,23 @@
 <template name="Log">
-  {{name}}
+  <div class="ui breadcrumb">
+   {{#with owner}}
+      {{#linkTo route='user'}}
+        <a class="section">{{username}}</a>
+      {{/linkTo}}
+    {{/with}}
+    <i class="right chevron icon divider"></i>
+      {{#linkTo route='log' logId=this._id}}
+        <a class="section">{{name}}</a>
+      {{/linkTo}}
+      {{#if currentUser}}
+        {{#linkTo route='log.edit' logId=this._id}}
+          <i class="icon setting"></i>
+        {{/linkTo}}
+      {{/if}}
+
+  </div>
+
+
   <hr>
   {{>CreateMessage}}
   <h4>Log</h4>

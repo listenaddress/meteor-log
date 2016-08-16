@@ -65,7 +65,7 @@ Meteor.methods({
     }
 
     if (userId) item.userId = userId;
-    if (groupId) item.groupId = groupId;
+
     if (refType === 'Messages') {
       item.messageId = id;
     } else if (refType === 'Nows') {
@@ -119,10 +119,14 @@ Meteor.methods({
       });
     })
   },
+
+  ///////////// LOGS /////////////
+
   'addNewLog': function(item){
     check(item.name, String);
     item.creatorId = Meteor.userId();
     item.createdAt = new Date;
+    item.accessList = [Meteor.userId()];
 
     if (item.creatorId) {
       return Logs.insert(item, function(error, response) {
@@ -136,6 +140,36 @@ Meteor.methods({
       });
     }
   },
+
+  'updateLog': function(logId, item){
+    check(item.name, String);
+    // check any other update, currently name only 
+
+    if(item.name){
+      console.log(logId);
+      return Logs.update({_id: logId},{$set:{name: item.name}}, 
+        function(error, response){
+        if(error)
+           throw error
+        console.log(logId);
+      });
+    }
+
+  },
+
+  'deleteLog': function(logId){
+      console.log(logId);
+      return Logs.remove({_id: logId}, 
+        function(error, response){
+        if(error)
+           throw error
+        console.log(logId);
+      });
+
+  },
+
+  ///////////// GROUPS /////////////
+
   'addNewGroup': function(item){
     check(item.name, String);
     item.creatorId = Meteor.userId();

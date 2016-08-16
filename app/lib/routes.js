@@ -116,6 +116,13 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
+    Router.route('/log/:logId/edit', {
+    name: 'log.edit',
+    controller: 'LogController',
+    action: 'edit',
+    where: 'client'
+  });
+
   Router.route('group/:groupId/integrations/', {
     name: 'group.integration',
     controller: 'IntegrationController',

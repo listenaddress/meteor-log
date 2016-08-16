@@ -20,7 +20,7 @@ Meteor.publish('user', function (username) {
 });
 
 Meteor.publish('userInfo', function (userId) {
-  return Meteor.users.find({_id: userId}, {fields: {profile: 1}});
+  return Meteor.users.find({_id: userId}, {fields: {profile: 1, username:1}});
 });
 
 
@@ -37,9 +37,13 @@ Meteor.publish('log', function (logId) {
 });
 
 Meteor.publish('userLogs', function (userId) {
-  return Logs.find({creatorId:userId});
+  return Logs.find({creatorId:userId, privacy:'public'});
 });
 
+Meteor.publish('privateUserLogs', function () {
+  if(this.userId)
+    return Logs.find({ $and: [ { privacy: "private" }, {accessList: this.userId} ] });
+});
 
 
 Meteor.publishComposite('notifications', function (id) {

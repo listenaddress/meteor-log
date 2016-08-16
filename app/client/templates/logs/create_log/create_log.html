@@ -4,6 +4,30 @@
       <label>Log Name</label>
       <input type="text" name="logName" placeholder="Call your Log something">
     </div>
+
+     <div class="grouped fields">
+        <label>Who can see this log?</label>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="privacy" value="public" checked="checked">
+            <label>
+               <i class="icon world"></i>
+              Public
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="privacy" value="private">
+            <label>
+              <i class="icon privacy"></i>
+              Private
+            </label>
+          </div>
+        </div>
+      </div>
+
+
     <button class="ui button" type="submit">Submit</button>
   </form>
 

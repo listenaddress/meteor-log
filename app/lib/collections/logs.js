@@ -21,6 +21,18 @@ Schemas.Log = new SimpleSchema({
   groupId: {
     type: String,
     optional: true
+  },
+  followers: {
+    type: [String],
+    optional: true
+  },
+  accessList: {
+    type: [String],
+    optional: true
+  },
+  privacy: {
+    type: String,
+    optional: true
   }
 });
 

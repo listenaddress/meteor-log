@@ -8,9 +8,11 @@ Template.createLog.events({
   'submit form': function(event){
     event.preventDefault();
     var logName = event.target.logName.value;
+    var logPrivacy = event.target.privacy.value;
 
     Meteor.call('addNewLog', {
-      name : logName
+      name : logName,
+      privacy: logPrivacy
     }, function(error, response) {
       if (error) {
         console.log('error: ', error);
