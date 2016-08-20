@@ -1,14 +1,17 @@
 Template.EventsList.helpers({
-  user: function() {
+  user: function () {
     return Meteor.users.findOne(this.userId);
   },
-  events: function () {
-    return Events.find({},{sort: {createdAt: -1}});
+  log: function () {
+    return Logs.findOne(this.logId);
   },
-  now: function() {
+  events: function () {
+    return Events.find({});
+  },
+  now: function () {
     return Nows.findOne(this.nowId);
   },
-  message: function() {
+  message: function () {
     return Messages.findOne(this.messageId);
   },
   timestamp: function () {
@@ -20,40 +23,47 @@ Template.EventsList.helpers({
 });
 
 
-Template.EventsList.onCreated(function(){
-  var self = this; 
+Template.EventsList.onCreated(function () {
+  var self = this;
   var controller = Router.current();
 
   var params = controller.params;
 
-  self.autorun(function(){
-    if(params.username){
+  self.autorun(function () {
+    if (params.username) {
       var user = Meteor.users.findOne({"username":controller.params.username});
-  
-      if(user) 
+
+      if (user)
         var userId = user._id;
-    
-      self.subscribe('userEvents', userId, function(){
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {
+
+      self.subscribe('userEvents', userId, function () {
+        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
           $( ".loading-wrapper" ).fadeIn( 'slow' );
         });
       });
     }
-    else if (params.logId){   
- 
-      self.subscribe('logEvents', params.logId, function(){
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {
+    else if (params.logId) {
+
+      self.subscribe('logEvents', params.logId, function () {
+        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
           $( ".loading-wrapper" ).fadeIn( 'slow' );
         });
       });
     }
-    else if (params.groupId){    
-      self.subscribe('groupEvents', params.groupId, function(){
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function() {
+    else if (params.groupId) {
+      self.subscribe('groupEvents', params.groupId, function () {
+        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
           $( ".loading-wrapper" ).fadeIn( 'slow' );
         });
       });
     }
-    
+    else {
+      self.subscribe('homeEvents', params.groupId, function () {
+        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
+          $( ".loading-wrapper" ).fadeIn( 'slow' );
+        });
+      });
+    }
+
   });
 });

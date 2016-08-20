@@ -3,19 +3,15 @@ Template.CreateMessage.events({
     e.preventDefault();
     var content = tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.get', true);
 
-    var controller = Router.current(); 
-    var logId = controller.params.logId; 
+    var controller = Router.current();
+    var logId = controller.params.logId;
 
-    Meteor.call('saveMessage', content, logId, function(error, response) {
-      if (error) {
-        console.log('error: ', error);
-      } else {
-        tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.set', '');
-      }
+    Meteor.call('saveMessage', content, logId, function (error, response) {
+      if (error) throw error;
+      tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.set', '');
     });
   }
 });
-
 
 Template.CreateMessage.helpers({
   getContext: function () {
@@ -41,5 +37,4 @@ Template.CreateMessage.helpers({
       },
     }
   }
-
 });

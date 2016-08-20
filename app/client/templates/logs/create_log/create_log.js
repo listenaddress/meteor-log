@@ -10,13 +10,13 @@ Template.createLog.events({
     var logName = event.target.logName.value;
     var logPrivacy = event.target.privacy.value;
 
-    Meteor.call('addNewLog', {
+    Meteor.call('saveLog', {
       name : logName,
       privacy: logPrivacy
     }, function(error, response) {
       if (error) {
         console.log('error: ', error);
-      } 
+      }
       else{
         Router.go('/log/'+response);
       }

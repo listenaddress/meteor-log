@@ -29,6 +29,11 @@ Schemas.Event = new SimpleSchema({
   logId: {
     type: String,
     optional: true
+  },
+  hidden:{
+    type: Boolean,
+    defaultValue: false,
+    optional: true
   }
 
 });

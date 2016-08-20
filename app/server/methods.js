@@ -9,7 +9,7 @@ Meteor.methods({
     note.createdAt = new Date;
 
     if(note.userId) {
-      return Notes.insert(note, function(error, response) {
+      return Notes.insert(note, function (error, response) {
         if (error) {
           console.log('error: ', error);
           throw error;
@@ -19,6 +19,7 @@ Meteor.methods({
       });
     }
   },
+
   'saveNow': function (item) {
     item.userId = Meteor.userId();
     item.createdAt = new Date;
@@ -35,6 +36,7 @@ Meteor.methods({
       });
     }
   },
+
   'saveMessage': function (content, logId) {
     var item = {
       userId: Meteor.userId(),
@@ -42,18 +44,32 @@ Meteor.methods({
       content: content
     };
 
+    var isMember = Members.findOne({ logId:logId, userId: Meteor.userId() });
+
     if (item.userId) {
-      return Messages.insert(item, function(error, response) {
-        if (error) {
-          console.log('error: ', error);
-          throw error;
-        } else {
-          Meteor.call('saveEvent', response, item.userId, logId, 'message_created', 'Messages');
+      if (isMember) {
+        return Messages.insert(item, function (error, response) {
+          if (error) throw error;
+
+          Meteor.call('saveEvent',
+                      response,
+                      item.userId,
+                      logId,
+                      'message_created',
+                      'Messages');
+
           return response;
-        }
-      });
+        });
+      }
+
+      throw new Meteor.Error(500,
+        'You cannot send messages if you did not join the log');
     }
+
+    throw new Meteor.Error(500,
+      'You cannot send messages while you are not connected');
   },
+
   'saveEvent': function (id, userId, logId, type, refType) {
     var item = {
       type: type,
@@ -73,7 +89,7 @@ Meteor.methods({
     }
 
     if (item.userId || item.groupId) {
-      return Events.insert(item, function(error, response) {
+      return Events.insert(item, function (error, response) {
         if (error) {
           console.log('error: ', error);
           throw error;
@@ -83,6 +99,7 @@ Meteor.methods({
       });
     }
   },
+
   'saveComment': function (comment) {
     // Save comment
     comment.userId = Meteor.userId();
@@ -93,6 +110,7 @@ Meteor.methods({
     // Save notification for subscribers
     Meteor.call('saveNoteCommentNotifications', comment);
   },
+
   'saveNoteCommentNotifications': function (comment) {
     // Save commenter to the note's subscribers array
     var note = Notes.findOne(comment.noteId);
@@ -109,7 +127,7 @@ Meteor.methods({
     }
 
     // Save a notification for all subscribers
-    _.each(note.subscribers, function(subscriber) {
+    _.each(note.subscribers, function (subscriber) {
       Notifications.insert({
         userId: subscriber,
         noteId: note._id,
@@ -122,7 +140,7 @@ Meteor.methods({
 
   ///////////// LOGS /////////////
 
-  'addNewLog': function(item){
+  'saveLog': function(item){
     check(item.name, String);
     item.creatorId = Meteor.userId();
     item.createdAt = new Date;
@@ -131,9 +149,10 @@ Meteor.methods({
     if (item.creatorId) {
       return Logs.insert(item, function(error, response) {
         if (error) {
-          console.log('error: ', error);
+          console.log('error adding log: ', error);
           throw error;
         } else {
+          Meteor.call('joinLog', response);
           Meteor.call('saveEvent', response, item.creatorId, response, 'log_created', 'Logs');
           return response;
         }
@@ -143,34 +162,102 @@ Meteor.methods({
 
   'updateLog': function(logId, item){
     check(item.name, String);
-    // check any other update, currently name only 
+    // check any other update, currently name only
 
-    if(item.name){
+    if (item.name) {
       console.log(logId);
-      return Logs.update({_id: logId},{$set:{name: item.name}}, 
-        function(error, response){
-        if(error)
-           throw error
-        console.log(logId);
+      return Logs.update({_id: logId},{ $set: {name: item.name} },
+        function (error, response) {
+        if (error) throw error;
+
+        Meteor.call('saveEvent',
+                    logId,
+                    Meteor.userId(),
+                    logId,
+                    'log_updated',
+                    'Logs',
+
+          function (error, response) {
+            if (error) throw error;
+          }
+        );
+
+        return response;
       });
     }
-
   },
 
-  'deleteLog': function(logId){
-      console.log(logId);
-      return Logs.remove({_id: logId}, 
-        function(error, response){
-        if(error)
-           throw error
-        console.log(logId);
-      });
+  'deleteLog': function (logId) {
+    return Logs.update({_id: logId}, { $set: {hidden: true} },
+      function(error, response){
+        if (error) throw error;
 
+        Meteor.call('saveEvent',
+                    logId,
+                    Meteor.userId(),
+                    logId,
+                    'log_deleted',
+                    'Logs',
+
+          function (error, response) {
+            if (error) throw error;
+
+            Events.update({logId: logId}, { $set: {hidden: true} }, {multi: true},
+              function (error, response) {
+                if (error) throw error;
+              }
+            );
+          }
+        );
+
+        return response;
+    });
+  },
+
+  'joinLog': function (logId) {
+    var member = Members.findOne({ logId: logId, userId: Meteor.userId() });
+    if (member) throw new Meteor.Error(500,
+      'You cannot join a log that you have already joined');
+
+    Members.insert({ logId: logId,
+                     userId: Meteor.userId(),
+                     createdAt: new Date },
+      function (error, response) {
+        if (error) throw error;
+
+        Meteor.call('saveEvent',
+                    response,
+                    Meteor.userId(),
+                    logId,
+                    'member_joined_log',
+                    'Logs');
+
+        return response;
+      }
+    );
+  },
+
+  'leaveLog': function (logId) {
+    var member = Members.findOne({ logId: logId, userId: Meteor.userId() });
+    if (!member) throw new Meteor.Error(500, 'You cannot leave a log that you have already left');
+
+    Members.remove({ logId: logId, userId: Meteor.userId() }, function(error, response){
+      if(error) throw error
+
+      Meteor.call('saveEvent',
+                  response,
+                  Meteor.userId(),
+                  logId,
+                  'member_left_log',
+                  'Logs');
+
+      return response;
+    });
   },
 
   ///////////// GROUPS /////////////
 
-  'addNewGroup': function(item){
+  'addNewGroup': function (item) {
     check(item.name, String);
     item.creatorId = Meteor.userId();
     item.createdAt = new Date;
@@ -181,16 +268,22 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
-          Meteor.call('saveEvent', response, item.creatorId, response, 'group_created', 'Groups');
+          Meteor.call('saveEvent',
+                      response,
+                      item.creatorId,
+                      response,
+                      'group_created',
+                      'Groups');
+
           return response;
         }
       });
     }
   },
-  'userExists': function(username){
+  'userExists': function (username) {
     return !!Meteor.users.findOne({username: username});
   },
-  'getRepos': function() {
+  'getRepos': function () {
     console.log('tryna snatch');
     // Query Github for users' repos
     // Save integration with repos
@@ -279,7 +372,7 @@ Meteor.methods({
         'issue_comment',
         'push'
       ]
-    }).then(function(response) {
+    }).then(function (response) {
       console.log('user agian', user);
       console.log('add webhook response');
       var updateObj = {userId: user._id, service: 'github'};
@@ -287,12 +380,12 @@ Meteor.methods({
       hook.repo = repo.name;
       hook.repoOwner = repo.owner.login;
       if (groupId) hook.groupId = groupId;
-      
+
       return Integrations.update(
         updateObj,
-        {$push: {'hooks': hook}} 
+        { $push: {'hooks': hook} }
       );
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('error adding repo hook: ', error);
       throw error;
     });
@@ -313,18 +406,18 @@ Meteor.methods({
       user: hook.repoOwner,
       repo: hook.repo,
       id: hook.id
-    }).then(function(response) {
+    }).then(function (response) {
       var updateObj = {userId: user._id, service: 'github'};
-      
+
       if (groupId) {
         updateObj.groupId = groupId;
       }
-      
+
       return Integrations.update(
         updateObj,
         {$pull: {hooks: {id: hook.id}}}
       );
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('error removing github webhook:', error);
       throw error;
     });
@@ -342,7 +435,7 @@ Meteor.methods({
 
     if (userId) message.userId = userId;
 
-    Messages.insert(message, function(error, response) {
+    Messages.insert(message, function (error, response) {
       if (error) {
         console.log('error saving message: ', error);
         throw error;
