@@ -1,26 +1,32 @@
 <template name="Log">
   <div class="ui breadcrumb">
-   {{#with owner}}
+    {{#with owner}}
       {{#linkTo route='user'}}
         <a class="section">{{username}}</a>
       {{/linkTo}}
     {{/with}}
     <i class="right chevron icon divider"></i>
-      {{#linkTo route='log' logId=this._id}}
-        <a class="section">{{name}}</a>
+    {{#linkTo route='log' logId=this._id}}
+      <a class="section">{{name}}</a>
+    {{/linkTo}}
+    {{#if currentUser}}
+      {{#linkTo route='log.edit' logId=this._id}}
+        <i class="icon setting"></i>
       {{/linkTo}}
-      {{#if currentUser}}
-        {{#linkTo route='log.edit' logId=this._id}}
-          <i class="icon setting"></i>
-        {{/linkTo}}
-      {{/if}}
-
+    {{/if}}
   </div>
 
+  {{#if joined}}
+    <button class="ui button leaveLog"> Leave </button>
+  {{else}}
+    <button class="ui button joinLog"> Join </button>
+  {{/if}}
 
   <hr>
-  {{>CreateMessage}}
   <h4>Log</h4>
   {{>EventsList}}
   <br>
+  {{#if joined}}
+    {{>CreateMessage}}
+  {{/if}}
 </template>

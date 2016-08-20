@@ -33,16 +33,24 @@ Meteor.publish('groups', function () {
 });
 
 Meteor.publish('log', function (logId) {
-  return Logs.find({_id:logId});
+  var log = Logs.find({_id:logId, hidden: false});
+  return log;
 });
 
+Meteor.publish('members', function(logId){
+  return Members.find({logId:logId});
+})
+
 Meteor.publish('userLogs', function (userId) {
-  return Logs.find({creatorId:userId, privacy:'public'});
+  return Logs.find({creatorId:userId, privacy:'public', hidden: false});
 });
 
 Meteor.publish('privateUserLogs', function () {
   if(this.userId)
-    return Logs.find({ $and: [ { privacy: "private" }, {accessList: this.userId} ] });
+    return Logs.find({ $and: [ {privacy: "private"},
+                               {accessList: this.userId},
+                               {hidden: false} ]
+    });
 });
 
 
@@ -86,7 +94,7 @@ Meteor.publishComposite('userEvents', function (userId) {
   return {
     find: function () {
       if(userId)
-        return Events.find({userId: userId}, {sort: {createdAt: -1}});
+        return Events.find({userId: userId, hidden: false}, {sort: {createdAt: -1}});
     },
     children: [
       {
@@ -110,7 +118,7 @@ Meteor.publishComposite('logEvents', function (logId) {
   return {
     find: function () {
       if(logId)
-        return Events.find({logId: logId}, {sort: {createdAt: -1}});
+        return Events.find({logId: logId, hidden: false}, {sort: {createdAt: -1}});
     },
     children: [
       {
@@ -124,6 +132,18 @@ Meteor.publishComposite('logEvents', function (logId) {
         find: function(item) {
           return Nows.find({_id: item.nowId});
         }
+      },
+      {
+        // Find user of the event
+        find: function(item){
+          return Meteor.users.find({_id: item.userId, hidden: false}, {username:1, profile:1});
+        }
+      },
+      {
+        // Find log of the event
+        find: function(item){
+          return Logs.find({_id: item.logId, hidden: false});
+        }
       }
     ]
   }
@@ -134,7 +154,7 @@ Meteor.publishComposite('groupEvents', function (groupId) {
   return {
     find: function () {
       if(groupId)
-        return Events.find({groupId: groupId}, {sort: {createdAt: -1}});
+        return Events.find({groupId: groupId, hidden: false}, {sort: {createdAt: -1}});
     },
     children: [
       {
@@ -156,7 +176,7 @@ Meteor.publishComposite('groupEvents', function (groupId) {
 Meteor.publishComposite('homeEvents', function () {
   return {
     find: function () {
-        return Events.find({},{sort: {createdAt: -1}});
+        return Events.find({hidden: false},{sort: {createdAt: -1}});
     },
     children: [
       {
@@ -169,6 +189,18 @@ Meteor.publishComposite('homeEvents', function () {
         // Find now from event
         find: function(item) {
           return Nows.find({_id: item.nowId});
+        }
+      },
+      {
+        // Find user of the event
+        find: function(item){
+          return Meteor.users.find({_id: item.userId}, {username:1, profile:1});
+        }
+      },
+      {
+        // Find log of the event
+        find: function(item){
+          return Logs.find({_id: item.logId, hidden: false});
         }
       }
     ]

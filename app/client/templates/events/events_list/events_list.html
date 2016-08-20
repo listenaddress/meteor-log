@@ -1,42 +1,83 @@
 <template name="EventsList">
-  {{> loader}}
-
-
+  {{>loader}}
   {{#if Template.subscriptionsReady}}
+    <div class="events-list loading-wrapper">
+      {{#each events}}
+        <div class="ui items">
+          {{#if this.messageId}}
+            {{#with message}}
+              {{> MessagePreview}}
+            {{/with}}
+          {{/if}}
 
-  <div class="events-list loading-wrapper">
-    {{#each events}}
-      <div class="ui items">
-        {{#if this.messageId}}
-          {{#with message}}
-            {{> MessagePreview}}
-          {{/with}}
-        {{/if}}
-        
-        {{#if this.nowId}}
-          {{#with now}}
-            {{>NowPreview}}
-          {{/with}}
-        {{/if}}
+          {{#if this.nowId}}
+            {{#with now}}
+              {{>NowPreview}}
+            {{/with}}
+          {{/if}}
 
+          {{#if $eq this.type 'log_created'}}
+            {{#with user}}
+              {{#linkTo route='user'}}
+                {{profile.firstName}}
+              {{/linkTo}}
+            {{/with}}
+            started a log called
+            {{#with log}}
+              {{#linkTo route='log' logId=_id}}
+                {{name}}.
+              {{/linkTo}}
+            {{/with}}
 
-        {{#if $eq this.type 'log_created'}}
-          {{#with user}}
-            {{#linkTo route='user'}}
-              {{profile.firstName}}
-            {{/linkTo}}
-          {{/with}}
-          started a
-          {{#linkTo route='log' _id=this.logId}}
-            log.
-          {{/linkTo}}
-          {{timestamp}}
-        {{/if}}
+            {{timestamp}}
+          {{/if}}
 
-      </div>
-    {{/each}}
-  </div>
+          {{#if $eq this.type 'log_updated'}}
+            {{#with user}}
+              {{#linkTo route='user'}}
+                {{profile.firstName}}
+              {{/linkTo}}
+            {{/with}}
+            updated his log called
+            {{#with log}}
+              {{#linkTo route='log' logId=_id}}
+                  {{name}}.
+              {{/linkTo}}
+            {{/with}}
+            {{timestamp}}
+          {{/if}}
+
+          {{#if $eq this.type 'member_joined_log'}}
+            {{#with user}}
+              {{#linkTo route='user'}}
+                {{profile.firstName}}
+              {{/linkTo}}
+            {{/with}}
+            has joined
+            {{#with log}}
+              {{#linkTo route='log' logId=_id}}
+                {{name}}.
+              {{/linkTo}}
+            {{/with}}
+            {{timestamp}}
+          {{/if}}
+
+          {{#if $eq this.type 'member_left_log'}}
+            {{#with user}}
+              {{#linkTo route='user'}}
+                {{profile.firstName}}
+              {{/linkTo}}
+            {{/with}}
+            has left
+            {{#with log}}
+              {{#linkTo route='log' logId=_id}}
+                  {{name}}.
+              {{/linkTo}}
+            {{/with}}
+            {{timestamp}}
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
   {{/if}}
-  
-
 </template>

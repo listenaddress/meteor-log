@@ -1,19 +1,45 @@
 Template.Log.onCreated(function(){
   var self = this;
-
-    self.autorun(function(){
-      self.subscribe('UserNow', this.creatorId);
-    });
-
+  self.autorun(function(){
+    var controller = Router.current();
+    self.subscribe('members', controller.params.logId);
+  });
 });
 
 Template.Log.helpers({
-  owner: function(){
+  owner: function () {
     var user = Meteor.users.findOne({_id: this.creatorId});
     return user;
   },
 
-  log:function(){
+  log: function () {
     return Logs.findOne({});
-  }
+  },
+
+  joined: function () {
+    var controller = Router.current();
+    var logId = controller.params.logId;
+    var member = Members.findOne({logId: logId, userId: Meteor.userId()});
+
+    if (member) return true;
+    else return false;
+  },
+});
+
+Template.Log.events({
+  "click .joinLog": function () {
+    Meteor.call('joinLog', this._id,
+      function (error, response) {
+        if(error) throw error ;
+      }
+    );
+  },
+
+  "click .leaveLog": function () {
+    Meteor.call('leaveLog', this._id,
+      function (error, response) {
+        if(error) throw error;
+      }
+    );
+  },
 });

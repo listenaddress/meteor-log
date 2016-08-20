@@ -1,42 +1,25 @@
-Logs = new Mongo.Collection('logs');
+Members = new Mongo.Collection('members');
 
 var Schemas = {};
 
-Schemas.Log = new SimpleSchema({
-  name: {
+Schemas.Member = new SimpleSchema({
+  logId: {
     type: String,
     optional: true
   },
-  creatorId: {
+  userId: {
     type: String,
     optional: true
   },
   createdAt: {
     type: Date
-  },
-  groupId: {
-    type: String,
-    optional: true
-  },
-  accessList: {
-    type: [String],
-    optional: true
-  },
-  privacy: {
-    type: String,
-    optional: true
-  },
-  hidden: {
-    type: Boolean,
-    defaultValue: false,
-    optional: true
   }
 });
 
-Logs.attachSchema(Schemas.Log);
+Members.attachSchema(Schemas.Member);
 
 if (Meteor.isServer) {
-  Logs.allow({
+  Members.allow({
     insert: function (userId, doc) {
       return userId === doc.userId;
     },
