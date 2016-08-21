@@ -14,8 +14,4 @@ UserController = RouteController.extend({
   edit: function () {
     this.render('editUser');
   },
-
-  nowhistory: function () {
-    this.render('Now');
-  }
 });

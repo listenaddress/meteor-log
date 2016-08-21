@@ -8,9 +8,6 @@ Template.EventsList.helpers({
   events: function () {
     return Events.find({});
   },
-  now: function () {
-    return Nows.findOne(this.nowId);
-  },
   message: function () {
     return Messages.findOne(this.messageId);
   },
@@ -45,13 +42,6 @@ Template.EventsList.onCreated(function () {
     else if (params.logId) {
 
       self.subscribe('logEvents', params.logId, function () {
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
-          $( ".loading-wrapper" ).fadeIn( 'slow' );
-        });
-      });
-    }
-    else if (params.groupId) {
-      self.subscribe('groupEvents', params.groupId, function () {
         $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
           $( ".loading-wrapper" ).fadeIn( 'slow' );
         });

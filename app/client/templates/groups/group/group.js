@@ -1,5 +1,0 @@
-Template.Group.onCreated(function(){
-
-
-  
-});

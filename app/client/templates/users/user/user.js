@@ -1,20 +1,4 @@
-
 Template.User.events({
-  "click .copylabel": function(){
-    var Clipboard = require('clipboard');
-    var clipboard = new Clipboard('.copylabel',{
-        text: function() { 
-            return Session.get('copyboard');
-        }
-    });
-    $('.copylabel').popup({
-      content : 'Hello I am a popup',
-      on    : 'click',
-      position: 'top center'
-
-    });
-  },
-
   "click .showlogs": function(){
     $( ".mainlog" ).delay( 400 ).fadeOut( 'slow', function() {
       $('.logs').fadeIn( 'slow' );
@@ -33,15 +17,6 @@ Template.User.events({
 });
 
 Template.User.helpers({
-  now: function () {
-    var user = this;
-    return Nows.findOne({userId: user._id}, {sort: {createdAt: -1}, limit: 1});
-  },
-  nows: function () {
-    var user = this;
-    return Nows.find({userId: user._id}, {sort: {createdAt: -1}});
-  },
-
   isMe: function () {
     return this._id === Meteor.userId();
   },
@@ -65,10 +40,10 @@ Template.User.helpers({
 
 Template.User.onCreated(function(){
 
-  var self = this; 
+  var self = this;
   self.autorun(function(){
-    
-  }); 
 
-  
+  });
+
+
 });
