@@ -30,7 +30,7 @@ Schemas.Event = new SimpleSchema({
     type: String,
     optional: true
   },
-  hidden:{
+  hidden: {
     type: Boolean,
     defaultValue: false,
     optional: true

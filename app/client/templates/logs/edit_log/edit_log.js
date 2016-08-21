@@ -3,7 +3,7 @@ Template.editLog.helpers({
 });
 
 Template.editLog.events({
-  "click .dropdown": function(){
+  'click .dropdown': function () {
     $('.selection.dropdown').dropdown();
   },
 
@@ -13,7 +13,7 @@ Template.editLog.events({
     var logId = this._id;
 
     Meteor.call('updateLog', logId, {
-      name : logName
+      name: logName
     }, function (error, response) {
       if (error) throw error;
       Router.go('log', {logId: logId});
@@ -21,10 +21,10 @@ Template.editLog.events({
   },
 
   'click .deleteLog': function () {
-      Meteor.call('deleteLog', this._id,
-        function (error, response) {
-          if (error) throw error;
-          Router.go('home');
+    Meteor.call('deleteLog', this._id,
+      function (error, response) {
+        if (error) throw error;
+        Router.go('home');
       });
-  },
+  }
 });

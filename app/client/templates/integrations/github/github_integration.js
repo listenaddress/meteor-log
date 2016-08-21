@@ -1,32 +1,32 @@
-Template.GithubIntegration.onCreated(function() {
+Template.GithubIntegration.onCreated(function () {
   this.lastError = new ReactiveVar(null);
 });
 
 Template.GithubIntegration.helpers({
-  integration: function() {
+  integration: function () {
     return Integrations.findOne({service: 'github'});
   },
-  errorMessage: function() {
+  errorMessage: function () {
     return Template.instance().lastError.get();
   }
 });
 
-Template.GithubIntegration.onRendered(function(){
-  this.$(".dropdown").dropdown();
+Template.GithubIntegration.onRendered(function () {
+  this.$('.dropdown').dropdown();
 });
 
 Template.GithubIntegration.events({
-  'click .save': function(e, template) {
+  'click .save': function (e, template) {
     e.preventDefault();
 
     if (Meteor.user()) {
       var value = template.$('.dropdown').dropdown('get value');
       var integration = Integrations.findOne({service: 'github'});
-      var repo = integration.repos.filter(function(item) {
-        return item.id == value[0];
+      var repo = integration.repos.filter(function (item) {
+        return item.id === value[0];
       });
 
-      Meteor.call('addRepoHook', repo[0], function(error, response) {
+      Meteor.call('addRepoHook', repo[0], function (error, response) {
         if (error) {
           template.lastError.set(error.reason);
           console.log(error);
@@ -37,7 +37,7 @@ Template.GithubIntegration.events({
       });
     }
   },
-  'click .groupSave': function(e, template) {
+  'click .groupSave': function (e, template) {
     e.preventDefault();
     var userId = Meteor.userId();
     var groupId = Router.current().params.groupId;
@@ -45,11 +45,11 @@ Template.GithubIntegration.events({
     if (userId) {
       var value = template.$('.dropdown').dropdown('get value');
       var integration = Integrations.findOne({userId: userId, service: 'github'});
-      var repo = integration.repos.filter(function(item) {
-        return item.id == value[0];
+      var repo = integration.repos.filter(function (item) {
+        return item.id === value[0];
       });
 
-      Meteor.call('addRepoHook', repo[0], groupId, function(error, response) {
+      Meteor.call('addRepoHook', repo[0], groupId, function (error, response) {
         if (error) {
           template.lastError.set(error.reason);
           console.log(error);
@@ -60,23 +60,23 @@ Template.GithubIntegration.events({
       });
     }
   },
-  'click .remove': function(e, tmpl) {
+  'click .remove': function (e, template) {
     e.preventDefault();
 
     if (Meteor.user()) {
       var integration = Integrations.findOne({service: 'github'});
-      var hook = integration.hooks.filter(function(item) {
+      var hook = integration.hooks.filter(function (item) {
         console.log(item, e.target.dataset.value);
-        return item.id == e.target.dataset.value;
+        return item.id === e.target.dataset.value;
       });
 
       console.log(hook[0]);
-      Meteor.call('removeRepoHook', hook[0], function(error, response) {
+      Meteor.call('removeRepoHook', hook[0], function (error, response) {
         if (error) {
           template.lastError.set(error.reason);
           console.log(error);
         } else if (response === 1) {
-          tmpl.$('.dropdown').dropdown('clear');
+          template.$('.dropdown').dropdown('clear');
           template.lastError.set(null);
         }
       });

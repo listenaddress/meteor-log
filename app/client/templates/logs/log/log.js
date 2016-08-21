@@ -1,6 +1,6 @@
-Template.Log.onCreated(function(){
+Template.Log.onCreated(function () {
   var self = this;
-  self.autorun(function(){
+  self.autorun(function () {
     var controller = Router.current();
     self.subscribe('members', controller.params.logId);
   });
@@ -23,23 +23,23 @@ Template.Log.helpers({
 
     if (member) return true;
     else return false;
-  },
+  }
 });
 
 Template.Log.events({
-  "click .joinLog": function () {
+  'click .joinLog': function () {
     Meteor.call('joinLog', this._id,
       function (error, response) {
-        if(error) throw error ;
+        if (error) throw error;
       }
     );
   },
 
-  "click .leaveLog": function () {
+  'click .leaveLog': function () {
     Meteor.call('leaveLog', this._id,
       function (error, response) {
-        if(error) throw error;
+        if (error) throw error;
       }
     );
-  },
+  }
 });

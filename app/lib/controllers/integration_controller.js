@@ -1,33 +1,22 @@
 IntegrationController = RouteController.extend({
-  subscriptions: function() {
+  subscriptions: function () {
     this.subscribe('integrations', Meteor.userId());
   },
 
-  data: function() {
+  data: function () {
     return;
   },
 
-  github: function() {
+  github: function () {
     this.render('GithubIntegration', { /* data: {} */});
   },
 
-  groupGithub: function() {
-    this.state.set('isGroup', true);
-    this.render('GithubIntegration', { /* data: {} */});
-  },
-
-  evernote: function() {
+  evernote: function () {
     this.render('EvernoteIntegration', { /* data: {} */});
   },
 
-  dashboard: function(){
+  dashboard: function () {
     this.render('Integrations')
-  },
-
-  groupDashboard: function() {
-    this.state.set('isGroup', true);
-    console.log('this', this);
-    this.render('Integrations', { /* data: {} */});
   },
 
   edit: function () {

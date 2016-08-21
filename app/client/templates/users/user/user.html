@@ -1,8 +1,8 @@
 <template name="User">
-  
+
     <div class="ui events grid">
-      <div class="ten wide column">
-        
+      <div class="sixteen wide column">
+
             {{#with userProfile}}
       <div class="ui items">
         <div class="item">
@@ -15,7 +15,7 @@
             </h1>
             <div class="description">
               <p>
-              {{#linkTo route='user'}}      
+              {{#linkTo route='user'}}
                   @{{username}}
               {{/linkTo}}
               {{#if isMe}}
@@ -56,10 +56,10 @@
             </div>
           </div>
         </div>
-   
+
         <div class="logs">
           {{>LogsList}}
-         
+
 
         </div>
 
@@ -68,29 +68,5 @@
         </div>
       </div>
 
-      <div class="six wide column">
-        <h3>What I am doing now!</h3>
-
-        <div class="ui now segment">
-          {{>UserNow}}
-        </div>
-
-            {{#if isMe}}
-            <h4>Embed this now in your website</h4>
-
-            <div class="ui segment codesnippet">
-               <div class="ui bottom right attached label nospacelabel copylabel">
-                  <button class="ui icon copybutton button">
-                    <i class="copy icon"></i>
-                  </button>            
-              </div>
-
-                    {{{HTMLsnippet}}}
-             </div>
-
-            {{/if}}
-
-      </div>
-      
     </div>
 </template>

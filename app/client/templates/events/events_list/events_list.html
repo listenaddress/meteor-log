@@ -10,12 +10,6 @@
             {{/with}}
           {{/if}}
 
-          {{#if this.nowId}}
-            {{#with now}}
-              {{>NowPreview}}
-            {{/with}}
-          {{/if}}
-
           {{#if $eq this.type 'log_created'}}
             {{#with user}}
               {{#linkTo route='user'}}
