@@ -6,7 +6,8 @@ module.exports = {
   ],
   "rules": {
     "semi": [0],
-    "curly": [0]
+    "curly": [0],
+    "no-native-reassign": ["error", {"exceptions": ["UserController"]}]
   },
   "globals": {
     // Templates
@@ -16,6 +17,7 @@ module.exports = {
     "Template": false,
     "SimpleSchema": false,
     "AccountsTemplates": false,
+    "RouteController": false,
 
     // Collections
 
@@ -29,6 +31,10 @@ module.exports = {
     "Comments": false,
     "Notes": false,
     "Groups": false,
+
+    // Controllers
+
+    "UserController": false,
   },
   "env": {
     "meteor": true,
