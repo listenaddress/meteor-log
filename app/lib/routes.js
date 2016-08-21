@@ -11,7 +11,6 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-
   Router.route('/integrations/', {
     name: 'integration',
     controller: 'IntegrationController',
@@ -33,7 +32,6 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-
   Router.route('/note/:_id', {
     name: 'note',
     controller: 'NoteController',
@@ -49,23 +47,20 @@ if (Meteor.isClient) {
   });
 
   Router.route('/account', {
+    name: 'account',
     before: function () {
-      console.log('yo');
-       if (Meteor.user()) {
-         this.redirect('/');
-       }
-       else{
-         this.render('account');
-       }
-   },
-    name: 'account'
+      if (Meteor.user()) {
+        this.redirect('/');
+      } else {
+        this.render('account');
+      }
+    }
   });
 
   // Router.onBeforeAction(function() {
   //     if (!Meteor.user())
   //         this.redirect('/account');
   // }, {except: ['account', 'home', 'user']});
-
 
   Router.route('/:username', {
     name: 'user',
@@ -116,7 +111,7 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-    Router.route('/log/:logId/edit', {
+  Router.route('/log/:logId/edit', {
     name: 'log.edit',
     controller: 'LogController',
     action: 'edit',
@@ -136,7 +131,6 @@ if (Meteor.isClient) {
     action: 'groupGithub',
     where: 'client'
   });
-
 }
 
 // Router.route('/user/:_id/notifications', {
@@ -147,8 +141,8 @@ if (Meteor.isClient) {
 // });
 
 if (Meteor.isServer) {
-  Router.route("/integrations/:userId", { where: "server" } )
-    .post(function() {
+  Router.route('/integrations/:userId', { where: 'server' })
+    .post(function () {
       var user = Meteor.users.findOne({_id: this.params.userId});
       if (this.request.body.sender.id === user.services.github.id) {
         Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
@@ -157,8 +151,8 @@ if (Meteor.isServer) {
       this.response.end('yo yo');
     });
 
-  Router.route("/integrations/group/:groupId", { where: "server" } )
-    .post(function() {
+  Router.route('/integrations/group/:groupId', { where: 'server' })
+    .post(function () {
       var group = Groups.findOne({_id: this.params.groupId});
 
       if (group._id) {
