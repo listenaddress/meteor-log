@@ -3,13 +3,13 @@ AccountsTemplates.addField({
   type: 'text',
   required: true,
   displayName: 'Username',
-  func: function(value){
+  func: function (value) {
     if (Meteor.isClient) {
       var self = this;
 
-      Meteor.call('userExists', value, function(err, userExists){
+      Meteor.call('userExists', value, function (error, userExists) {
+        if (error) throw error;
         if (!userExists) return self.setSuccess();
-
         self.setError(userExists);
         self.setValidating(false);
       });
@@ -27,5 +27,5 @@ AccountsTemplates.addField({
   placeholder: 'John',
   type: 'text',
   required: true,
-  displayName: "What is your Name?"
+  displayName: 'What is your Name?'
 });

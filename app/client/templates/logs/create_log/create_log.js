@@ -5,22 +5,17 @@ Template.createLog.helpers({
 });
 
 Template.createLog.events({
-  'submit form': function(event){
+  'submit form': function (event) {
     event.preventDefault();
     var logName = event.target.logName.value;
     var logPrivacy = event.target.privacy.value;
 
     Meteor.call('saveLog', {
-      name : logName,
+      name: logName,
       privacy: logPrivacy
-    }, function(error, response) {
-      if (error) {
-        console.log('error: ', error);
-      }
-      else{
-        Router.go('/log/'+response);
-      }
+    }, function (error, response) {
+      if (error) throw error
+      Router.go('/log/' + response);
     });
-
   }
-})
+});

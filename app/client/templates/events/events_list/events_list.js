@@ -19,41 +19,32 @@ Template.EventsList.helpers({
   }
 });
 
-
 Template.EventsList.onCreated(function () {
   var self = this;
   var controller = Router.current();
-
   var params = controller.params;
 
   self.autorun(function () {
     if (params.username) {
-      var user = Meteor.users.findOne({"username":controller.params.username});
-
-      if (user)
-        var userId = user._id;
-
+      var user = Meteor.users.findOne({'username': controller.params.username});
+      if (user) var userId = user._id;
       self.subscribe('userEvents', userId, function () {
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
-          $( ".loading-wrapper" ).fadeIn( 'slow' );
+        $('.loader').delay(1000).fadeOut('slow', function () {
+          $('.loading-wrapper').fadeIn('slow');
         });
       });
-    }
-    else if (params.logId) {
-
+    } else if (params.logId) {
       self.subscribe('logEvents', params.logId, function () {
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
-          $( ".loading-wrapper" ).fadeIn( 'slow' );
+        $('.loader').delay(1000).fadeOut('slow', function () {
+          $('.loading-wrapper').fadeIn('slow');
         });
       });
-    }
-    else {
+    } else {
       self.subscribe('homeEvents', params.groupId, function () {
-        $( ".loader" ).delay( 1000 ).fadeOut( 'slow', function () {
-          $( ".loading-wrapper" ).fadeIn( 'slow' );
+        $('.loader').delay(1000).fadeOut('slow', function () {
+          $('.loading-wrapper').fadeIn('slow');
         });
       });
     }
-
   });
 });

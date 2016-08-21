@@ -7,7 +7,15 @@ module.exports = {
   "rules": {
     "semi": [0],
     "curly": [0],
-    "no-native-reassign": ["error", {"exceptions": ["UserController"]}]
+    "no-native-reassign": ["error", {"exceptions": ["UserController",
+                                                    "LogController",
+                                                    "IntegrationController",
+                                                    "HomeController",
+                                                    "Logs",
+                                                    "Events",
+                                                    "Integrations",
+                                                    "Messages",
+                                                    "Members"]}]
   },
   "globals": {
     // Templates
@@ -21,20 +29,22 @@ module.exports = {
 
     // Collections
 
-    "Notifications": false,
     "Logs": false,
     "Events": false,
     "Integrations": false,
     "Messages": false,
     "Members": false,
-    "Nows": false,
-    "Comments": false,
-    "Notes": false,
-    "Groups": false,
 
     // Controllers
 
     "UserController": false,
+    "LogController": false,
+    "IntegrationController": false,
+    "HomeController": false,
+
+    // Packages
+
+    "moment": false
   },
   "env": {
     "meteor": true,

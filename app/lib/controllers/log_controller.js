@@ -2,7 +2,7 @@ LogController = RouteController.extend({
   subscriptions: function () {
     this.subscribe('log', this.params.logId);
     var log = Logs.findOne({_id: this.params.logId});
-    if(log){
+    if (log) {
       this.subscribe('userInfo', log.creatorId);
     }
   },
@@ -19,7 +19,7 @@ LogController = RouteController.extend({
     this.render('createLog');
   },
 
-  edit: function(){
+  edit: function () {
     this.render('editLog');
   }
 });
