@@ -6,6 +6,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "bluebird": "3.4.1",
     "clipboard": "^1.5.12",
     "github": "2.1.0",
