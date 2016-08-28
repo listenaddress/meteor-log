@@ -15,7 +15,8 @@ module.exports = {
                                                     "Events",
                                                     "Integrations",
                                                     "Messages",
-                                                    "Members"]}]
+                                                    "Members",
+                                                    "Services"]}]
   },
   "globals": {
     // Templates
@@ -34,6 +35,7 @@ module.exports = {
     "Integrations": false,
     "Messages": false,
     "Members": false,
+    "Services": false,
 
     // Controllers
 

@@ -21,5 +21,9 @@ LogController = RouteController.extend({
 
   edit: function () {
     this.render('editLog');
+  },
+
+  integrations: function () {
+    this.render('logIntegrations');
   }
 });

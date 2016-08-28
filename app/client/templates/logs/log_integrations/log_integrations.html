@@ -1,0 +1,15 @@
+<template name="logIntegrations">
+  <div class="ui segment">
+    <h3>Available Services</h3>
+    <ul>
+      {{#each services}}
+        {{#if connected}}
+          <i class="icon circle green"></i>
+          <li>{{type}}</li>
+        {{else}}
+         <li>{{type}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</template>

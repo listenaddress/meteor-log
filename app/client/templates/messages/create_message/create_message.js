@@ -10,6 +10,11 @@ Template.CreateMessage.events({
       if (error) throw error;
       tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.set', '');
     });
+  },
+
+  'click .addIntegration': function (e, tmpl) {
+    var controller = Router.current();
+    Router.go('log.integrations', { logId: controller.params.logId });
   }
 });
 
