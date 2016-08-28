@@ -106,6 +106,10 @@ Meteor.publishComposite('homeEvents', function () {
   }
 });
 
-Meteor.publish('integrations', function (userId) {
-  return Integrations.find({userId: userId});
+Meteor.publish('integrations', function (logId) {
+  return Integrations.find({logId: logId});
+});
+
+Meteor.publish('services', function () {
+  return Services.find({});
 });

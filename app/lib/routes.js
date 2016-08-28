@@ -77,6 +77,13 @@ if (Meteor.isClient) {
     action: 'edit',
     where: 'client'
   });
+
+  Router.route('/log/:logId/integrations', {
+    name: 'log.integrations',
+    controller: 'LogController',
+    action: 'integrations',
+    where: 'client'
+  });
 }
 
 if (Meteor.isServer) {
