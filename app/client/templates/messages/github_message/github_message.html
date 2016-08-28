@@ -20,5 +20,9 @@
     {{#if $eq type 'push'}}
       {{data.sender.login}} <a target="_blank" href="{{data.head_commit.url}}">pushed</a> {{#if $gt data.commits.length 0}}{{data.commits.length}} commit{{#if $gt data.commits.length 1}}s{{/if}}{{/if}} to <a target="_blank" href="{{data.repository.html_url}}">{{data.repository.name}}</a>.
     {{/if}}
+
+    {{#if $eq type 'ping'}}
+      <p>Just a ping from github</p>
+    {{/if}}
   </div>
 </template>

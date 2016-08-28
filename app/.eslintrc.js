@@ -21,7 +21,8 @@ module.exports = {
                                                     "Notifications",
                                                     "Messages",
                                                     "Members",
-                                                    "Services"]}]
+                                                    "Services",
+                                                    "Github"]}]
   },
   "globals": {
     // Templates
@@ -44,6 +45,7 @@ module.exports = {
     "Messages": false,
     "Members": false,
     "Services": false,
+    "Github": false,
 
     // Controllers
 

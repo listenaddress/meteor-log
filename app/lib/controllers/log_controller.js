@@ -37,5 +37,9 @@ LogController = RouteController.extend({
 
   integrations: function () {
     this.render('logIntegrations');
+  },
+
+  integration: function () {
+    this.render('LogIntegration');
   }
 });
