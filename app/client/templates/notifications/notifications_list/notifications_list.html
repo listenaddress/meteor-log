@@ -1,0 +1,29 @@
+<template name="NotificationsList">
+  <h2>Notifications</h2>
+  <div class="notications-panel">
+    <ul class="notications-list">
+      {{#each notifications}}
+        <li class="notication-item {{isPrivateClass}}">
+        {{#if this.logId}}
+          <!-- User joined a log -->
+          {{#if $eq event.type 'member_joined_log'}}
+            {{#with event}}
+              {{#with user}}
+                {{#linkTo route='user'}} {{username}} {{/linkTo}}
+              {{/with}}
+              joined
+              {{#with log}}
+                {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
+              {{/with}}
+            {{/with}}
+          {{/if}}
+        {{/if}}
+        </li>
+      {{else}}
+        <li class="notication-item empty">
+          No notifications yet.
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
