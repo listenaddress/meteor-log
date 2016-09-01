@@ -43,6 +43,13 @@ if (Meteor.isClient) {
     }
   });
 
+  Router.route('/notifications', {
+    name: 'notifications',
+    controller: 'NotificationController',
+    action: 'detail',
+    where: 'client'
+  });
+
   Router.route('/:username', {
     name: 'user',
     controller: 'UserController',

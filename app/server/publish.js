@@ -106,6 +106,36 @@ Meteor.publishComposite('homeEvents', function () {
   }
 });
 
+Meteor.publishComposite('notifications', function (userId) {
+  return {
+    find: function () {
+      return Notifications.find({userId: userId});
+    },
+    children: [
+      {
+        // Find log from notification
+        find: function (notification) {
+          return Logs.find({_id: notification.logId});
+        }
+      },
+      {
+        // Find event from notification
+        find: function (notification) {
+          return Events.find({_id: notification.eventId});
+        },
+        children: [
+          {
+            // Find user from event
+            find: function (event, notification) {
+              return Meteor.users.find({_id: event.userId});
+            }
+          }
+        ]
+      }
+    ]
+  }
+});
+
 Meteor.publish('integrations', function (logId) {
   return Integrations.find({logId: logId});
 });
