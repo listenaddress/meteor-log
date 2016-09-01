@@ -37,7 +37,7 @@ Meteor.methods({
       'You cannot send messages while you are not connected');
   },
 
-  'saveEvent': function (id, userId, logId, type, refType) {
+  'saveEvent': function (id, userId, logId, type, refType, hidden) {
     var item = {
       type: type,
       createdAt: new Date()
@@ -48,11 +48,10 @@ Meteor.methods({
     }
 
     if (userId) item.userId = userId;
+    if (hidden) item.hidden = true;
 
     if (refType === 'Messages') {
       item.messageId = id;
-    } else if (refType === 'Nows') {
-      item.nowId = id;
     }
 
     if (item.userId || item.groupId) {
@@ -61,10 +60,33 @@ Meteor.methods({
           console.log('error: ', error);
           throw error;
         } else {
+          if (hidden) return;
+
+          Meteor.call('saveNotifications', logId, response, item.userId, refType);
           return;
         }
       });
     }
+  },
+
+  'saveNotifications': function (logId, eventId, eventUserId, refType) {
+    if (refType === 'Logs') {
+      var log = Logs.findOne(logId);
+      if (log.creatorId === eventUserId) return;
+
+      Meteor.call('saveLogNotifications', logId, eventId);
+    }
+  },
+
+  'saveLogNotifications': function (logId, eventId) {
+    var log = Logs.findOne(logId);
+
+    Notifications.insert({
+      userId: log.creatorId,
+      logId: logId,
+      eventId: eventId,
+      createdAt: new Date()
+    });
   },
 
   /*  Log Methods */
@@ -126,6 +148,7 @@ Meteor.methods({
                     logId,
                     'log_deleted',
                     'Logs',
+                    true,
           function (error, response) {
             if (error) throw error;
 
@@ -159,6 +182,7 @@ Meteor.methods({
                     logId,
                     'member_joined_log',
                     'Logs');
+
         return response;
       }
     );
@@ -176,7 +200,8 @@ Meteor.methods({
                   Meteor.userId(),
                   logId,
                   'member_left_log',
-                  'Logs');
+                  'Logs',
+                  true);
 
       return response;
     });
@@ -241,7 +266,6 @@ Meteor.methods({
 
   'addRepoHook': function (repo, groupId) {
     var user = Meteor.user();
-    console.log('user', user);
     var endpoint;
     var GitHub = require('github');
     var github = new GitHub({

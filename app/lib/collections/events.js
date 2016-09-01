@@ -35,7 +35,6 @@ Schemas.Event = new SimpleSchema({
     defaultValue: false,
     optional: true
   }
-
 });
 
 Events.attachSchema(Schemas.Event);
