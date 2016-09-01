@@ -14,6 +14,7 @@ Schemas.Notification = new SimpleSchema({
   },
   unseen: {
     type: Boolean,
+    defaultValue: true,
     optional: true
   },
   createdAt: {
