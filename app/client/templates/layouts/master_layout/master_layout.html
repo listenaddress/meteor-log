@@ -3,13 +3,19 @@
     <div class="ui container">
       <a href="/" class="header item">Log</a>
       <div class="right menu">
+        {{#linkTo route="notifications"}}
+          <span class="ui label" style="padding-top: 10px;
+                                        margin: 1px;">{{unseenNotifications}}
+          </span>
+        {{/linkTo}}
+
         {{#if currentUser}}
           {{#linkTo route="user" username=currentUser.username}}
-
             <a class="item">
               {{currentUser.profile.firstName}}
             </a>
           {{/linkTo}}
+
           <a class="item" href="#" data-logout>Logout</a>
         {{else}}
           {{#if loggingIn}}

@@ -1,5 +1,6 @@
 HomeController = RouteController.extend({
   subscriptions: function () {
+    this.subscribe('notifications', Meteor.userId());
   },
 
   data: function () {

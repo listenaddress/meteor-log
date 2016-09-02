@@ -1,5 +1,7 @@
 Template.MasterLayout.helpers({
-
+  unseenNotifications: function () {
+    return Notifications.find({userId: Meteor.userId(), unseen: true}).count();
+  }
 });
 
 Template.MasterLayout.events({
