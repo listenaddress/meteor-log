@@ -1,4 +1,4 @@
-Template.LogsList.helpers({
+Template.LogsGrid.helpers({
   publicLogs: function () {
     return Logs.find({creatorId: Session.get('userOnPage'), privacy: 'public'});
   },
@@ -12,7 +12,7 @@ Template.LogsList.helpers({
   }
 });
 
-Template.LogsList.onCreated(function () {
+Template.LogsGrid.onCreated(function () {
   var self = this;
 
   self.autorun(function () {
@@ -38,6 +38,6 @@ Template.LogsList.onCreated(function () {
   });
 });
 
-Template.LogsList.onRendered(function () {
+Template.LogsGrid.onRendered(function () {
   $('.loader').delay(750).fadeIn();
 });
