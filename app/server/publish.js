@@ -15,6 +15,11 @@ Meteor.publish('log', function (logId) {
   return log;
 });
 
+Meteor.publish('logs', function (logId) {
+  var logs = Logs.find({hidden: false});
+  return logs;
+});
+
 Meteor.publish('members', function (logId) {
   return Members.find({logId: logId});
 })
