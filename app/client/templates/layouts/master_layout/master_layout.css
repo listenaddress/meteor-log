@@ -1,0 +1,32 @@
+.master-layout {
+  position: fixed;
+  /*top: 0;*/
+  width: 100%;
+  margin: 0px !important;
+  background-color: white !important;
+  border-bottom: 1px solid !important;
+  z-index: 1;
+}
+
+.main-content {
+  padding-top: 95px;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}

@@ -15,6 +15,11 @@ Meteor.publish('log', function (logId) {
   return log;
 });
 
+Meteor.publish('logs', function (logId) {
+  var logs = Logs.find({hidden: false});
+  return logs;
+});
+
 Meteor.publish('members', function (logId) {
   return Members.find({logId: logId});
 })
@@ -53,7 +58,7 @@ Meteor.publishComposite('logEvents', function (logId) {
   return {
     find: function () {
       if (logId)
-        return Events.find({logId: logId, hidden: false}, {sort: {createdAt: -1}});
+        return Events.find({logId: logId, hidden: false}, {sort: {createdAt: 1}});
     },
     children: [
       {
