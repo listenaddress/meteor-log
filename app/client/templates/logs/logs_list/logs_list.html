@@ -1,47 +1,14 @@
 <template name="LogsList">
-  {{#if Template.subscriptionsReady}}
-    <div class="ui grid ">
-      {{#each publicLogs}}
-        {{#linkTo route="log" logId=_id}}
-          <div class="five column logbox-wrapper">
-            <div class="ui segment logbox">
-              <div class="extra">
-                Progress in
-              </div>
-              <h3>{{name}}</h3>
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
-              <br>
-            </div>
-          </div>
-        {{/linkTo}}
+  <div>
+    <h3>Logs</h3>
+    <ul>
+      {{#each logs}}
+        <li>
+          {{#linkTo route='log' logId=this._id}}
+            {{this.name}}
+          {{/linkTo}}
+        </li>
       {{/each}}
-    </div>
-
-     <br><br><br>
-
-    {{#if isMe}}
-    <div class="ui grid">
-      <div class="left floated seven wide column">
-        <h3>Private Logs</h3>
-      </div>
-    </div>
-    {{#each privateLogs}}
-        {{#linkTo route="log" logId=_id}}
-          <div class="five column logbox-wrapper">
-            <div class="ui segment logbox">
-              <div class="extra">
-                Progress in
-              </div>
-              <h3>{{name}}</h3>
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
-              <br>
-            </div>
-          </div>
-        {{/linkTo}}
-      {{/each}}
-    {{/if}}
-
-  {{/if}}
+    </ul>
+  </div>
 </template>
