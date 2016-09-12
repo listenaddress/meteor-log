@@ -58,7 +58,7 @@ Meteor.publishComposite('logEvents', function (logId) {
   return {
     find: function () {
       if (logId)
-        return Events.find({logId: logId, hidden: false}, {sort: {createdAt: -1}});
+        return Events.find({logId: logId, hidden: false}, {sort: {createdAt: 1}});
     },
     children: [
       {
