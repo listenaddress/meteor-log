@@ -1,11 +1,3 @@
-Template.Log.onCreated(function () {
-  var self = this;
-  self.autorun(function () {
-    var controller = Router.current();
-    self.subscribe('members', controller.params.logId);
-  });
-});
-
 Template.Log.helpers({
   owner: function () {
     var user = Meteor.users.findOne({_id: this.creatorId});

@@ -1,14 +1,19 @@
 Template.CreateMessage.events({
-  'click .save': function (e, tmpl) {
+  'keypress textarea.message-input': function (e, tmpl) {
+    console.log('e', e);
+    if (e.which !== 13) return;
     e.preventDefault();
-    var content = tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.get', true);
 
+    var message = tmpl.find(".message-input").value;
     var controller = Router.current();
     var logId = controller.params.logId;
 
-    Meteor.call('saveMessage', content, logId, function (error, response) {
+    Meteor.call('saveMessage', message, logId, function (error, response) {
       if (error) throw error;
-      tmpl.$('div.froala-reactive-meteorized').froalaEditor('html.set', '');
+      tmpl.find(".message-input").value = '';
+      setTimeout(function() {
+        $('.events-list').scrollTop(100000);
+      }, 200);
     });
   },
 

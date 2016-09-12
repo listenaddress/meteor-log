@@ -3,7 +3,11 @@
     <h3>Logs</h3>
     <ul>
       {{#each logs}}
-        <li>{{this.name}}</li>
+        <li>
+          {{#linkTo route='log' logId=this._id}}
+            {{this.name}}
+          {{/linkTo}}
+        </li>
       {{/each}}
     </ul>
   </div>

@@ -3,5 +3,21 @@
 /*****************************************************************************/
 .events-list {
   font-size: 1.14285714rem;
-  overflow-y: scroll;
+  height: calc(100vh - 187px);
+  overflow: auto;
+}
+
+.events-list::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: transparent;
+}
+
+.events-list::-webkit-scrollbar-thumb {
+  background-color: #ef46a6;
+  opacity: 0.75;
+}
+
+.events-wrapper {
+  height: calc(100vh - 200px);
 }

@@ -33,18 +33,6 @@ Template.EventsList.onCreated(function () {
           $('.loading-wrapper').fadeIn('slow');
         });
       });
-    } else if (params.logId) {
-      self.subscribe('logEvents', params.logId, function () {
-        $('.loader').delay(1000).fadeOut('slow', function () {
-          $('.loading-wrapper').fadeIn('slow');
-        });
-      });
-    } else {
-      self.subscribe('homeEvents', params.groupId, function () {
-        $('.loader').delay(1000).fadeOut('slow', function () {
-          $('.loading-wrapper').fadeIn('slow');
-        });
-      });
     }
   });
 });
