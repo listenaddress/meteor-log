@@ -1,6 +1,7 @@
 Template.CreateMessage.events({
-  'keypress textarea.message-input': function (e, tmpl) {
-    console.log('e', e);
+  'keyup textarea.message-input': function (e, tmpl) {
+    var message = tmpl.find('.message-input').value;
+    Session.set('message', message);
     if (e.which !== 13) return;
     e.preventDefault();
 
@@ -10,7 +11,7 @@ Template.CreateMessage.events({
 
     Meteor.call('saveMessage', message, logId, function (error, response) {
       if (error) throw error;
-      tmpl.find(".message-input").value = '';
+      tmpl.find('.message-input').value = '';
       setTimeout(function() {
         $('.events-list').scrollTop(100000);
       }, 200);
@@ -24,25 +25,10 @@ Template.CreateMessage.events({
 });
 
 Template.CreateMessage.helpers({
-  getContext: function () {
-    return {
-      // Set html content
-      // _value: self.note,
-      _keepMarkers: true,
-      toolbarInline: true,
-      initOnClick: false,
-      tabSpaces: false,
-      placeholderText: 'What are you working on now...?',
+  tagging: function () {
+    var message = Session.get('message');
+    var taggingUserPattern = /\B@$|\B@[a-z0-9_-]+$/;
 
-      // FE save.before event handler function:
-      '_onsave.before': function (e, editor) {
-        // var newHTML = editor.html.get(true /* keep_markers */);
-        // Do something to update the edited value
-        // if (!_.isEqual(newHTML, self.note.body)) {
-        //   Meteor.call('saveNote', { body: newHTML })
-        // }
-        return false; // Stop Froala Editor from POSTing to the Save URL
-      }
-    }
+    return message.match(taggingUserPattern);
   }
 });
