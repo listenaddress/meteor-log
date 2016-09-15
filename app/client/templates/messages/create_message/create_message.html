@@ -5,7 +5,7 @@
         {{#if usersToTag}}
           <ul class="user-list">
             {{#each usersToTag}}
-              <li>{{username}}</li>
+              <li data-value="{{username}}">{{username}}</li>
             {{/each}}
           </ul>
         {{else}}
