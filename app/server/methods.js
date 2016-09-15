@@ -4,14 +4,17 @@ import P from 'bluebird';
 
 Meteor.methods({
 
-  'saveMessage': function (content, logId) {
+  'saveMessage': function (message, logId) {
     var item = {
       userId: Meteor.userId(),
       createdAt: new Date(),
-      content: content
+      content: message
     };
 
     var isMember = Members.findOne({ logId: logId, userId: Meteor.userId() });
+    var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
+    var matches = message.match(usersTaggedPattern);
+    console.log('matches', matches);
 
     if (item.userId) {
       if (isMember) {
