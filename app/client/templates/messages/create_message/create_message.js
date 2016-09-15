@@ -27,8 +27,26 @@ Template.CreateMessage.events({
 Template.CreateMessage.helpers({
   tagging: function () {
     var message = Session.get('message');
-    var taggingUserPattern = /\B@$|\B@[a-z0-9_-]+$/;
+    if (!message) return;
+    var taggingUserPattern = /\B@[a-z0-9_-]+$/;
+    var match = message.match(taggingUserPattern);
+    if (!match) return;
 
-    return message.match(taggingUserPattern);
+    var username = match[0].slice(1);
+    var query = '.*' + username + '.*';
+    Session.set('loadingUsers', true);
+    Meteor.subscribe('usersByUsername', query, function () {
+      var users = Meteor.users.find({username: {$regex: query}}).fetch();
+      Session.set('usersToTag', users);
+      Session.set('loadingUsers', false);
+    });
+
+    return match;
+  },
+  loadingUsers: function () {
+    return Session.get('loadingUsers');
+  },
+  usersToTag: function () {
+    return Session.get('usersToTag');
   }
 });

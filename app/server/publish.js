@@ -2,11 +2,12 @@ Meteor.publish('users', function () {
   return Meteor.users.find({}, {fields: {profile: 1, username: 1}});
 });
 
-Meteor.publish('user', function (username) {
-  return Meteor.users.find({username: username}, {fields: {profile: 1, username: 1}});
+Meteor.publish('usersByUsername', function (username) {
+  console.log('username', username);
+  return Meteor.users.find({username: {$regex: username}}, {fields: {profile: 1, username: 1}});
 });
 
-Meteor.publish('userInfo', function (userId) {
+Meteor.publish('usersById', function (userId) {
   return Meteor.users.find({_id: userId}, {fields: {profile: 1, username: 1}});
 });
 

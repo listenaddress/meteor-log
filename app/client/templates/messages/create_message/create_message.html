@@ -1,6 +1,22 @@
 <template name="CreateMessage">
   <div class="create-message">
-    {{#if tagging}}tagging{{/if}}
+    {{#if tagging}}
+      <div class="tagging-wrapper">
+        {{#if usersToTag}}
+          <ul class="user-list">
+            {{#each usersToTag}}
+              <li>{{username}}</li>
+            {{/each}}
+          </ul>
+        {{else}}
+          {{#if loadingUsers}}
+            <span>Loading...</span>
+          {{else}}
+            <span>No one found yet.</span>
+          {{/if}}
+        {{/if}}
+      </div>
+    {{/if}}
     <textarea class="message-input"></textarea>
   </div>
 </template>
