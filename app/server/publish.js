@@ -134,6 +134,18 @@ Meteor.publishComposite('notifications', function (userId) {
             find: function (event, notification) {
               return Meteor.users.find({_id: event.userId});
             }
+          },
+          {
+            // Find message from event
+            find: function (event, notification) {
+              return Messages.find({_id: event.messageId});
+            }
+          },
+          {
+            // Find log from event
+            find: function (event, notification) {
+              return Logs.find({_id: event.logId});
+            }
           }
         ]
       }

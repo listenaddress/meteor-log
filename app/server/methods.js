@@ -85,7 +85,7 @@ Meteor.methods({
   'saveNotifications': function (logId, event, refType) {
     if (refType === 'Logs') {
       var log = Logs.findOne(logId);
-      if (log.creatorId === eventUserId) return;
+      if (log.creatorId === event.userId) return;
 
       Meteor.call('saveLogNotifications', logId, event._id);
     }
@@ -95,11 +95,11 @@ Meteor.methods({
       var message = Messages.findOne(event.messageId);
       var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
       var matches = message.content.match(usersTaggedPattern);
-      if (matches.length > 0) {
+      if (matches && matches.length > 0) {
         _.map(matches, function (item) {
           var username = item.replace('@', '');
-          var exists = !!Meteor.users.findOne({username: username});
-          if (!exists) return;
+          var user = Meteor.users.findOne({username: username});
+          if (!user || user._id === event.userId) return;
 
           Meteor.call('saveTaggedNotification', username, event._id);
         });

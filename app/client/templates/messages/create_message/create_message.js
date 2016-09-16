@@ -1,4 +1,9 @@
 Template.CreateMessage.events({
+  'keypress textarea.message-input': function (e, tmpl) {
+    if (e.which !== 13) return;
+    e.preventDefault();
+  },
+
   'keyup textarea.message-input': function (e, tmpl) {
     var message = tmpl.find('.message-input').value;
     if (!message) return;
