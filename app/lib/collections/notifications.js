@@ -7,7 +7,8 @@ Schemas.Notification = new SimpleSchema({
     type: String
   },
   logId: {
-    type: String
+    type: String,
+    optional: true
   },
   eventId: {
     type: String

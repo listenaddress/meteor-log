@@ -3,7 +3,6 @@ Meteor.publish('users', function () {
 });
 
 Meteor.publish('usersByUsername', function (username) {
-  console.log('username', username);
   return Meteor.users.find({username: {$regex: username}}, {fields: {profile: 1, username: 1}});
 });
 

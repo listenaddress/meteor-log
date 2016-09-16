@@ -3,18 +3,27 @@
 import P from 'bluebird';
 
 Meteor.methods({
-
   'saveMessage': function (message, logId) {
+    // Find users tagged and add links to their profile
+    var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
+    var matches = message.match(usersTaggedPattern);
+    if (matches && matches.length > 0) {
+      _.map(matches, function (item) {
+        var username = item.replace('@', '');
+        var exists = !!Meteor.users.findOne({username: username});
+        if (!exists) return;
+
+        message = message.replace(item, '<a href="/' + username + '">' + item +'</a>');
+      });
+    }
+
+    // Save Message
+    var isMember = Members.findOne({ logId: logId, userId: Meteor.userId() });
     var item = {
       userId: Meteor.userId(),
       createdAt: new Date(),
       content: message
     };
-
-    var isMember = Members.findOne({ logId: logId, userId: Meteor.userId() });
-    var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
-    var matches = message.match(usersTaggedPattern);
-    console.log('matches', matches);
 
     if (item.userId) {
       if (isMember) {
@@ -65,19 +74,36 @@ Meteor.methods({
         } else {
           if (hidden) return;
 
-          Meteor.call('saveNotifications', logId, response, item.userId, refType);
+          item._id = response;
+          Meteor.call('saveNotifications', logId, item, refType);
           return;
         }
       });
     }
   },
 
-  'saveNotifications': function (logId, eventId, eventUserId, refType) {
+  'saveNotifications': function (logId, event, refType) {
     if (refType === 'Logs') {
       var log = Logs.findOne(logId);
       if (log.creatorId === eventUserId) return;
 
-      Meteor.call('saveLogNotifications', logId, eventId);
+      Meteor.call('saveLogNotifications', logId, event._id);
+    }
+
+    if (refType === 'Messages') {
+      // Find users tagged and save a notification for them
+      var message = Messages.findOne(event.messageId);
+      var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
+      var matches = message.content.match(usersTaggedPattern);
+      if (matches.length > 0) {
+        _.map(matches, function (item) {
+          var username = item.replace('@', '');
+          var exists = !!Meteor.users.findOne({username: username});
+          if (!exists) return;
+
+          Meteor.call('saveTaggedNotification', username, event._id);
+        });
+      }
     }
   },
 
@@ -87,6 +113,16 @@ Meteor.methods({
     Notifications.insert({
       userId: log.creatorId,
       logId: logId,
+      eventId: eventId,
+      createdAt: new Date()
+    });
+  },
+
+  'saveTaggedNotification': function (username, eventId) {
+    var user = Meteor.users.findOne({username: username});
+
+    Notifications.insert({
+      userId: user._id,
       eventId: eventId,
       createdAt: new Date()
     });
