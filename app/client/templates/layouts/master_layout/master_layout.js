@@ -23,7 +23,7 @@ Template.EventsList.onRendered(function () {
         _.map(matches, function (item) {
           var username = item.replace('@', '');
           var user = Meteor.users.findOne({username: username});
-          if (user._id !== Meteor.userId()) return;
+          if (!user || user._id !== Meteor.userId()) return;
           var audio = new Audio('/assets/realtalk.mp3');
           audio.play();
         });
