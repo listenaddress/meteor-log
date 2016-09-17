@@ -1,6 +1,5 @@
 Template.EventsList.onRendered(function () {
   var query = Notifications.find({userId: Meteor.userId(), unseen: true});
-  var count = Notifications.find({userId: Meteor.userId(), unseen: true}).count();
 
   // eslint-disable-next-line no-unused-vars
   var handle = query.observeChanges({
