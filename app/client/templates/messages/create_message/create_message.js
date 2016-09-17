@@ -1,3 +1,7 @@
+Template.CreateMessage.onRendered(function () {
+  Session.set('tagging', false);
+});
+
 Template.CreateMessage.events({
   'keypress textarea.message-input': function (e, tmpl) {
     if (e.which !== 13) return;
@@ -11,6 +15,7 @@ Template.CreateMessage.events({
     var taggingUserPattern = /\B@[a-z0-9_-]+$/;
     var match = message.match(taggingUserPattern);
     if (match) {
+      Session.set('match', match);
       handleTagging();
     } else {
       Session.set('tagging', false);
@@ -33,7 +38,6 @@ Template.CreateMessage.events({
     function handleTagging () {
       var username = match[0].slice(1);
       var query = '.*' + username + '.*';
-      Session.set('match', match);
       Session.set('tagging', true);
       Session.set('loadingUsers', true);
       Meteor.subscribe('usersByUsername', query, function () {
