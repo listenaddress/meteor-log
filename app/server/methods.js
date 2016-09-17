@@ -130,9 +130,18 @@ Meteor.methods({
 
   'markNotificationsAsSeen': function () {
     return Notifications.update({userId: Meteor.userId()},
-                       {$unset: {unseen: ''}},
-                       {multi: true},
+                                {$unset: {unseen: ''}},
+                                {multi: true},
 
+      function (error, response) {
+        if (error) throw error;
+        return response;
+      }
+    );
+  },
+
+  'markNotificationAsHeard': function (id) {
+    return Notifications.update(id, {$set: {heard: true}},
       function (error, response) {
         if (error) throw error;
         return response;

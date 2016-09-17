@@ -5,6 +5,7 @@ Template.EventsList.onRendered(function () {
   // eslint-disable-next-line no-unused-vars
   var handle = query.observeChanges({
     added: function (id, notification) {
+      if (notification.heard) return;
       var now = moment();
       var then = moment.utc(notification.createdAt);
       var diff = now.diff(then);
@@ -26,6 +27,7 @@ Template.EventsList.onRendered(function () {
           if (!user || user._id !== Meteor.userId()) return;
           var audio = new Audio('/assets/realtalk.mp3');
           audio.play();
+          Meteor.call('markNotificationAsHeard', id);
         });
       }, 100);
     }
