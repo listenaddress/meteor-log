@@ -5,20 +5,31 @@
       <ul class="notications-list">
         {{#each notifications}}
           <li class="notication-item {{isPrivateClass}}">
-          {{#if this.logId}}
-            <!-- User joined a log -->
-            {{#if $eq event.type 'member_joined_log'}}
-              {{#with event}}
+            {{#with event}}
+              {{#if logId}}
+                <!-- User joined a log -->
+                {{#if $eq type 'member_joined_log'}}
+                  {{#with user}}
+                    {{#linkTo route='user'}} {{username}} {{/linkTo}}
+                  {{/with}}
+                  joined
+                  {{#with log}}
+                    {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
+                  {{/with}}
+                {{/if}}
+              {{/if}}
+
+              <!-- User tagged you in a message -->
+              {{#if messageId}}
                 {{#with user}}
                   {{#linkTo route='user'}} {{username}} {{/linkTo}}
                 {{/with}}
-                joined
+                tagged you in
                 {{#with log}}
                   {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
                 {{/with}}
-              {{/with}}
-            {{/if}}
-          {{/if}}
+              {{/if}}
+            {{/with}}
           </li>
         {{else}}
           <li class="notication-item empty">

@@ -17,6 +17,26 @@
   border: none;
 }
 
+.tagging-wrapper {
+  position: absolute;
+  bottom: 52px;
+  left: -1px;
+  padding: 4px;
+  background: white;
+  border: 1px solid;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.user-list li:hover {
+  cursor: pointer;
+  color: #f000ff;
+}
+
 .ui.segment button {
   position: fixed;
 }

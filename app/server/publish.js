@@ -2,11 +2,11 @@ Meteor.publish('users', function () {
   return Meteor.users.find({}, {fields: {profile: 1, username: 1}});
 });
 
-Meteor.publish('user', function (username) {
-  return Meteor.users.find({username: username}, {fields: {profile: 1, username: 1}});
+Meteor.publish('usersByUsername', function (username) {
+  return Meteor.users.find({username: {$regex: username}}, {fields: {profile: 1, username: 1}});
 });
 
-Meteor.publish('userInfo', function (userId) {
+Meteor.publish('usersById', function (userId) {
   return Meteor.users.find({_id: userId}, {fields: {profile: 1, username: 1}});
 });
 
@@ -133,6 +133,18 @@ Meteor.publishComposite('notifications', function (userId) {
             // Find user from event
             find: function (event, notification) {
               return Meteor.users.find({_id: event.userId});
+            }
+          },
+          {
+            // Find message from event
+            find: function (event, notification) {
+              return Messages.find({_id: event.messageId});
+            }
+          },
+          {
+            // Find log from event
+            find: function (event, notification) {
+              return Logs.find({_id: event.logId});
             }
           }
         ]

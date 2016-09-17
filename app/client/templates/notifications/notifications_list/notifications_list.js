@@ -8,6 +8,9 @@ Template.NotificationsList.helpers({
   log: function () {
     return Logs.findOne(this.logId);
   },
+  message: function () {
+    return Messages.findOne(this.logId);
+  },
   event: function () {
     return Events.findOne(this.eventId);
   }

@@ -11,7 +11,7 @@ Template.MessagePreview.helpers({
 Template.MessagePreview.onCreated(function () {
   var self = this;
   self.autorun(function () {
-    self.subscribe('userInfo', self.data.userId);
+    self.subscribe('usersById', self.data.userId);
   });
 })
 
