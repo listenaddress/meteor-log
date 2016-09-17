@@ -15,12 +15,13 @@ Template.CreateMessage.events({
     var taggingUserPattern = /\B@[a-z0-9_-]+$/;
     var match = message.match(taggingUserPattern);
     if (match) {
-      Session.set('match', match);
+      Session.set('usernameSearch', match);
       handleTagging();
     } else {
       Session.set('tagging', false);
     }
 
+    // Handle user hitting return key to save message
     if (e.which !== 13) return;
     e.preventDefault();
 
@@ -40,6 +41,7 @@ Template.CreateMessage.events({
       var query = '.*' + username + '.*';
       Session.set('tagging', true);
       Session.set('loadingUsers', true);
+
       Meteor.subscribe('usersByUsername', query, function () {
         var users = Meteor.users.find({username: {$regex: query}}).fetch();
         Session.set('usersToTag', users);
@@ -53,14 +55,16 @@ Template.CreateMessage.events({
     Router.go('log.integrations', { logId: controller.params.logId });
   },
 
+  // Handle user selecting a user from the tagging dropup
   'click .user-list li': function (e, tmpl) {
     var username = e.target.dataset.value;
     var message = tmpl.find('.message-input').value;
-    var match = Session.get('match');
+    var match = Session.get('usernameSearch');
 
     message = message.slice(0, -(match[0].length - 1));
-    tmpl.find('.message-input').value = message += username + ' ';
-    tmpl.find('.message-input').focus();
+    message += username;
+    $('.message-input').focus().val('').val(message);
+
     Session.set('tagging', false);
   }
 });

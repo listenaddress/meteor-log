@@ -1,9 +1,9 @@
 Template.EventsList.onRendered(function () {
+  // Check if we're tagged in a new message. Play realtalk.mp3 if we are.
   var query = Notifications.find({userId: Meteor.userId(), unseen: true});
 
   // eslint-disable-next-line no-unused-vars
   var handle = query.observeChanges({
-    // Check if we're tagged in a new message. Play realtalk.mp3 if we are.
     added: function (id, notification) {
       var now = moment();
       var then = moment.utc(notification.createdAt);
