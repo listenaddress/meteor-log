@@ -31,6 +31,7 @@ Template.CreateMessage.events({
     Meteor.call('saveMessage', message, logId, function (error, response) {
       if (error) throw error;
       tmpl.find('.message-input').value = '';
+      Session.set('tagging', false);
       setTimeout(function () {
         $('.events-list').scrollTop(100000);
       }, 200);

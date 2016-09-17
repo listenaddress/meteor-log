@@ -10,6 +10,7 @@ Template.EventsList.onRendered(function () {
       var diff = now.diff(then);
       if (diff > 20000) return;
 
+      // Timeout is to make sure that how events and messages are populated
       setTimeout(function () {
         var event = Events.findOne(notification.eventId);
         if (!event) return;
@@ -26,7 +27,7 @@ Template.EventsList.onRendered(function () {
           var audio = new Audio('/assets/realtalk.mp3');
           audio.play();
         });
-      }, 300);
+      }, 100);
     }
   });
 });
