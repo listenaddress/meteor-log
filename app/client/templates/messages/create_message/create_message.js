@@ -19,19 +19,18 @@ Template.CreateMessage.events({
     if (e.which !== 13) return;
     e.preventDefault();
 
-    var message = tmpl.find(".message-input").value;
     var controller = Router.current();
     var logId = controller.params.logId;
 
     Meteor.call('saveMessage', message, logId, function (error, response) {
       if (error) throw error;
       tmpl.find('.message-input').value = '';
-      setTimeout(function() {
+      setTimeout(function () {
         $('.events-list').scrollTop(100000);
       }, 200);
     });
 
-    function handleTagging() {
+    function handleTagging () {
       var username = match[0].slice(1);
       var query = '.*' + username + '.*';
       Session.set('match', match);

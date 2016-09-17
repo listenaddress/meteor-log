@@ -13,7 +13,7 @@ Meteor.methods({
         var exists = !!Meteor.users.findOne({username: username});
         if (!exists) return;
 
-        message = message.replace(item, '<a href="/' + username + '">' + item +'</a>');
+        message = message.replace(item, '<a href="/' + username + '">' + item + '</a>');
       });
     }
 
