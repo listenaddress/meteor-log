@@ -1,5 +1,13 @@
 <template name="CreateMessage">
   <div class="create-message">
+    <div class="photo-upload">
+      <input type="file" class="file_bag">
+      <button class="upload">Upload</button>
+
+      {{#each files}}
+        <p>{{percent_uploaded}}</p>
+      {{/each}}
+    </div>
     {{#if tagging}}
       <div class="tagging-wrapper">
         {{#if usersToTag}}

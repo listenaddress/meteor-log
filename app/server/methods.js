@@ -1,9 +1,9 @@
 /*  Server Methods  */
-
 import P from 'bluebird';
+var saveFiles = saveFiles;
 
 Meteor.methods({
-  'saveMessage': function (message, logId) {
+  'saveMessage': function (message, files, logId) {
     // Find users tagged and add links to their profile
     var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
     var matches = message.match(usersTaggedPattern);
@@ -17,36 +17,51 @@ Meteor.methods({
       });
     }
 
-    // Save Message
-    var isMember = Members.findOne({ logId: logId, userId: Meteor.userId() });
     var item = {
       userId: Meteor.userId(),
       createdAt: new Date(),
       content: message
     };
+    var isMember = Members.findOne({ logId: logId, userId: Meteor.userId() });
 
-    if (item.userId) {
-      if (isMember) {
-        return Messages.insert(item, function (error, response) {
-          if (error) throw error;
+    if (!item.userId) {
+      throw new Meteor.Error(500,
+        'You cannot send messages while you are not connected');
+    }
 
-          Meteor.call('saveEvent',
-                      response,
-                      item.userId,
-                      logId,
-                      'message_created',
-                      'Messages');
-
-          return response;
-        });
-      }
-
+    if (!isMember) {
       throw new Meteor.Error(500,
         'You cannot send messages if you did not join the log');
     }
 
-    throw new Meteor.Error(500,
-      'You cannot send messages while you are not connected');
+    return Messages.insert(item, function (error, response) {
+      if (error) throw error;
+
+      saveFiles(files, response, logId);
+
+      Meteor.call('saveEvent',
+                  response,
+                  item.userId,
+                  logId,
+                  'message_created',
+                  'Messages');
+
+      return response;
+    });
+
+    // return saveFiles(item).then(Meteor.bindEnvironment(function (value) {
+    //   if (value) item.files = value;
+    //   console.log('value from saveFiles', value);
+    //   return saveMessage(item);
+    // })).then(Meteor.bindEnvironment(function (value) {
+    //   console.log('value from saveMessage', value);
+    //   return saveEvent(value,
+    //                    item.userId,
+    //                    logId,
+    //                    'message_created',
+    //                    'Messages');
+
+    // }));
   },
 
   'saveEvent': function (id, userId, logId, type, refType, hidden) {
@@ -431,3 +446,18 @@ Meteor.methods({
     });
   }
 });
+
+saveFiles = function (files, messageId, logId) {
+  _.map(files, function (item) {
+    Files.insert({
+      userId: Meteor.userId(),
+      messageId: messageId,
+      s3Id: item._id,
+      secure_url: item.secure_url,
+      original_name: item.file.original_name,
+      createdAt: new Date()
+    }, function (error, response) {
+      if (error) throw error;
+    });
+  });
+};
