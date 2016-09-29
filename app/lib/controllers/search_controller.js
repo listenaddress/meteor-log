@@ -4,14 +4,10 @@ SearchController = RouteController.extend({
   },
 
   data: function () {
-    // return Logs.findOne({_id: this.params.logId});
+    // return Notifications.find({userId: Meteor.userId()});
   },
 
   search: function () {
-    this.render('search');
-  },
-
-  edit: function () {
-    this.render('editLog');
+    this.render('Search');
   }
 });

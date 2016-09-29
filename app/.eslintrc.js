@@ -13,6 +13,7 @@ module.exports = {
                                                     "NotificationController",
                                                     "SearchController",
                                                     "HomeController",
+                                                    "SearchController",
                                                     "Logs",
                                                     "Events",
                                                     "Files",

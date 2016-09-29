@@ -3,7 +3,7 @@ Meteor.publish('users', function () {
 });
 
 Meteor.publish('usersByUsername', function (username) {
-  return Meteor.users.find({username: {$regex: username}}, {fields: {profile: 1, username: 1}});
+  return Meteor.users.find({username: {$regex: username, $options: 'i'}}, {fields: {profile: 1, username: 1}});
 });
 
 Meteor.publish('usersById', function (userId) {
@@ -45,6 +45,14 @@ Meteor.publish('privateUserLogs', function () {
                                {hidden: false} ]
     });
   }
+});
+
+Meteor.publish('messagesByText', function (content) {
+  return Messages.find({content: {$regex: content, $options: 'i'}});
+});
+
+Meteor.publish('logsByName', function (name) {
+  return Logs.find({name: {$regex: name, $options: 'i'}});
 });
 
 Meteor.publishComposite('userEvents', function (userId) {

@@ -1,0 +1,43 @@
+<template name="Search">
+  <div style="margin-top: 100px;">
+    <h1>oh, finna search?</h1>
+    {{#if users}}
+      <h3>Users</h3>
+      <ul>
+        {{#each users}}
+          <li>
+            {{#linkTo route='user'}}
+              {{username}}
+            {{/linkTo}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+
+  {{#if logs}}
+    <div style="margin-top: 40px;">
+      <h3>Logs</h3>
+      <ul>
+        {{#each logs}}
+          <li>
+            {{#linkTo route='log' logId=_id}}
+              {{name}}
+            {{/linkTo}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if messages}}
+    <div style="margin-top: 40px;">
+      <h3>Messages</h3>
+      <ul>
+        {{#each messages}}
+          {{> MessagePreview}}
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</template>
