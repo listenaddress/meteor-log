@@ -65,7 +65,15 @@ Meteor.publishComposite('logEvents', function (logId) {
         // Find message from event
         find: function (item) {
           return Messages.find({_id: item.messageId});
-        }
+        },
+        children: [
+          {
+            // Find files from message
+            find: function (message, event) {
+              return Files.find({messageId: message._id});
+            }
+          }
+        ]
       },
       {
         // Find user of the event

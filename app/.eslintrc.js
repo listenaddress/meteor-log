@@ -11,9 +11,12 @@ module.exports = {
                                                     "LogController",
                                                     "IntegrationController",
                                                     "NotificationController",
+                                                    "SearchController",
                                                     "HomeController",
                                                     "Logs",
                                                     "Events",
+                                                    "Files",
+                                                    "S3",
                                                     "Integrations",
                                                     "Notifications",
                                                     "Messages",
@@ -34,8 +37,9 @@ module.exports = {
 
     "Logs": false,
     "Events": false,
+    "Files": false,
+    "S3": false,
     "Integrations": false,
-    "NotificationController": false,
     "Notifications": false,
     "Messages": false,
     "Members": false,
@@ -47,6 +51,8 @@ module.exports = {
     "LogController": false,
     "IntegrationController": false,
     "HomeController": false,
+    "NotificationController": false,
+    "SearchController": false,
 
     // Packages
 

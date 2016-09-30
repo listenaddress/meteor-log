@@ -17,6 +17,9 @@ Template.EventsList.helpers({
   message: function () {
     return Messages.findOne(this.messageId);
   },
+  files: function () {
+    return Files.find({messageId: this.messageId});
+  },
   timestamp: function () {
     return moment(this.createdAt).fromNow();
   },

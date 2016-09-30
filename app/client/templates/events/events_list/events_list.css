@@ -21,3 +21,7 @@
 .events-wrapper {
   height: calc(100vh - 200px);
 }
+
+.events-list img {
+  max-width: 100%;
+}

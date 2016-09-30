@@ -27,11 +27,13 @@ Template.CreateMessage.events({
 
     var controller = Router.current();
     var logId = controller.params.logId;
+    var files = Session.get('files');
 
-    Meteor.call('saveMessage', message, logId, function (error, response) {
+    Meteor.call('saveMessage', message, files, logId, function (error, response) {
       if (error) throw error;
       tmpl.find('.message-input').value = '';
       Session.set('tagging', false);
+      Session.set('files', false);
       setTimeout(function () {
         $('.events-list').scrollTop(100000);
       }, 200);
@@ -67,6 +69,24 @@ Template.CreateMessage.events({
     $('.message-input').focus().val('').val(message);
 
     Session.set('tagging', false);
+  },
+
+  'click button.upload': function () {
+    var files = $('input.file_bag')[0].files;
+
+    S3.upload({
+      files: files,
+      path: ''
+    }, function (error, response) {
+      if (error) console.log('error', error);
+
+      // Push new file onto the 'files' session variable
+      var files = Session.get('files');
+      if (!files || files.length < 1) files = [];
+      files.push(response);
+      Session.set('files', files);
+      files = Session.get('files');
+    });
   }
 });
 
@@ -79,5 +99,8 @@ Template.CreateMessage.helpers({
   },
   tagging: function () {
     return Session.get('tagging');
+  },
+  files: function () {
+    return S3.collection.find();
   }
 });
