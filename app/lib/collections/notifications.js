@@ -18,6 +18,10 @@ Schemas.Notification = new SimpleSchema({
     defaultValue: true,
     optional: true
   },
+  heard: {
+    type: Boolean,
+    optional: true
+  },
   createdAt: {
     type: Date
   }
