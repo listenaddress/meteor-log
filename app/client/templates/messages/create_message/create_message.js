@@ -72,12 +72,12 @@ Template.CreateMessage.events({
   },
 
   'click button.upload': function () {
-    var files = $("input.file_bag")[0].files
+    var files = $('input.file_bag')[0].files;
 
     S3.upload({
-      files:files,
-      path: '',
-    }, function(error, response) {
+      files: files,
+      path: ''
+    }, function (error, response) {
       if (error) console.log('error', error);
 
       // Push new file onto the 'files' session variable
@@ -100,7 +100,7 @@ Template.CreateMessage.helpers({
   tagging: function () {
     return Session.get('tagging');
   },
-  files: function(){
+  files: function () {
     return S3.collection.find();
   }
 });
