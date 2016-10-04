@@ -1,5 +1,6 @@
 LogController = RouteController.extend({
   subscriptions: function () {
+    this.subscribe('notifications', Meteor.userId());
     this.subscribe('log', this.params.logId);
     var log = Logs.findOne({_id: this.params.logId});
     var controller = Router.current();

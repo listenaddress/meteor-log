@@ -1,6 +1,30 @@
 <template name="CreateMessage">
   <div class="create-message">
+    <div class="photo-upload">
+      <input type="file" class="file_bag">
+      <button class="upload">Upload</button>
+
+      {{#each files}}
+        <p>{{percent_uploaded}}</p>
+      {{/each}}
+    </div>
+    {{#if tagging}}
+      <div class="tagging-wrapper">
+        {{#if usersToTag}}
+          <ul class="user-list">
+            {{#each usersToTag}}
+              <li data-value="{{username}}">{{username}}</li>
+            {{/each}}
+          </ul>
+        {{else}}
+          {{#if loadingUsers}}
+            <span>Loading...</span>
+          {{else}}
+            <span>No one found yet.</span>
+          {{/if}}
+        {{/if}}
+      </div>
+    {{/if}}
     <textarea class="message-input"></textarea>
   </div>
-  <br><br>
 </template>

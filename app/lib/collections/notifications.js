@@ -7,7 +7,8 @@ Schemas.Notification = new SimpleSchema({
     type: String
   },
   logId: {
-    type: String
+    type: String,
+    optional: true
   },
   eventId: {
     type: String
@@ -15,6 +16,10 @@ Schemas.Notification = new SimpleSchema({
   unseen: {
     type: Boolean,
     defaultValue: true,
+    optional: true
+  },
+  heard: {
+    type: Boolean,
     optional: true
   },
   createdAt: {

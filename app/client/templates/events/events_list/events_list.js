@@ -6,10 +6,19 @@ Template.EventsList.helpers({
     return Logs.findOne(this.logId);
   },
   events: function () {
+    var controller = Router.current();
+    var params = controller.params;
+    if (params.logId) {
+      return Events.find({logId: params.logId});
+    }
+
     return Events.find({});
   },
   message: function () {
     return Messages.findOne(this.messageId);
+  },
+  files: function () {
+    return Files.find({messageId: this.messageId});
   },
   timestamp: function () {
     return moment(this.createdAt).fromNow();
