@@ -22,11 +22,3 @@ Template.GithubIntegrationButton.helpers({
     return Template.instance().lastError.get();
   }
 });
-
-Template.GithubIntegrationButton.onCreated(function () {
-  var self = this;
-  self.lastError = new ReactiveVar(null);
-  self.autorun(function () {
-    self.subscribe('githubintegrated');
-  });
-});

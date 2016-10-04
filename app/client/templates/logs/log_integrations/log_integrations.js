@@ -8,6 +8,11 @@ Template.logIntegrations.helpers({
 
   'connected': function () {
     return Integrations.findOne({ serviceType: this.type });
+  },
+
+  'log': function () {
+    var controller = Router.current();
+    return controller.params.logId;
   }
 });
 

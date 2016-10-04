@@ -22,10 +22,6 @@ Schemas.Event = new SimpleSchema({
   createdAt: {
     type: Date
   },
-  groupId: {
-    type: String,
-    optional: true
-  },
   logId: {
     type: String
   },

@@ -81,20 +81,18 @@ Meteor.methods({
       item.messageId = id;
     }
 
-    if (item.userId || item.groupId) {
-      return Events.insert(item, function (error, response) {
-        if (error) {
-          console.log('error: ', error);
-          throw error;
-        } else {
-          if (hidden) return;
+    return Events.insert(item, function (error, response) {
+      if (error) {
+        console.log('error: ', error);
+        throw error;
+      } else {
+        if (hidden) return;
 
-          item._id = response;
-          Meteor.call('saveNotifications', logId, item, refType);
-          return;
-        }
-      });
-    }
+        item._id = response;
+        Meteor.call('saveNotifications', logId, item, refType);
+        return;
+      }
+    });
   },
 
   'saveNotifications': function (logId, event, refType) {

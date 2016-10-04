@@ -10,6 +10,16 @@ Meteor.publish('usersById', function (userId) {
   return Meteor.users.find({_id: userId}, {fields: {profile: 1, username: 1}});
 });
 
+Meteor.publish('userService', function (serviceType) {
+  var username = 'services.' + serviceType + '.username';
+  var repos = 'services.' + serviceType + '.repos';
+  return Meteor.users.find({_id: this.userId}, {fields: {[username]: 1, [repos]: 1}});
+});
+
+Meteor.publish('github', function (integrationId) {
+  return Github.find({integrationId: integrationId});
+});
+
 Meteor.publish('log', function (logId) {
   var log = Logs.find({_id: logId, hidden: false});
   return log;
@@ -165,6 +175,14 @@ Meteor.publish('integrations', function (logId) {
   return Integrations.find({logId: logId});
 });
 
+Meteor.publish('integration', function (logId, serviceType) {
+  return Integrations.find({logId: logId, serviceType: serviceType});
+});
+
 Meteor.publish('services', function () {
   return Services.find({});
+});
+
+Meteor.publish('service', function (serviceType) {
+  return Services.find({type: serviceType});
 });
