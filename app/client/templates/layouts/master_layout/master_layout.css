@@ -1,6 +1,6 @@
 .master-layout {
   position: fixed;
-  /*top: 0;*/
+  top: 0px;
   width: 100%;
   margin: 0px !important;
   background-color: white !important;

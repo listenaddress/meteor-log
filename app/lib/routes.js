@@ -36,6 +36,13 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
+  Router.route('/search', {
+    name: 'search',
+    controller: 'SearchController',
+    action: 'search',
+    where: 'client'
+  });
+
   Router.route('/:username', {
     name: 'user',
     controller: 'UserController',
