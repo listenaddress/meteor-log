@@ -11,20 +11,6 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/integrations/', {
-    name: 'integration',
-    controller: 'IntegrationController',
-    action: 'dashboard',
-    where: 'client'
-  });
-
-  Router.route('/integrations/github', {
-    name: 'integration.github',
-    controller: 'IntegrationController',
-    action: 'github',
-    where: 'client'
-  });
-
   Router.route('/integrations/evernote', {
     name: 'integration.evernote',
     controller: 'IntegrationController',
@@ -91,16 +77,24 @@ if (Meteor.isClient) {
     action: 'integrations',
     where: 'client'
   });
+
+  Router.route('/log/:logId/integrations/:serviceType', {
+    name: 'log.integration',
+    controller: 'LogController',
+    action: 'integration',
+    where: 'client'
+  });
 }
 
 if (Meteor.isServer) {
-  Router.route('/integrations/:userId', { where: 'server' })
+  Router.route('/integrations/:logId/:_id', { where: 'server' })
     .post(function () {
-      var user = Meteor.users.findOne({_id: this.params.userId});
+      var user = Meteor.users.findOne({_id: this.params._id});
       if (this.request.body.sender.id === user.services.github.id) {
-        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], user._id)
+        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], this.params.logId, function (error, response) {
+          if (error) throw error;
+        });
       }
-
       this.response.end('Thanks Github, we got your message!');
     });
 }
