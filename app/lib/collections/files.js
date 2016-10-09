@@ -7,7 +7,8 @@ Schemas.File = new SimpleSchema({
     type: String
   },
   messageId: {
-    type: String
+    type: String,
+    optional: true
   },
   s3Id: {
     type: String

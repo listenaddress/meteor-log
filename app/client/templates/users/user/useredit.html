@@ -1,3 +1,29 @@
 <template name="editUser">
-      {{>quickForm collection="Meteor.users" id=isMe type="update" doc=this autosave=true}}
+  <form class="ui form" style="margin-top: 100px">
+    <div class="field">
+      <label>Username</label>
+      <input class="username" type="text" name="username" value="{{username}}"/>
+    </div>
+    <div class="field">
+      <label>First Name</label>
+      <input class="first-name" type="text" name="first-name" value="{{profile.firstName}}"/>
+    </div>
+    <div class="field">
+      <label>Last Name</label>
+      <input class="last-name" type="text" name="first-name" value="{{profile.lastName}}"/>
+    </div>
+  </form>
+  <div>
+    <button class="save">Save</button>
+  </div>
+  {{#if profile.thumb}}
+    <img style="margin: 20px; height: 100px; width: 100px; " src="{{profile.thumb}}">
+  {{/if}}
+  <div class="user-photo-upload">
+    <input type="file" class="file_bag">
+    <button class="upload">Upload</button>
+    {{#each files}}
+      <p>{{percent_uploaded}}</p>
+    {{/each}}
+  </div>
 </template>
