@@ -8,5 +8,10 @@ Template.LogsList.onCreated(function () {
 Template.LogsList.helpers({
   logs: function () {
     return Logs.find();
+  },
+
+  onPage: function () {
+    var controller = Router.current();
+    return this._id === controller.params.logId;
   }
 });

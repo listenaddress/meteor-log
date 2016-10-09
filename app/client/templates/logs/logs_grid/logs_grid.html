@@ -2,46 +2,32 @@
   {{#if Template.subscriptionsReady}}
     <div class="ui grid ">
       {{#each publicLogs}}
-        {{#linkTo route="log" logId=_id}}
-          <div class="five column logbox-wrapper">
-            <div class="ui segment logbox">
-              <div class="extra">
-                Progress in
+          <div class="eight wide two wide computer column">
+            {{#linkTo route="log" logId=_id}}
+              <div class="ui segment">
+                <h3>{{name}}</h3>
+                <div class="contributors">
+                  <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
+                  <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
+                </div>
               </div>
-              <h3>{{name}}</h3>
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
-              <br>
-            </div>
+            {{/linkTo}}
           </div>
-        {{/linkTo}}
       {{/each}}
-    </div>
-
-     <br><br><br>
-
-    {{#if isMe}}
-    <div class="ui grid">
-      <div class="left floated seven wide column">
-        <h3>Private Logs</h3>
-      </div>
-    </div>
-    {{#each privateLogs}}
-        {{#linkTo route="log" logId=_id}}
-          <div class="five column logbox-wrapper">
-            <div class="ui segment logbox">
-              <div class="extra">
-                Progress in
+      {{#if isMe}}
+        {{#each privateLogs}}
+          <div class="eight wide two wide computer column">
+            {{#linkTo route="log" logId=_id}}
+              <div class="ui segment">
+                <h3>{{name}}<i class="lock icon"></i></h3>
+                <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
+                <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
+                <br>
               </div>
-              <h3>{{name}}</h3>
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/elliot.jpg">
-              <img class="ui left avatar image" src="http://semantic-ui.com/images/avatar/small/stevie.jpg">
-              <br>
-            </div>
+            {{/linkTo}}
           </div>
-        {{/linkTo}}
-      {{/each}}
-    {{/if}}
-
+        {{/each}}
+      {{/if}}
+    </div>
   {{/if}}
 </template>

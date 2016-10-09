@@ -3,15 +3,34 @@
   top: 0px;
   width: 100%;
   margin: 0px !important;
-  background-color: white !important;
-  border-bottom: 1px solid !important;
+  background-color: #eee !important;
   z-index: 1;
+  min-height: 60px !important;
+}
+
+.master-layout .container{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.notifications .ui.floating.label {
+  top: 0.8em;
+  left: 85%;
+}
+
+.menu .pointing {
+  z-index: 2;
+}
+
+.menu .searchbar {
+  margin-left: 10% !important;
+  width: 50% !important;
 }
 
 .main-content {
-  padding-top: 95px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-top: 60px;
+  width: 100vw;
+  overflow: hidden;
 }
 
 textarea:hover,

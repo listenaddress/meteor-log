@@ -39,6 +39,10 @@ Template.EventsList.onRendered(function () {
 Template.MasterLayout.helpers({
   unseenNotifications: function () {
     return Notifications.find({userId: Meteor.userId(), unseen: true}).count();
+  },
+
+  hasNotifications: function () {
+    return Notifications.find({userId: Meteor.userId(), unseen: true});
   }
 });
 
@@ -82,3 +86,13 @@ clearResults = function () {
   Session.set('logs', null);
   Session.set('messages', null);
 };
+
+Template.Menu.onRendered(function () {
+  $('.master-layout').delegate('.dropdown', 'click', function (event) {
+    $('.ui.dropdown').dropdown({
+      action: 'nothing',
+      on: 'click',
+      keepOnScreen: true
+    });
+  });
+});

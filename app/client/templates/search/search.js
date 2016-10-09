@@ -38,3 +38,7 @@ Template.Search.events({
     });
   }
 });
+
+var clearResults = function () {
+  return;
+}

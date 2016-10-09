@@ -1,0 +1,19 @@
+.logList ul {
+  margin-left: 10px;
+}
+
+.logList li {
+  list-style: none;
+}
+
+.logList h3 {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.logList li .logonpage {
+  background: #eee;
+  color: rgba(0, 0, 0, 0.6);
+  margin-left: 0px;
+  padding-left: 10px;
+}

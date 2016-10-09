@@ -1,11 +1,11 @@
 <template name="createLog">
-  <form class="ui form">
-    <div class="field">
-      <label>Log Name</label>
-      <input type="text" name="logName" placeholder="Call your Log something">
-    </div>
-
-     <div class="grouped fields">
+  <div class="ui container">
+    <form class="ui form">
+      <div class="field">
+        <label>Log Name</label>
+        <input type="text" name="logName" placeholder="Call your Log something">
+      </div>
+      <div class="grouped fields">
         <label>Who can see this log?</label>
         <div class="field">
           <div class="ui radio checkbox">
@@ -26,9 +26,7 @@
           </div>
         </div>
       </div>
-
-
-    <button class="ui button" type="submit">Submit</button>
-  </form>
-
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+  </div>
 </template>

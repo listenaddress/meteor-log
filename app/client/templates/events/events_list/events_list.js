@@ -30,10 +30,10 @@ Template.EventsList.helpers({
 
 Template.EventsList.onCreated(function () {
   var self = this;
-  var controller = Router.current();
-  var params = controller.params;
 
   self.autorun(function () {
+    var controller = Router.current();
+    var params = controller.params;
     if (params.username) {
       var user = Meteor.users.findOne({'username': controller.params.username});
       if (user) var userId = user._id;

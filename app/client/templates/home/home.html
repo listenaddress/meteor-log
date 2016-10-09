@@ -1,20 +1,17 @@
 <template name="Home">
-  <div class="ui text container">
-
-    <h1>Log</h1>
-    {{#if currentUser}}
-      {{> CreateMessage}}
-    {{/if}}
-    <div class="ui divider"></div>
-
-        <div class="ui events grid">
-          <div class="thirteen wide column">
-              {{> EventsList}}
-          </div>
-          <div class="three wide column">
-                {{> UsersList}}
-          </div>
+  <div class="ui container">
+    <div class="ui events grid">
+      <div class="thirteen wide column">
+        <div class="logs">
+          <h2>Featured Logs</h2>
+          {{>LogsGrid}}
         </div>
-
+        <h2>Activity</h2>
+        {{> EventsList}}
+      </div>
+      <div class="three wide column">
+        {{> UsersList}}
+      </div>
+    </div>
   </div>
 </template>

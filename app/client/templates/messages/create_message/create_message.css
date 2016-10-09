@@ -8,7 +8,7 @@
   width: calc(100vw - 200px);
   margin: 0px;
   border-radius: inherit;
-  border-top: 1px solid grey;
+  border-top: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .create-message textarea {
@@ -23,7 +23,7 @@
   left: -1px;
   padding: 4px;
   background: white;
-  border: 1px solid;
+  border: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .photo-upload {
@@ -32,7 +32,7 @@
   right: 0px;
   padding: 4px;
   background: white;
-  border: 1px solid;
+  border: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .user-list {

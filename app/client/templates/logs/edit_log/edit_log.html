@@ -1,51 +1,74 @@
 <template name="editLog">
-  <div class="main-content">
-    <h3 class="ui top attached header">
-    Settings
-    </h3>
-    <div>
-      <form class="ui form">
-        <div class="field">
-          <label>Log Name</label>
-          <input type="text" name="logName" placeholder="  {{name}}">
-        </div>
-        <h4 class="ui dividing header">Privacy</h4>
-          <div class="field">
-            <label>Who can see this log?</label>
-            <div class="ui selection dropdown">
-              <input type="hidden" name="card[type]">
-              <div class="default text">Public</div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <div class="item" data-value="visa">
-                  <i class="user icon"></i>
-                  Private
-                </div>
-                <div class="item" data-value="amex">
-                  <i class="users icon"></i>
-                  Public
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="sidebar">
+    {{>LogsList}}
+  </div>
+  <div class="log-content">
+    <div class="log-header">
+      {{#linkTo route='log' logId=this._id}}
+        <h3>
+          {{name}}
+          {{#if currentUser}}
+            {{#linkTo route='log.edit' logId=this._id}}
+              <i class="icon setting"></i>
+            {{/linkTo}}
+          {{/if}}
 
-          <h4 class="ui dividing header">Delete the Log</h4>
-
-          <div class="field">
-            <div class="ui left labeled button" tabindex="0">
-              <a class="ui basic red label">
-                Pressing this button will delete your log forever and ever!
-              </a>
-              <div class="deleteLog ui icon red fluid button">
-                <i class="icon trash"></i>
-                Delete
-              </div>
-            </div>
-          </div>
-        <button class="ui button" type="submit">
-        Submit</button>
-      </form>
+          {{#if joined}}
+            <button class="ui button leaveLog"> Leave </button>
+          {{else}}
+            <button class="ui button joinLog"> Join </button>
+          {{/if}}
+        </h3>
+      {{/linkTo}}
     </div>
-    <br>
+    <div class="ui container">
+      <h3 class="ui top attached header">
+      Settings
+      </h3>
+      <div>
+        <form class="ui form">
+          <div class="field">
+            <label>Log Name</label>
+            <input type="text" name="logName" placeholder="  {{name}}">
+          </div>
+          <h4 class="ui dividing header">Privacy</h4>
+            <div class="field">
+              <label>Who can see this log?</label>
+              <div class="ui selection dropdown">
+                <input type="hidden" name="card[type]">
+                <div class="default text">Public</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item" data-value="visa">
+                    <i class="user icon"></i>
+                    Private
+                  </div>
+                  <div class="item" data-value="amex">
+                    <i class="users icon"></i>
+                    Public
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="ui dividing header">Delete the Log</h4>
+
+            <div class="field">
+              <div class="ui left labeled button" tabindex="0">
+                <a class="ui basic red label">
+                  Pressing this button will delete your log forever and ever!
+                </a>
+                <div class="deleteLog ui icon red fluid button">
+                  <i class="icon trash"></i>
+                  Delete
+                </div>
+              </div>
+            </div>
+          <button class="ui button" type="submit">
+          Submit</button>
+        </form>
+      </div>
+      <br>
+    </div>
   </div>
 </template>

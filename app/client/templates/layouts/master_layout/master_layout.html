@@ -1,23 +1,52 @@
 <template name="MasterLayout">
-  <div class="ui secondary menu master-layout">
+  {{> Menu}}
+  <div class="main-content">
+    {{> yield}}
+  </div>
+</template>
+
+<template name="Menu">
+  <div class="ui secondary text menu master-layout">
     <div class="ui container">
       <a href="/" class="header item">Log</a>
-      <input class="search-bar" />
+      <div class="searchbar item">
+        <div class="ui icon input">
+          <input class="search-bar" type="text" placeholder="Search...">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+
       <div class="right menu">
-        {{#linkTo route="notifications"}}
-          <span class="ui label" style="padding-top: 10px;
-                                        margin: 1px;">{{unseenNotifications}}
-          </span>
-        {{/linkTo}}
-
         {{#if currentUser}}
-          {{#linkTo route="user" username=currentUser.username}}
-            <a class="item">
-              {{currentUser.profile.firstName}}
-            </a>
-          {{/linkTo}}
+          <div class="item quickMessage">
+            <i class="write large icon"></i>
+          </div>
+          <div class="item notifications">
+            {{#linkTo route="notifications"}}
+              <i class="icon large outline alarm"></i>
+              {{#if hasNotifications}}
+                <div class="ui floating red label">  {{unseenNotifications}}
+                </div>
+              {{/if}}
+            {{/linkTo}}
+          </div>
 
-          <a class="item" href="#" data-logout>Logout</a>
+          <div class="ui dropdown pointing simple item">
+            <div class="text">
+              <img class="ui image avatar" src="{{currentUser.profile.thumb}}">
+              {{currentUser.profile.firstName}}
+            </div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item">
+                {{#linkTo route="user" username=currentUser.username}}
+                  Profile
+                {{/linkTo}}
+              </div>
+              <div class="divider"></div>
+              <a class="item" href="#" data-logout>Logout</a>
+            </div>
+          </div>
         {{else}}
           {{#if loggingIn}}
             Logging in...
@@ -27,8 +56,5 @@
         {{/if}}
       </div>
     </div>
-  </div>
-  <div>
-    {{> yield}}
   </div>
 </template>

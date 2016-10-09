@@ -1,5 +1,4 @@
 <template name="Log">
-  <div class="log-container">
     <div class="sidebar">
       {{>LogsList}}
     </div>
@@ -12,27 +11,42 @@
         {{/with}} -->
         <!-- <i class="right chevron icon divider"></i> -->
         {{#linkTo route='log' logId=this._id}}
-          <a class="section">{{name}}</a>
+          <h3>
+            {{name}}
+            {{#if currentUser}}
+              {{#linkTo route='log.edit' logId=this._id}}
+                <i class="icon setting"></i>
+              {{/linkTo}}
+            {{/if}}
+
+            {{#if joined}}
+              <button class="ui button leaveLog"> Leave </button>
+            {{else}}
+              <button class="ui button joinLog"> Join </button>
+            {{/if}}
+          </h3>
         {{/linkTo}}
 
-        {{#if currentUser}}
-          {{#linkTo route='log.edit' logId=this._id}}
-            <i class="icon setting"></i>
-          {{/linkTo}}
-        {{/if}}
 
-        {{#if joined}}
-          <button class="ui button leaveLog"> Leave </button>
-        {{else}}
-          <button class="ui button joinLog"> Join </button>
-        {{/if}}
+
+
+        <div class="ui secondary pointing menu">
+          <a class="active item">
+            Messages
+          </a>
+          <a class="item">
+            Files
+          </a>
+          <a class="item">
+            Overview
+          </a>
+        </div>
+
       </div>
-      <h4>Log</h4>
       {{>EventsList}}
       <br>
       {{#if joined}}
         {{>CreateMessage}}
       {{/if}}
     </div>
-  </div>
 </template>
