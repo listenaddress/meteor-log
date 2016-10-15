@@ -223,7 +223,7 @@ Meteor.publishComposite('notifications', function (userId) {
       {
         // Find event from notification
         find: function (notification) {
-          return Events.find({_id: notification.eventId, hidden: false});
+          return Events.find({_id: notification.eventId});
         },
         children: [
           {
@@ -241,13 +241,17 @@ Meteor.publishComposite('notifications', function (userId) {
           {
             // Find log from event
             find: function (event, notification) {
-              return Logs.find({_id: event.logId, hidden: false, privacy: ''});
+              return Logs.find({_id: event.logId});
             }
           }
         ]
       }
     ]
   }
+});
+
+Meteor.publish('unseenNotifications', function (userId) {
+  return Notifications.find({userId: userId, unseen: true});
 });
 
 Meteor.publish('integrations', function (logId) {
