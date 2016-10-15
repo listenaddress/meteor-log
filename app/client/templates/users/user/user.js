@@ -23,5 +23,7 @@ Template.User.helpers({
 Template.User.onCreated(function () {
   var self = this;
   self.autorun(function () {
+    var controller = Router.current();
+    self.subscribe('user', controller.params.username);
   });
 });

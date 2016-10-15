@@ -1,10 +1,10 @@
-<template name="logIntegration">
+<template name="LogIntegration">
   This {{service.type}} baby!
   <p>{{service.description}}</p>
   <a href="{{service.website}}">{{service.website}}</a>
   <br>
   <hr>
   {{#if $eq service.type 'github'}}
-    {{> github}}
+    {{> Github}}
   {{/if}}
 </template>

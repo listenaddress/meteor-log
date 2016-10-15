@@ -61,7 +61,7 @@ Meteor.methods({
     if (logId)
       // This needs to be set in the env variable file.
       // Used only for testing and bridging to localhost.
-      process.env.ENDPOINT = 'https://fbaf5020.ngrok.io';
+      process.env.ENDPOINT = 'https://820d96c9.ngrok.io';
 
     var endpoint = process.env.ENDPOINT + '/integrations/' + logId + '/' + user._id;
 

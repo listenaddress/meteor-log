@@ -22,6 +22,14 @@
   z-index: 2;
 }
 
+.ui.menu .dropdown.item:hover{
+  background: none !important;
+}
+
+.ui.menu .pointing.dropdown.item .menu {
+  margin-top: 1.5em !important;
+}
+
 .menu .searchbar {
   margin-left: 10% !important;
   width: 50% !important;

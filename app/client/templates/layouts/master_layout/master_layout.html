@@ -10,10 +10,7 @@
     <div class="ui container">
       <a href="/" class="header item">Log</a>
       <div class="searchbar item">
-        <div class="ui icon input">
-          <input class="search-bar" type="text" placeholder="Search...">
-          <i class="search link icon"></i>
-        </div>
+        {{>SearchBar}}
       </div>
 
       <div class="right menu">
@@ -31,7 +28,7 @@
             {{/linkTo}}
           </div>
 
-          <div class="ui dropdown pointing simple item">
+          <div class="ui dropdown pointing item">
             <div class="text">
               <img class="ui image avatar" src="{{currentUser.profile.thumb}}">
               {{currentUser.profile.firstName}}

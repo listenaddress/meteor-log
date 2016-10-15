@@ -13,6 +13,10 @@ Template.Search.helpers({
 });
 
 Template.Search.events({
+
+});
+
+Template.SearchBar.events({
   'click .search-bar': function (e, tmpl) {
     Router.go('search');
   },
@@ -40,5 +44,7 @@ Template.Search.events({
 });
 
 var clearResults = function () {
-  return;
-}
+  Session.set('users', null);
+  Session.set('logs', null);
+  Session.set('messages', null);
+};

@@ -7,9 +7,8 @@ Template.EventsList.helpers({
   },
   events: function () {
     var controller = Router.current();
-    var params = controller.params;
-    if (params.logId) {
-      return Events.find({logId: params.logId});
+    if (controller.params.logId) {
+      return Events.find({logId: controller.params.logId});
     }
 
     return Events.find({});
@@ -30,18 +29,10 @@ Template.EventsList.helpers({
 
 Template.EventsList.onCreated(function () {
   var self = this;
-
   self.autorun(function () {
     var controller = Router.current();
-    var params = controller.params;
-    if (params.username) {
-      var user = Meteor.users.findOne({'username': controller.params.username});
-      if (user) var userId = user._id;
-      self.subscribe('userEvents', userId, function () {
-        $('.loader').delay(1000).fadeOut('slow', function () {
-          $('.loading-wrapper').fadeIn('slow');
-        });
-      });
+    if (controller.params.logId) {
+      self.subscribe('logEvents', controller.params.logId);
     }
   });
 });

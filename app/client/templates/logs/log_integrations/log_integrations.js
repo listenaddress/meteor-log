@@ -1,7 +1,7 @@
-Template.logIntegrations.events({
+Template.LogIntegrations.events({
 });
 
-Template.logIntegrations.helpers({
+Template.LogIntegrations.helpers({
   'services': function () {
     return Services.find({});
   },
@@ -16,7 +16,7 @@ Template.logIntegrations.helpers({
   }
 });
 
-Template.logIntegrations.onCreated(function () {
+Template.LogIntegrations.onCreated(function () {
   var self = this;
   self.autorun(function () {
     self.subscribe('services');

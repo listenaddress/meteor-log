@@ -5,7 +5,9 @@ Template.Log.helpers({
   },
 
   log: function () {
-    return Logs.findOne({});
+    var controller = Router.current();
+    if (controller.params.logId)
+      return Logs.findOne({_id: controller.params.logId});
   },
 
   joined: function () {
@@ -19,19 +21,20 @@ Template.Log.helpers({
 });
 
 Template.Log.events({
-  'click .joinLog': function () {
-    Meteor.call('joinLog', this._id,
-      function (error, response) {
-        if (error) throw error;
-      }
-    );
-  },
 
-  'click .leaveLog': function () {
-    Meteor.call('leaveLog', this._id,
-      function (error, response) {
-        if (error) throw error;
-      }
-    );
-  }
 });
+
+Template.Log.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    var controller = Router.current();
+    if (controller.params.logId) {
+      var log = Logs.findOne({_id: controller.params.logId});
+      self.subscribe('log', controller.params.logId);
+      if (log) {
+        self.subscribe('userInfo', log.creatorId);
+      }
+    }
+  });
+});
+

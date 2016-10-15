@@ -46,10 +46,6 @@
   color: #f000ff;
 }
 
-.ui.segment button {
-  position: fixed;
-}
-
 .ui.segment .right {
   left: 470px;
 }

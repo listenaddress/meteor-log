@@ -21,6 +21,7 @@
 .events-wrapper {
   height: calc(100vh - 200px);
   padding-left: 20px;
+  padding-top: 10px;
 }
 
 .events-list img {

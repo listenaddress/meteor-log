@@ -6,11 +6,15 @@
           <div class="ui items">
             <div class="item">
               <div class="ui tiny circular image">
-               <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
+               <img src="{{profile.thumb}}">
               </div>
               <div class="content">
+                <br>
                 <h1 class="header">
                   {{profile.firstName}}
+                  {{#if status.online}}
+                    <i class="circle small icon green"></i>
+                  {{/if}}
                 </h1>
                 <div class="description">
                   <p>
@@ -29,11 +33,11 @@
           </div>
         {{/with}}
 
-        <div class="ui grid">
-          <div class="left floated seven wide column">
+        <div class="ui grid right aligned">
+          <div class="left aligned floated six wide column">
             <h2>Logs</h2>
           </div>
-          <div class="right floated aligned four wide column">
+          <div class="right floated aligned ten wide column">
             {{#if currentUser}}
               <button class="ui addlog icon compact button">
                 <i class="plus icon"></i>
@@ -48,7 +52,7 @@
         </div>
 
         <h2>Activity</h2>
-        {{>EventsList}}
+        {{>UserActivity}}
       </div>
     </div>
   </div>

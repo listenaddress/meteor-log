@@ -1,9 +1,11 @@
 .logList ul {
-  margin-left: 10px;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .logList li {
   list-style: none;
+  padding-left: 15px;
 }
 
 .logList h3 {
@@ -11,9 +13,10 @@
   margin-top: 10px;
 }
 
-.logList li .logonpage {
+li.logonpage {
   background: #eee;
   color: rgba(0, 0, 0, 0.6);
-  margin-left: 0px;
   padding-left: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
 }

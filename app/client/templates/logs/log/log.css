@@ -8,10 +8,5 @@
 
 .log-content {
   margin-left: 200px;
-}
-
-.log-header {
-  width: calc(100vw - 230px);
-  background-color: white;
-  padding: 10px;
+  height: 100%;
 }
