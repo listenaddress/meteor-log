@@ -1,5 +1,6 @@
 /*  Server Methods  */
 var saveFiles = saveFiles;
+var updateUser = updateUser;
 
 Meteor.methods({
   'saveMessage': function (message, files, logId) {

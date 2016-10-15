@@ -33,7 +33,8 @@ Template.CreateMessage.events({
       if (error) throw error;
       tmpl.find('.message-input').value = '';
       Session.set('tagging', false);
-      Session.set('files', false);
+      Session.set('files', []);
+      S3.collection.remove({});
       setTimeout(function () {
         $('.events-list').scrollTop(100000);
       }, 200);
@@ -71,7 +72,7 @@ Template.CreateMessage.events({
     Session.set('tagging', false);
   },
 
-  'click button.upload': function () {
+  'change .file_bag': function () {
     var files = $('input.file_bag')[0].files;
 
     S3.upload({
@@ -85,7 +86,6 @@ Template.CreateMessage.events({
       if (!files || files.length < 1) files = [];
       files.push(response);
       Session.set('files', files);
-      files = Session.get('files');
     });
   }
 });

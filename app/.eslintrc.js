@@ -11,7 +11,6 @@ module.exports = {
                                                     "LogController",
                                                     "IntegrationController",
                                                     "NotificationController",
-                                                    "SearchController",
                                                     "HomeController",
                                                     "Logs",
                                                     "Events",

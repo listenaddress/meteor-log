@@ -28,11 +28,20 @@
 
 .photo-upload {
   position: absolute;
+  width: 300px;
   bottom: 52px;
   right: 0px;
   padding: 4px;
   background: white;
   border: 2px solid rgba(34, 36, 38, 0.15);
+}
+
+.photo-upload img {
+  max-width: 100%;
+}
+
+.file_bag {
+  color: white;
 }
 
 .user-list {
