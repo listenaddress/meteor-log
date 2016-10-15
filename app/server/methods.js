@@ -281,20 +281,47 @@ Meteor.methods({
 
   'userExists': function (username) {
     return !!Meteor.users.findOne({username: username});
+  },
+
+  'updateUserPhoto': function (file) {
+    file.userThumb = true;
+    saveFiles([file]);
+  },
+
+  'updateUserProfile': function (updatedUser) {
+    var user = Meteor.users.findOne(Meteor.userId());
+    user.username = updatedUser.username;
+    user.profile.firstName = updatedUser.profile.firstName;
+    user.profile.lastName = updatedUser.profile.lastName;
+    updateUser(user);
   }
 });
 
 saveFiles = function (files, messageId, logId) {
   _.map(files, function (item) {
-    Files.insert({
+    var obj = {
       userId: Meteor.userId(),
-      messageId: messageId,
       s3Id: item._id,
       secure_url: item.secure_url,
-      original_name: item.file.original_name,
       createdAt: new Date()
-    }, function (error, response) {
+    };
+    if (messageId) obj.messageId = messageId;
+    if (item.file && item.file.original_name) {
+      obj.original_name = item.file.original_name;
+    }
+
+    Files.insert(obj, function (error, response) {
       if (error) throw error;
+      if (item.userThumb) updateUser({'profile.thumb': item.secure_url});
     });
   });
+};
+
+updateUser = function (updateObj) {
+  return Meteor.users.update(Meteor.userId(), {$set: updateObj},
+    function (error, response) {
+      if (error) throw error;
+      return response;
+    }
+  );
 };
