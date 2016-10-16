@@ -1,0 +1,31 @@
+<template name="FeaturedLogs">
+<!--   {{#if Template.subscriptionsReady}}
+ -->
+    <div class="ui grid">
+      {{#each logs}}
+        <div class="eight wide two wide computer column">
+          {{#linkTo route="log" logId=_id}}
+            <div class="ui segment">
+              <h3>
+                {{name}}
+              </h3>
+              <div class="contributors">
+              {{#each members}}
+                {{#with user}}
+                  <img class="ui left avatar image contributor" src="{{profile.thumb}}" data-title="{{profile.firstName}}" data-content="{{profile.firstName}} joined the log since {{timestamp}}">
+                {{/with}}
+              {{/each}}
+              </div>
+            </div>
+          {{/linkTo}}
+        </div>
+      {{/each}}
+    </div>
+  <!-- {{else}}
+    <div class="ui grid log_placeholder">
+      <div class="eight wide computer column">
+        <img src="/images/log_placeholder.png">
+      </div>
+    </div>
+  {{/if}} -->
+</template>

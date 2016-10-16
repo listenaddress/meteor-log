@@ -1,6 +1,5 @@
 IntegrationController = RouteController.extend({
   subscriptions: function () {
-    this.subscribe('integrations', Meteor.userId());
   },
 
   data: function () {

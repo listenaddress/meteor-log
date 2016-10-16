@@ -1,8 +1,7 @@
 <template name="EventsList">
   <div class="events-wrapper">
-    {{>loader}}
-    {{#if Template.subscriptionsReady}}
-      <div class="events-list loading-wrapper">
+<!--     {{#if Template.subscriptionsReady}} -->
+      <div class="events-list">
         {{#each events}}
           <div class="ui items">
             {{#if this.messageId}}
@@ -80,8 +79,18 @@
               {{timestamp}}
             {{/if}}
           </div>
+        {{else}}
+          <div class="ui items">
+            Nothing here yet!
+          </div>
         {{/each}}
       </div>
-    {{/if}}
+    <!-- {{else}}
+      <div class="ui grid log_placeholder">
+        <div class="eight wide computer column">
+          <img src="/images/activity_placeholder.png">
+        </div>
+      </div>
+    {{/if}} -->
   </div>
 </template>

@@ -1,13 +1,17 @@
 Meteor.publish('users', function () {
-  return Meteor.users.find({}, {fields: {profile: 1, username: 1}});
+  return Meteor.users.find({}, {fields: {profile: 1, username: 1, status: 1}});
 });
 
 Meteor.publish('usersByUsername', function (username) {
-  return Meteor.users.find({username: {$regex: username, $options: 'i'}}, {fields: {profile: 1, username: 1}});
+  return Meteor.users.find({username: {$regex: username, $options: 'i'}}, {fields: {profile: 1, username: 1, status: 1}});
 });
 
 Meteor.publish('usersById', function (userId) {
-  return Meteor.users.find({_id: userId}, {fields: {profile: 1, username: 1}});
+  return Meteor.users.find({_id: userId}, {fields: {profile: 1, username: 1, status: 1}});
+});
+
+Meteor.publish('user', function (username) {
+  return Meteor.users.find({username: username}, {fields: {profile: 1, username: 1, status: 1}});
 });
 
 Meteor.publish('userService', function (serviceType) {
@@ -25,8 +29,8 @@ Meteor.publish('log', function (logId) {
   return log;
 });
 
-Meteor.publish('logs', function (logId) {
-  var logs = Logs.find({hidden: false});
+Meteor.publish('logs', function () {
+  var logs = Logs.find({hidden: false}, {field: {name: 1, _id: 1}});
   return logs;
 });
 
@@ -34,16 +38,83 @@ Meteor.publish('members', function (logId) {
   return Members.find({logId: logId});
 })
 
-Meteor.publish('userLogs', function (userId) {
-  return Logs.find({creatorId: userId, privacy: 'public', hidden: false});
+Meteor.publishComposite('userLogs', function (userId) {
+  return {
+    find: function () {
+      if (userId)
+        return Logs.find({creatorId: userId, privacy: 'public', hidden: false});
+    },
+    children: [
+      {
+        find: function (item) {
+          return Members.find({logId: item._id});
+        },
+        children: [
+          {
+            // Find files from message
+            find: function (member, event) {
+              return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
+            }
+          }
+        ]
+      }
+    ]
+  }
 });
 
-Meteor.publish('privateUserLogs', function () {
-  if (this.userId) {
-    return Logs.find({ $and: [ {privacy: 'private'},
-                               {accessList: this.userId},
+Meteor.publishComposite('featuredLogs', function (userId) {
+  return {
+    find: function () {
+      if (userId)
+        // custom featured logs
+        return Logs.find({privacy: 'public', hidden: false});
+      else
+        // general featured logs
+        return Logs.find({privacy: 'public', hidden: false});
+    },
+    children: [
+      {
+        find: function (item) {
+          return Members.find({logId: item._id});
+        },
+        children: [
+          {
+            // Find files from message
+            find: function (member, event) {
+              return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
+            }
+          }
+        ]
+      }
+    ]
+  }
+});
+
+Meteor.publishComposite('privateUserLogs', function (userId) {
+  return {
+    find: function () {
+      if (this.userId === userId) {
+        return Logs.find({ $and: [ {privacy: 'private'},
+                               {accessList: userId},
                                {hidden: false} ]
-    });
+        });
+      }
+    },
+    children: [
+      {
+        find: function (item) {
+          return Members.find({logId: item._id});
+        },
+        children: [
+          {
+            // Find files from message
+            find: function (member, event) {
+              return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
+            }
+          }
+        ]
+      }
+    ]
   }
 });
 
@@ -96,7 +167,7 @@ Meteor.publishComposite('logEvents', function (logId) {
       {
         // Find user of the event
         find: function (item) {
-          return Meteor.users.find({_id: item.userId, hidden: false}, {username: 1, profile: 1});
+          return Meteor.users.find({_id: item.userId}, {username: 1, profile: 1, status: 1});
         }
       },
       {
@@ -124,13 +195,13 @@ Meteor.publishComposite('homeEvents', function () {
       {
         // Find user of the event
         find: function (item) {
-          return Meteor.users.find({_id: item.userId}, {username: 1, profile: 1});
+          return Meteor.users.find({_id: item.userId}, {username: 1, profile: 1, status: 1});
         }
       },
       {
         // Find log of the event
         find: function (item) {
-          return Logs.find({_id: item.logId, hidden: false});
+          return Logs.find({_id: item.logId, hidden: false, privacy: 'public'});
         }
       }
     ]
@@ -177,6 +248,10 @@ Meteor.publishComposite('notifications', function (userId) {
       }
     ]
   }
+});
+
+Meteor.publish('unseenNotifications', function (userId) {
+  return Notifications.find({userId: userId, unseen: true});
 });
 
 Meteor.publish('integrations', function (logId) {

@@ -1,55 +1,72 @@
-<template name="github">
-  <div class="">
+<template name="Github">
+  <div class="ui grid">
     {{#if userConnected.services.github.username}}
-      <div class="ui label">
-        Signed in with {{userConnected.services.github.username}}
-        <i class="delete icon disconnectGithub"></i>
-      </div>
-
-      <button class="ui button refreshRepos"><i class="icon refresh"></i> Refresh</button>
-
-      <div class=" ui fluid selection getRepos dropdown">
-        <input type="hidden" name="user">
-        <i class="dropdown icon"></i>
-        <div class="default text">
-            Add a repo
+      <div class="sixteen wide column">
+        <div class="ui label">
+          Signed in with {{userConnected.services.github.username}}
+          <i class="delete icon disconnectGithub"></i>
         </div>
-        <div class="menu">
-          {{#with currentUser}}
-            {{#unless services.github.repos}}
-              Looking for repos...
-            {{/unless}}
-            {{#each services.github.repos}}
-              <div class="item" data-value="{{id}}">
-                {{name}}
-              </div>
-            {{/each}}
-          {{/with}}
-        </div>
+        <button class="ui button icon mini refreshRepos">
+          <i class="icon refresh"></i>
+        </button>
       </div>
-      <button class="ui button addRepo">Add Repo</button>
+      <div class="sixteen wide column">
+        {{>dropdown}}
+      </div>
+      <div class="sixteen wide column">
+        <button class="ui button addRepo">Add Repo</button>
+      </div>
     {{else}}
-      <button class="ui button connectGithub">Connect Github</button>
+      <div class="sixteen wide column">
+        <button class="ui button connectGithub">Connect Github</button>
+      </div>
     {{/if}}
 
-    {{#if errorMessage}}<div class="ui violet message">That didn't work — {{errorMessage}}</div>{{/if}}
+    <div class="sixteen wide column">
+      {{#if errorMessage}}
+        <div class="ui violet message">
+          That didn't work — {{errorMessage}}
+        </div>
+      {{/if}}
+      {{#if logIntegrated}}
+        <h3>Connected repos</h3>
+        <div class="ui middle aligned divided list">
+          {{#each integrations}}
+            <div class="item">
+              <div class="right floated content">
+                {{#if repoOwner}}
+                  <div class="ui button remove" data-value="{{hook.id}}">Remove</div>
+                {{/if}}
+              </div>
+              <div class="content">
+                {{hook.repo}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>
 
-    {{#if logIntegrated}}
-      <h3>Connected repos</h3>
-      <div class="ui middle aligned divided list">
-        {{#each integrations}}
-          <div class="item">
-            <div class="right floated content">
-              {{#if repoOwner}}
-              <div class="ui button remove" data-value="{{hook.id}}">Remove</div>
-              {{/if}}
-            </div>
-            <div class="content">
-              {{hook.repo}}
-            </div>
+<template name="dropdown">
+  <div class=" ui fluid selection getRepos dropdown">
+    <input type="hidden" name="user">
+    <i class="dropdown icon"></i>
+    <div class="default text">
+        Add a repo
+    </div>
+    <div class="menu">
+      {{#with currentUser}}
+        {{#unless services.github.repos}}
+          Looking for repos...
+        {{/unless}}
+        {{#each services.github.repos}}
+          <div class="item" data-value="{{id}}">
+            {{name}}
           </div>
         {{/each}}
-      </div>
-    {{/if}}
+      {{/with}}
+    </div>
   </div>
 </template>

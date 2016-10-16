@@ -67,14 +67,35 @@ if (Meteor.isClient) {
   Router.route('/log/:logId', {
     name: 'log',
     controller: 'LogController',
-    action: 'detail',
+    action: 'messages',
     where: 'client'
   });
 
-  Router.route('/log/:logId/edit', {
-    name: 'log.edit',
+  Router.route('/log/:logId/messages', {
+    name: 'log.messages',
     controller: 'LogController',
-    action: 'edit',
+    action: 'messages',
+    where: 'client'
+  });
+
+  Router.route('/log/:logId/overview', {
+    name: 'log.overview',
+    controller: 'LogController',
+    action: 'overview',
+    where: 'client'
+  });
+
+  Router.route('/log/:logId/files', {
+    name: 'log.files',
+    controller: 'LogController',
+    action: 'files',
+    where: 'client'
+  });
+
+  Router.route('/log/:logId/settings', {
+    name: 'log.settings',
+    controller: 'LogController',
+    action: 'settings',
     where: 'client'
   });
 

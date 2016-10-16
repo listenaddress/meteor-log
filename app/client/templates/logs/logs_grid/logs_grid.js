@@ -1,6 +1,14 @@
 Template.LogsGrid.helpers({
-  publicLogs: function () {
-    return Logs.find({creatorId: Session.get('userOnPage'), privacy: 'public'});
+  logs: function () {
+    return Logs.find({creatorId: Session.get('userOnPage')});
+  },
+
+  members: function () {
+    return Members.find({logId: this._id});
+  },
+
+  user: function () {
+    return Meteor.users.findOne({_id: this.userId});
   },
 
   privateLogs: function () {
@@ -9,6 +17,14 @@ Template.LogsGrid.helpers({
 
   isMe: function () {
     return this._id === Meteor.userId();
+  },
+
+  userOnPage: function () {
+    return Meteor.users.findOne({_id: Session.get('userOnPage')});
+  },
+
+  timestamp: function () {
+    return moment(this.createdAt).fromNow();
   }
 });
 
@@ -24,20 +40,11 @@ Template.LogsGrid.onCreated(function () {
       Session.set('userOnPage', userId);
     }
 
-    self.subscribe('userLogs', userId, function () {
-      $('.loader').delay(1000).fadeOut('slow', function () {
-        $('.loading-wrapper').fadeIn('slow');
-      });
-    });
-
-    self.subscribe('privateUserLogs', function () {
-      $('.loader').delay(1000).fadeOut('slow', function () {
-        $('.loading-wrapper').fadeIn('slow');
-      });
-    });
+    self.subscribe('userLogs', Session.get('userOnPage'));
+    self.subscribe('privateUserLogs', Meteor.userId());
+    $('.contributors.contributor').popup();
   });
 });
 
 Template.LogsGrid.onRendered(function () {
-  $('.loader').delay(750).fadeIn();
 });

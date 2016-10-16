@@ -3,26 +3,10 @@
   width: 200px;
   position: fixed;
   float: left;
-  border-right: 1px solid;
-}
-
-.log-container {
-  width: 100vw;
-  padding-top: 75px;
-  overflow: hidden;
+  border-right: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .log-content {
   margin-left: 200px;
-}
-
-.log-header {
-  position: fixed;
-  width: calc(100vw - 200px);
-  background-color: white;
-  z-index: 1;
-  top: 75px;
-  height: 60px;
-  border-bottom: 1px solid;
-  padding: 10px;
+  height: 100%;
 }

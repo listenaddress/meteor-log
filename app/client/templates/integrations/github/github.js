@@ -1,15 +1,42 @@
-Template.github.onCreated(function () {
-  this.lastError = new ReactiveVar(null);
+Template.dropdown.onRendered(function () {
+  this.$('.dropdown').dropdown();
 });
 
-Template.github.onRendered(function () {
+Template.dropdown.onCreated(function () {
   var self = this;
+  self.lastError = new ReactiveVar(null);
   self.autorun(function () {
-    $('.dropdown').dropdown();
+    var controller = Router.current();
+    self.subscribe('userService', controller.params.serviceType);
   });
 });
 
-Template.github.helpers({
+Template.dropdown.events({
+  'click .addRepo': function (e, template) {
+    e.preventDefault();
+
+    if (Meteor.user()) {
+      var value = parseInt(template.$('.dropdown').dropdown('get value')[0]);
+      var currentUser = Meteor.users.findOne({ _id: Meteor.userId() });
+      var repo = currentUser.services.github.repos.filter(function (item) {
+        return item.id === value;
+      });
+
+      var controller = Router.current();
+      var logId = controller.params.logId;
+      Meteor.call('addRepoHook', repo[0], logId, function (error, response) {
+        if (error) {
+          template.lastError.set(error.reason);
+          throw error;
+        }
+        template.$('.dropdown').dropdown('clear');
+        template.lastError.set(null);
+      });
+    }
+  }
+});
+
+Template.Github.helpers({
   errorMessage: function () {
     return Template.instance().lastError.get();
   },
@@ -35,7 +62,7 @@ Template.github.helpers({
   }
 });
 
-Template.github.events({
+Template.Github.events({
   'click .addRepo': function (e, template) {
     e.preventDefault();
 
@@ -105,12 +132,15 @@ Template.github.events({
 
   'click .refreshRepos': function (e, t) {
     e.preventDefault();
-    Meteor.call('getRepos');
+    Meteor.call('getRepos', function (error, response) {
+      if (error) throw error;
+    });
   }
 });
 
-Template.logIntegration.onCreated(function () {
+Template.Github.onCreated(function () {
   var self = this;
+  self.lastError = new ReactiveVar(null);
   self.autorun(function () {
     var controller = Router.current();
     self.subscribe('userService', controller.params.serviceType);
