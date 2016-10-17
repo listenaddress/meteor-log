@@ -33,7 +33,9 @@ Template.EventsList.onCreated(function () {
     var controller = Router.current();
     if (controller.params.logId) {
       self.subscribe('logEvents', controller.params.logId, function () {
-        $('.events-list').scrollTop(100000);
+        setTimeout(function() {
+          $('.events-list').scrollTop(100000);
+        }, 0);
       });
     }
   });
