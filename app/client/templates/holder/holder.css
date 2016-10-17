@@ -1,0 +1,10 @@
+.holder-cover {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.holder {
+  height: auto !important;
+}

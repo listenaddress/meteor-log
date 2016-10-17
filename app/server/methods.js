@@ -1,6 +1,11 @@
 /*  Server Methods  */
-var saveFiles = saveFiles;
-var updateUser = updateUser;
+import sizeOf from 'image-size';
+import url from 'url';
+import http from 'http';
+
+var saveFiles;
+var updateUser;
+var getImageSize;
 
 Meteor.methods({
   'saveMessage': function (message, files, logId) {
@@ -314,9 +319,36 @@ saveFiles = function (files, messageId, logId) {
     Files.insert(obj, function (error, response) {
       if (error) throw error;
       if (item.userThumb) updateUser({'profile.thumb': item.secure_url});
+      getImageSize(item, response);
     });
   });
 };
+
+getImageSize = function (file, id) {
+  var options = url.parse(file.url);
+
+  http.get(options, function (response) {
+    var chunks = [];
+    response.on('data', function (chunk) {
+      chunks.push(chunk);
+    }).on('end', function() {
+      var buffer = Buffer.concat(chunks);
+      var size = sizeOf(buffer);
+      if (!size.width) return;
+      var updateObj = { width: size.width, height: size.height };
+      updateFile(updateObj, id);
+    });
+  });
+};
+
+updateFile = Meteor.bindEnvironment(function (updateObj, id) {
+  return Files.update(id, {$set: updateObj},
+    function (error, response) {
+      if (error) throw error;
+      return response;
+    }
+  );
+});
 
 updateUser = function (updateObj) {
   return Meteor.users.update(Meteor.userId(), {$set: updateObj},
