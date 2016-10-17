@@ -27,3 +27,17 @@
 .events-list img {
   max-width: 100%;
 }
+
+.image-container {
+  position: relative;
+}
+
+.image-container {
+  height: auto !important;
+}
+
+.message-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

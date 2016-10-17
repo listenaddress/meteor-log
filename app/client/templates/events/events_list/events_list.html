@@ -8,14 +8,15 @@
               {{#with message}}
                 {{> MessagePreview}}
               {{/with}}
-              <ul>
-                {{#each files}}
-                  <li>
-                    <div>{{original_name}}</div>
-                    <div><img src="{{secure_url}}"/></div>
-                  </li>
-                {{/each}}
-              </ul>
+              {{#each files}}
+                <div>
+                  <div>{{original_name}}</div>
+                  <div class="image-container">
+                    {{> Holder}}
+                    <img class="message-image" src="{{secure_url}}"/>
+                  </div>
+                </div>
+              {{/each}}
             {{/if}}
 
             {{#if $eq this.type 'log_created'}}
