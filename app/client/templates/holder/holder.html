@@ -1,8 +1,10 @@
 <template name="Holder">
   <div>
     <div class="holder-cover"></div>
-    <img class="holder"
-         src="holder.js/{{width}}x{{height}}"
-         style="height: auto !important;">
+    {{#if width}}
+      <img class="holder"
+           src="holder.js/{{width}}x{{height}}"
+           style="height: auto !important;">
+    {{/if}}
   </div>
 </template>

@@ -1,4 +1,6 @@
 Template.Holder.onRendered(function() {
   window.Holder.run();
-  $('.events-list').scrollTop(100000);
+  setTimeout(function () {
+    $('.events-list').scrollTop(100000);
+  }, 250);
 });

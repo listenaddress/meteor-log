@@ -12,8 +12,10 @@
                 <div>
                   <div>{{original_name}}</div>
                   <div class="image-container">
-                    {{> Holder}}
-                    <img class="message-image" src="{{secure_url}}"/>
+                    {{#if width}}
+                      {{> Holder}}
+                      <img class="message-image" src="{{secure_url}}"/>
+                    {{/if}}
                   </div>
                 </div>
               {{/each}}
