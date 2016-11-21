@@ -8,6 +8,3 @@ app/client/templates/.DS_Store
 dump
 app/npm-debug.log
 *.DS_Store
-app/client/lib/semantic-ui
-!app/client/lib/semantic-ui/theme.config.import.less
-!app/client/lib/semantic-ui/custom.semantic.json

@@ -1,7 +1,2 @@
-# /node_modules and /bower_components ignored by default
-
-# Ignore files compiled from TypeScript and CoffeeScript
-# **/*.{ts,coffee}.js
-
-# Ignore built files except build/index.js
-client/lib/semantic-ui
+# Ignore files for eslint
+# Type the path of the file to ignore

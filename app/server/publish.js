@@ -123,7 +123,7 @@ Meteor.publish('messagesByText', function (content) {
 });
 
 Meteor.publish('logsByName', function (name) {
-  return Logs.find({name: {$regex: name, $options: 'i'}, hidden: false });
+  return Logs.find({name: {$regex: name, $options: 'i'}, hidden: false});
 });
 
 Meteor.publishComposite('userEvents', function (userId) {
