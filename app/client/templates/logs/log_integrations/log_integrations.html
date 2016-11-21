@@ -1,25 +1,23 @@
-<template name="logIntegrations">
-  <div class="ui segment">
-    <h3>Available Services</h3>
-    <ul>
-      {{#with log}}
-        {{#each services}}
-          {{#if connected}}
-            <li>
-              <i class="icon circle green"></i>
-              {{#linkTo route='log.integration' serviceType=type logId=log}}
-                {{type}}
-              {{/linkTo}}
-            </li>
-          {{else}}
-            <li>
-              {{#linkTo route='log.integration' serviceType=type logId=log}}
-                {{type}}
-              {{/linkTo}}
-            </li>
-          {{/if}}
-        {{/each}}
-      {{/with}}
-    </ul>
-  </div>
+<template name="LogIntegrations">
+  <h3>Available Services</h3>
+  <ul>
+    {{#with log}}
+      {{#each services}}
+        {{#if connected}}
+          <li>
+            <i class="icon circle green"></i>
+            {{#linkTo route='log.integration' serviceType=type logId=log}}
+              {{type}}
+            {{/linkTo}}
+          </li>
+        {{else}}
+          <li>
+            {{#linkTo route='log.integration' serviceType=type logId=log}}
+              {{type}}
+            {{/linkTo}}
+          </li>
+        {{/if}}
+      {{/each}}
+    {{/with}}
+  </ul>
 </template>

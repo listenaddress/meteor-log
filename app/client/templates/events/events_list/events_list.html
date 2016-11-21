@@ -1,22 +1,24 @@
 <template name="EventsList">
   <div class="events-wrapper">
-    {{>loader}}
-    {{#if Template.subscriptionsReady}}
-      <div class="events-list loading-wrapper">
+<!--     {{#if Template.subscriptionsReady}} -->
+      <div class="events-list">
         {{#each events}}
           <div class="ui items">
             {{#if this.messageId}}
               {{#with message}}
                 {{> MessagePreview}}
               {{/with}}
-              <ul>
-                {{#each files}}
-                  <li>
-                    <div>{{original_name}}</div>
-                    <div><img src="{{secure_url}}"/></div>
-                  </li>
-                {{/each}}
-              </ul>
+              {{#each files}}
+                <div>
+                  <div>{{original_name}}</div>
+                  <div class="image-container">
+                    {{#if width}}
+                      {{> Holder}}
+                      <img class="message-image" src="{{secure_url}}"/>
+                    {{/if}}
+                  </div>
+                </div>
+              {{/each}}
             {{/if}}
 
             {{#if $eq this.type 'log_created'}}
@@ -80,8 +82,18 @@
               {{timestamp}}
             {{/if}}
           </div>
+        {{else}}
+          <div class="ui items">
+            Nothing here yet!
+          </div>
         {{/each}}
       </div>
-    {{/if}}
+    <!-- {{else}}
+      <div class="ui grid log_placeholder">
+        <div class="eight wide computer column">
+          <img src="/images/activity_placeholder.png">
+        </div>
+      </div>
+    {{/if}} -->
   </div>
 </template>

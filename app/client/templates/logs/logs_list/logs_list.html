@@ -1,13 +1,21 @@
 <template name="LogsList">
-  <div>
-    <h3>Logs</h3>
+  <div class="logList">
+    <h3>Recent</h3>
     <ul>
       {{#each logs}}
-        <li>
-          {{#linkTo route='log' logId=this._id}}
-            {{this.name}}
-          {{/linkTo}}
-        </li>
+        {{#if onPage}}
+          <li class="logonpage">
+            {{#linkTo route='log' logId=this._id}}
+              {{this.name}}
+            {{/linkTo}}
+          </li>
+        {{else}}
+          <li>
+            {{#linkTo route='log' logId=this._id}}
+              {{this.name}}
+            {{/linkTo}}
+          </li>
+        {{/if}}
       {{/each}}
     </ul>
   </div>

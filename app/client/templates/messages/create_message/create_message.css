@@ -8,7 +8,7 @@
   width: calc(100vw - 200px);
   margin: 0px;
   border-radius: inherit;
-  border-top: 1px solid grey;
+  border-top: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .create-message textarea {
@@ -23,16 +23,25 @@
   left: -1px;
   padding: 4px;
   background: white;
-  border: 1px solid;
+  border: 2px solid rgba(34, 36, 38, 0.15);
 }
 
 .photo-upload {
   position: absolute;
+  width: 300px;
   bottom: 52px;
   right: 0px;
   padding: 4px;
   background: white;
-  border: 1px solid;
+  border: 2px solid rgba(34, 36, 38, 0.15);
+}
+
+.photo-upload img {
+  max-width: 100%;
+}
+
+.file_bag {
+  color: white;
 }
 
 .user-list {
@@ -44,10 +53,6 @@
 .user-list li:hover {
   cursor: pointer;
   color: #f000ff;
-}
-
-.ui.segment button {
-  position: fixed;
 }
 
 .ui.segment .right {

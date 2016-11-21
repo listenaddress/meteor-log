@@ -1,16 +1,4 @@
 Template.User.events({
-  'click .showlogs': function () {
-    $('.mainlog').delay(400).fadeOut('slow', function () {
-      $('.logs').fadeIn('slow');
-    });
-  },
-
-  'click .showmainlog': function () {
-    $('.logs').delay(400).fadeOut('slow', function () {
-      $('.mainlog').fadeIn('slow');
-    });
-  },
-
   'click .addlog': function () {
     Router.go('/log/new');
   }
@@ -35,5 +23,7 @@ Template.User.helpers({
 Template.User.onCreated(function () {
   var self = this;
   self.autorun(function () {
+    var controller = Router.current();
+    self.subscribe('user', controller.params.username);
   });
 });

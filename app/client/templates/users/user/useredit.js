@@ -18,7 +18,7 @@ Template.editUser.events({
   },
 
   'click button.save': function (e, tmpl) {
-    var user = { profile: {}};
+    var user = { profile: {} };
     user.username = tmpl.find('input.username').value;
     user.profile.firstName = tmpl.find('input.first-name').value;
     user.profile.lastName = tmpl.find('input.last-name').value;

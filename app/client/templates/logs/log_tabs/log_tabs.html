@@ -1,0 +1,21 @@
+<template name="LogTabs">
+  <div class="log-menu">
+    <div class="ui secondary pointing menu">
+      {{#linkTo route='log.messages' logId=log._id}}
+        <div class="item">
+          Messages
+        </div>
+      {{/linkTo}}
+      {{#linkTo route='log.files' logId=log._id}}
+        <div class="item">
+          Files
+        </div>
+      {{/linkTo}}
+      {{#linkTo route='log.overview' logId=log._id}}
+        <div class="item">
+          Overview
+        </div>
+      {{/linkTo}}
+    </div>
+  </div>
+</template>
