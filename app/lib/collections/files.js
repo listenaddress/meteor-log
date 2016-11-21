@@ -16,6 +16,14 @@ Schemas.File = new SimpleSchema({
   secure_url: {
     type: String
   },
+  width: {
+    type: String,
+    optional: true
+  },
+  height: {
+    type: String,
+    optional: true
+  },
   original_name: {
     type: String,
     optional: true

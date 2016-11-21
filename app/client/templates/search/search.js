@@ -1,3 +1,5 @@
+var clearResults;
+
 Template.Search.helpers({
   users: function () {
     return Session.get('users');
@@ -13,6 +15,10 @@ Template.Search.helpers({
 });
 
 Template.Search.events({
+
+});
+
+Template.SearchBar.events({
   'click .search-bar': function (e, tmpl) {
     Router.go('search');
   },
@@ -38,3 +44,9 @@ Template.Search.events({
     });
   }
 });
+
+clearResults = function () {
+  Session.set('users', null);
+  Session.set('logs', null);
+  Session.set('messages', null);
+};

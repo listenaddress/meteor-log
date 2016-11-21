@@ -2,10 +2,12 @@
   <div class="create-message">
     <div class="photo-upload">
       <input type="file" class="file_bag">
-      <button class="upload">Upload</button>
 
       {{#each files}}
-        <p>{{percent_uploaded}}</p>
+        <div>
+          <img src="{{secure_url}}" />
+          <p>{{percent_uploaded}}</p>
+        </div>
       {{/each}}
     </div>
     {{#if tagging}}

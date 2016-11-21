@@ -1,8 +1,12 @@
-Template.editLog.helpers({
-
+Template.LogSettings.helpers({
+  log: function () {
+    var controller = Router.current();
+    if (controller.params.logId)
+      return Logs.findOne({_id: controller.params.logId});
+  }
 });
 
-Template.editLog.events({
+Template.LogSettings.events({
   'click .dropdown': function () {
     $('.selection.dropdown').dropdown();
   },
@@ -27,4 +31,14 @@ Template.editLog.events({
         Router.go('home');
       });
   }
+});
+
+Template.LogSettings.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    var controller = Router.current();
+    if (controller.params.logId) {
+      self.subscribe('log', controller.params.logId);
+    }
+  });
 });

@@ -1,0 +1,22 @@
+<template name="LogHeader">
+  <div class="log-header">
+    {{#with log}}
+      {{#linkTo route='log.messages' logId=this._id}}
+        <h3>
+          {{name}}
+          {{#if currentUser}}
+            {{#linkTo route='log.settings' logId=this._id}}
+              <i class="icon setting"></i>
+            {{/linkTo}}
+          {{/if}}
+
+          {{#if joined}}
+            <button class="ui button leaveLog"> Leave </button>
+          {{else}}
+            <button class="ui button joinLog"> Join </button>
+          {{/if}}
+        </h3>
+      {{/linkTo}}
+    {{/with}}
+  </div>
+</template>

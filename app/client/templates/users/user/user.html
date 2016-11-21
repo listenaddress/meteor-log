@@ -1,65 +1,58 @@
 <template name="User">
-  <div class="ui events grid">
-    <div class="sixteen wide column">
-      {{#with userProfile}}
-        <div class="ui items">
-          <div class="item">
-            <div class="ui tiny circular image">
-             <img src="http://photon.hypb.st/hypetrak.com/images/2012/06/kool-ad-300x300.jpg">
-            </div>
-            <div class="content">
-              <h1 class="header">
-                {{profile.firstName}}
-              </h1>
-              <div class="description">
-                <p>
-                  {{#linkTo route='user'}}
-                    @{{username}}
-                  {{/linkTo}}
-                  {{#if isMe}}
-                    {{#linkTo route='user.edit'}}
-                      <i class="write square icon"></i>
-                    {{/linkTo}}
+  <div class="ui container">
+    <div class="ui events grid">
+      <div class="sixteen wide column">
+        {{#with userProfile}}
+          <div class="ui items">
+            <div class="item">
+              <div class="ui tiny circular image">
+               <img src="{{profile.thumb}}">
+              </div>
+              <div class="content">
+                <br>
+                <h1 class="header">
+                  {{profile.firstName}}
+                  {{#if status.online}}
+                    <i class="circle small icon green"></i>
                   {{/if}}
-                </p>
+                </h1>
+                <div class="description">
+                  <p>
+                    {{#linkTo route='user'}}
+                      @{{username}}
+                    {{/linkTo}}
+                    {{#if isMe}}
+                      {{#linkTo route='user.edit'}}
+                        <i class="write square icon"></i>
+                      {{/linkTo}}
+                    {{/if}}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      {{/with}}
-      {{#if isMe}}
-        {{> CreateMessage}}
-      {{/if}}
+        {{/with}}
 
-      <div class="ui grid">
-        <div class="left floated seven wide column">
-          <h3>Logs</h3>
-        </div>
-        <div class="right floated aligned four wide column">
-
-          {{#if currentUser}}
-            <button class="ui addlog icon compact button">
-              <i class="plus icon"></i>
-            </button>
-          {{/if}}
-
-          <div class="ui icon compact buttons">
-            <button class="showlogs ui button">
-              <i class="ellipsis horizontal icon"></i>
-            </button>
-            <button class="showmainlog ui button">
-              <i class="content icon"></i>
-            </button>
+        <div class="ui grid right aligned">
+          <div class="left aligned floated six wide column">
+            <h2>Logs</h2>
+          </div>
+          <div class="right floated aligned ten wide column">
+            {{#if currentUser}}
+              <button class="ui addlog icon compact button">
+                <i class="plus icon"></i>
+                Start a new Log
+              </button>
+            {{/if}}
           </div>
         </div>
-      </div>
 
-      <div class="logs">
-        {{>LogsGrid}}
-      </div>
+        <div class="logs">
+          {{>LogsGrid}}
+        </div>
 
-      <div class="mainlog ui segment">
-        {{>EventsList}}
+        <h2>Activity</h2>
+        {{>UserActivity}}
       </div>
     </div>
   </div>

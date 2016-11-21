@@ -1,4 +1,4 @@
-Template.logIntegration.helpers({
+Template.LogIntegration.helpers({
   'service': function () {
     return Services.findOne({});
   },
@@ -8,7 +8,7 @@ Template.logIntegration.helpers({
   }
 });
 
-Template.logIntegration.onCreated(function () {
+Template.LogIntegration.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var controller = Router.current();

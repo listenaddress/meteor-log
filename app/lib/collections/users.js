@@ -105,7 +105,7 @@ Schemas.User = new SimpleSchema({
     autoform: {
       type: 'hidden'
     }
-  }
+  },
   // Option 2: [String] type
   // If you are sure you will never need to use role groups, then
   // you can specify [String] as the type
@@ -116,6 +116,11 @@ Schemas.User = new SimpleSchema({
   //     type: 'hidden'
   //   }
   // },
+  status: {
+    type: Object,
+    optional: true,
+    blackbox: true
+  }
 });
 
 Meteor.users.attachSchema(Schemas.User);
