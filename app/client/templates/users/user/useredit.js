@@ -1,6 +1,11 @@
 Template.editUser.helpers({
   isMe: function () {
     return this._id === Meteor.userId();
+  },
+
+  userProfile: function () {
+    var controller = Router.current();
+    return Meteor.users.findOne({'username': controller.params.username});
   }
 });
 
@@ -23,6 +28,9 @@ Template.editUser.events({
     user.profile.firstName = tmpl.find('input.first-name').value;
     user.profile.lastName = tmpl.find('input.last-name').value;
 
-    Meteor.call('updateUserProfile', user);
+    Meteor.call('updateUserProfile', user, function (error) {
+      if (error) throw error;
+      Router.go('user', {username: user.username});
+    });
   }
 });
