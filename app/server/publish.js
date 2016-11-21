@@ -123,7 +123,7 @@ Meteor.publish('messagesByText', function (content) {
 });
 
 Meteor.publish('logsByName', function (name) {
-  return Logs.find({name: {$regex: name, $options: 'i'}});
+  return Logs.find({name: {$regex: name, $options: 'i'}, hidden: false });
 });
 
 Meteor.publishComposite('userEvents', function (userId) {
@@ -217,7 +217,7 @@ Meteor.publishComposite('notifications', function (userId) {
       {
         // Find log from notification
         find: function (notification) {
-          return Logs.find({_id: notification.logId});
+          return Logs.find({_id: notification.logId, hidden: false});
         }
       },
       {
@@ -241,7 +241,7 @@ Meteor.publishComposite('notifications', function (userId) {
           {
             // Find log from event
             find: function (event, notification) {
-              return Logs.find({_id: event.logId});
+              return Logs.find({_id: event.logId, hidden: false});
             }
           }
         ]
