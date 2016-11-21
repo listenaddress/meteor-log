@@ -4,6 +4,7 @@ import url from 'url';
 import http from 'http';
 
 var saveFiles;
+var updateFile;
 var updateUser;
 var getImageSize;
 
@@ -331,7 +332,7 @@ getImageSize = function (file, id) {
     var chunks = [];
     response.on('data', function (chunk) {
       chunks.push(chunk);
-    }).on('end', function() {
+    }).on('end', function () {
       var buffer = Buffer.concat(chunks);
       var size = sizeOf(buffer);
       if (!size.width) return;

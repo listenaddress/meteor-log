@@ -58,11 +58,6 @@ Meteor.methods({
       token: user.services.github.accessToken
     });
 
-    if (logId)
-      // This needs to be set in the env variable file.
-      // Used only for testing and bridging to localhost.
-      process.env.ENDPOINT = 'https://820d96c9.ngrok.io';
-
     var endpoint = process.env.ENDPOINT + '/integrations/' + logId + '/' + user._id;
 
     if (repo) {

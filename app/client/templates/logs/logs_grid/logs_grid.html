@@ -1,46 +1,37 @@
 <template name="LogsGrid">
-<!--   {{#if Template.subscriptionsReady}}
- -->
-    <div class="ui grid">
-      {{#each logs}}
-        <div class="eight wide two wide computer column">
-          {{#linkTo route="log" logId=_id}}
-            <div class="ui segment">
-              <h3>
-                {{name}}
-                {{#if $eq privacy 'private'}}
-                  <i class="lock icon"></i>
-                {{/if}}
-              </h3>
-              <div class="contributors">
-              {{#each members}}
-                {{#with user}}
-                  <img class="ui left avatar image contributor" src="{{profile.thumb}}" data-title="{{profile.firstName}}" data-content="{{profile.firstName}} joined the log since {{timestamp}}">
-                {{/with}}
-              {{/each}}
-              </div>
-            </div>
-          {{/linkTo}}
-        </div>
-      {{else}}
-        <div class="sixteen wide two wide computer column center aligned ">
-            <div class="ui segment">
-              {{#with userOnPage}}
-                <p>
-                  Wanna follow {{profile.firstName}}'s progress?
-                  <br>
-                  <a>Request to start a Log</a>
-                </p>
+  <div class="ui grid">
+    {{#each logs}}
+      <div class="eight wide two wide computer column">
+        {{#linkTo route="log" logId=_id}}
+          <div class="ui segment">
+            <h3>
+              {{name}}
+              {{#if $eq privacy 'private'}}
+                <i class="lock icon"></i>
+              {{/if}}
+            </h3>
+            <div class="contributors">
+            {{#each members}}
+              {{#with user}}
+                <img class="ui left avatar image contributor" src="{{profile.thumb}}" data-title="{{profile.firstName}}" data-content="{{profile.firstName}} joined the log since {{timestamp}}">
               {{/with}}
+            {{/each}}
             </div>
-        </div>
-      {{/each}}
-    </div>
-  <!-- {{else}}
-    <div class="ui grid log_placeholder">
-      <div class="eight wide computer column">
-        <img src="/images/log_placeholder.png">
+          </div>
+        {{/linkTo}}
       </div>
-    </div>
-  {{/if}} -->
+    {{else}}
+      <div class="sixteen wide two wide computer column center aligned ">
+          <div class="ui segment">
+            {{#with userOnPage}}
+              <p>
+                Wanna follow {{profile.firstName}}'s progress?
+                <br>
+                <a>Request to start a Log</a>
+              </p>
+            {{/with}}
+          </div>
+      </div>
+    {{/each}}
+  </div>
 </template>
