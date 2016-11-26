@@ -20,8 +20,20 @@ Meteor.publish('userService', function (serviceType) {
   return Meteor.users.find({_id: this.userId}, {fields: {[username]: 1, [repos]: 1}});
 });
 
+Meteor.publish('userTrelloService', function () {
+  var username = 'services.trello.username';
+  var boards = 'services.trello.boards';
+  var organizations = 'services.trello.organizations';
+  return Meteor.users.find({_id: this.userId},
+                           {fields: {[username]: 1, [boards]: 1, [organizations]: 1}});
+});
+
 Meteor.publish('github', function (integrationId) {
   return Github.find({integrationId: integrationId});
+});
+
+Meteor.publish('trello', function (integrationId) {
+  return Trello.find({integrationId: integrationId});
 });
 
 Meteor.publish('log', function (logId) {

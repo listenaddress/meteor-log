@@ -1,0 +1,33 @@
+<template name="TrelloMessage">
+  <div class="trello-message">
+    <!-- New Card -->
+    {{#if $eq type 'createCard'}}
+      {{data.memberCreator.fullName}} created a card —>
+        <a target="_blank"
+           href="https://trello.com/c/{{data.data.card.shortLink}}">
+          "{{data.data.card.name}}"
+        </a>.
+    {{/if}}
+    <!-- Moved Card -->
+    {{#if data.data.listAfter}}
+      {{data.memberCreator.fullName}} moved
+        <a target="_blank"
+           href="https://trello.com/c/{{data.data.card.shortLink}}">
+          "{{data.data.card.name}}"
+        </a>
+        to {{data.data.listAfter.name}}.
+    {{/if}}
+    <!-- New Comment -->
+    {{#if $eq type 'commentCard'}}
+      {{data.memberCreator.fullName}} commented on
+        <a target="_blank"
+           href="https://trello.com/c/{{data.data.card.shortLink}}">
+          "{{data.data.card.name}}"
+        </a>.
+        <div style="border-left: 1px solid;
+                    padding-left: 5px;">
+            "{{data.data.text}}"
+        </div>
+    {{/if}}
+  </div>
+</template>

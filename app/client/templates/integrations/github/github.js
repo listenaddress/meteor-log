@@ -111,7 +111,7 @@ Template.Github.events({
       Meteor.connectWith('github', {
         requestPermissions: ['repo']
       }, function (error) {
-        if (error) {
+        if (error.error) {
           t.lastError.set(error.error);
         } else {
           Meteor.call('getRepos');

@@ -115,6 +115,21 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+  Router.route('/integrations/trello/:hookId', { where: 'server' })
+    .post(function () {
+      var body = this.request.body;
+      if (body && body.action && body.action.data) {
+        Meteor.call('saveTrelloEvent',
+                    body.action,
+                    body.action.type,
+                    this.params.hookId);
+      } else {
+        console.log('Ping from Trello but didn\'t recieve event data.');
+      }
+
+      this.response.end('Thanks Trello, we got your message!');
+    });
+
   Router.route('/integrations/:logId/:_id', { where: 'server' })
     .post(function () {
       var user = Meteor.users.findOne({_id: this.params._id});

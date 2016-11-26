@@ -2,28 +2,34 @@
   <div class="ui comments" style="border: none">
     <div class="comment">
       <a class="avatar">
-        {{#with user}}
-          {{#if $eq service 'github'}}
-            <img src="https://a.slack-edge.com/ae7f/plugins/github/assets/service_512.png">
+        {{#if $eq service 'github'}}
+          <img src="https://a.slack-edge.com/ae7f/plugins/github/assets/service_512.png">
+        {{else}}
+          {{#if $eq service 'trello'}}
+            <img src="https://freeter.io/embedding-web-apps/project-management/trello.png">
           {{else}}
-            {{#if profile.thumb}}
-              <img src="{{profile.thumb}}">
+            {{#if user.profile.thumb}}
+              <img src="{{user.profile.thumb}}">
             {{else}}
               <img src="http://www.absoluteempowerment.com/attachments/Image/Fibonnaci/46ab1714c5db5c1a987f6041d8f16117.jpg">
             {{/if}}
           {{/if}}
-        {{/with}}
+        {{/if}}
       </a>
       <div class="content">
         <a class="author">
           {{#if $eq service 'github'}}
             Github
           {{else}}
-            {{#with user}}
-              {{#linkTo route='user'}}
-                {{profile.firstName}}
-              {{/linkTo}}
-            {{/with}}
+            {{#if $eq service 'trello'}}
+              Trello
+            {{else}}
+              {{#with user}}
+                {{#linkTo route='user'}}
+                  {{profile.firstName}}
+                {{/linkTo}}
+              {{/with}}
+            {{/if}}
           {{/if}}
         </a>
         <div class="metadata">
@@ -35,6 +41,9 @@
           {{/if}}
           {{#if $eq service 'github'}}
             {{> GithubMessage}}
+          {{/if}}
+          {{#if $eq service 'trello'}}
+            {{> TrelloMessage}}
           {{/if}}
         </div>
       </div>
