@@ -1,5 +1,4 @@
 Template.trelloDropdown.onRendered(function () {
-  console.log('drop', this.$('.dropdown'));
   this.$('.dropdown').dropdown();
 });
 
@@ -35,7 +34,6 @@ Template.Trello.helpers({
   },
 
   'currentUser': function () {
-    console.log('user', Meteor.user());
     return Meteor.users.findOne({_id: Meteor.userId()});
   },
 
@@ -46,9 +44,7 @@ Template.Trello.helpers({
   'board': function () {
     var id = this.hook.idModel;
     var user = Meteor.user();
-    console.log('id', id);
     return user.services.trello.boards.find(function (item) {
-      console.log('item', item);
       return item.id === id;
     });
   },
@@ -73,8 +69,6 @@ Template.Trello.events({
         return item.id === value;
       });
 
-      console.log('value', value);
-      console.log('board', board);
       var controller = Router.current();
       var logId = controller.params.logId;
       if (board.id) {
@@ -116,7 +110,6 @@ Template.Trello.events({
       expiration: 'never',
       name: 'log',
     };
-    console.log('options', options);
     var callback = function(error) {
       if (error.error) {
         t.lastError.set(error.error);
