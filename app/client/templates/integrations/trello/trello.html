@@ -1,0 +1,78 @@
+<template name="Trello">
+  <div class="ui grid">
+    {{#if currentUser.services.trello.username}}
+      <div class="sixteen wide column">
+        <div class="ui label">
+          Signed in with {{currentUser.services.trello.username}}
+          <i class="delete icon disconnectTrello"></i>
+        </div>
+        <button class="ui button icon mini refreshBoards">
+          <i class="icon refresh"></i>
+        </button>
+      </div>
+      <div class="sixteen wide column">
+        {{>trelloDropdown}}
+      </div>
+      <div class="sixteen wide column">
+        <button class="ui button addBoard">Add Board</button>
+      </div>
+    {{else}}
+      <div class="sixteen wide column">
+        <button class="ui button connectTrello">Connect Trello</button>
+      </div>
+    {{/if}}
+
+    <div class="sixteen wide column">
+      {{#if errorMessage}}
+        <div class="ui violet message">
+          That didn't work — {{errorMessage}}
+        </div>
+      {{/if}}
+      {{#if logIntegrated}}
+        <h3>Connected boards</h3>
+        <div class="ui middle aligned divided list">
+          {{#each integrations}}
+            <div class="item">
+              <div class="right floated content">
+                <!-- {{#if boardOwner}} -->
+                  <div class="ui button remove" data-value="{{hook.id}}">Remove</div>
+                <!-- {{/if}} -->
+              </div>
+              <div class="content">
+                {{#with board}}
+                  {{#if idOrganization}}
+                    {{organization.displayName}} —
+                  {{/if}}
+                  {{name}}
+                {{/with}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="trelloDropdown">
+  <div class=" ui fluid selection getBoards dropdown">
+    <input type="hidden" name="user">
+    <i class="dropdown icon"></i>
+    <div class="default text">
+        Add a board
+    </div>
+    <div class="menu">
+      {{#unless currentUser.services.trello.boards}}
+        Looking for boards...
+      {{/unless}}
+      {{#each currentUser.services.trello.boards}}
+        <div class="item" data-value="{{id}}">
+          {{#if idOrganization}}
+            {{organization.displayName}} —
+          {{/if}}
+          {{name}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>

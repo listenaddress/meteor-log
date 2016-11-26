@@ -18,9 +18,9 @@ Meteor.startup(() => {
     },
     {
       type: 'trello',
-      description: 'GitHub offers online source code hosting for Git projects, with powerful collaboration, code review, and issue tracking.',
-      website: 'http://github.com',
-      thumb_url: 'https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2016-05-18/44042585718_0e6a837d5b63fd1cfc07_512.png'
+      description: 'Trello is a collaboration tool that organizes your projects into boards.',
+      website: 'http://trello.com',
+      thumb_url: 'https://freeter.io/embedding-web-apps/project-management/trello.png'
     }
   ];
   for (var i = 0; i < services.length; i++) {

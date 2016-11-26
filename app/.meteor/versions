@@ -20,6 +20,7 @@ blaze@2.1.8
 blaze-html-templates@1.0.4
 blaze-tools@1.0.9
 boilerplate-generator@1.0.11
+bozhao:link-accounts@1.2.9
 bruz:github-api@0.2.4_1
 caching-compiler@1.1.9
 caching-html-compiler@1.0.6
@@ -61,6 +62,8 @@ iron:middleware-stack@1.1.0
 iron:router@1.0.13
 iron:url@1.0.11
 jquery@1.11.10
+jsep:accounts-trello@0.1.0
+jsep:trello@0.0.2
 juliancwirko:postcss@1.1.1
 launch-screen@1.0.12
 lepozepo:s3@5.2.2

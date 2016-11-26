@@ -113,15 +113,17 @@ Meteor.methods({
       // Find users tagged and save a notification for them
       var message = Messages.findOne(event.messageId);
       var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
-      var matches = message.content.match(usersTaggedPattern);
-      if (matches && matches.length > 0) {
-        _.map(matches, function (item) {
-          var username = item.replace('@', '');
-          var user = Meteor.users.findOne({username: username});
-          if (!user || user._id === event.userId) return;
+      if (message && message.content) {
+        var matches = message.content.match(usersTaggedPattern);
+        if (matches && matches.length > 0) {
+          _.map(matches, function (item) {
+            var username = item.replace('@', '');
+            var user = Meteor.users.findOne({username: username});
+            if (!user || user._id === event.userId) return;
 
-          Meteor.call('saveTaggedNotification', username, event._id);
-        });
+            Meteor.call('saveTaggedNotification', username, event._id);
+          });
+        }
       }
     }
   },
