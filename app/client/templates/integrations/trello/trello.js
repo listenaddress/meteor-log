@@ -5,10 +5,6 @@ Template.trelloDropdown.onRendered(function () {
 Template.trelloDropdown.onCreated(function () {
   var self = this;
   self.lastError = new ReactiveVar(null);
-  self.autorun(function () {
-    var controller = Router.current();
-    self.subscribe('userService', controller.params.serviceType);
-  });
 });
 
 Template.trelloDropdown.helpers({
