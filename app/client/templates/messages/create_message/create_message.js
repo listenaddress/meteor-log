@@ -36,7 +36,7 @@ Template.CreateMessage.events({
       Session.set('files', []);
       S3.collection.remove({});
       setTimeout(function () {
-        $('.events-list').scrollTop(100000);
+        window.scrollTo(0, 100000);
       }, 200);
     });
 

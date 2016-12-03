@@ -1,6 +1,11 @@
 <template name="LogsList">
-  <div class="logList">
-    <h3>Recent</h3>
+  <div class="log-list">
+    <div class="list-header">
+      <span>Logs ({{logsCount}})</span>
+      {{#linkTo route='log.new'}}
+        <span class="new-log">+ New Log</span>
+      {{/linkTo}}
+    </div>
     <ul>
       {{#each logs}}
         {{#if onPage}}

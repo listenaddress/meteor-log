@@ -1,4 +1,4 @@
-Template.LogHeader.helpers({
+Template.LogInfo.helpers({
   log: function () {
     var controller = Router.current();
     if (controller.params.logId)
@@ -15,7 +15,7 @@ Template.LogHeader.helpers({
   }
 });
 
-Template.LogHeader.events({
+Template.LogInfo.events({
   'click .joinLog': function () {
     Meteor.call('joinLog', this._id,
       function (error, response) {
@@ -33,7 +33,7 @@ Template.LogHeader.events({
   }
 });
 
-Template.LogHeader.onCreated(function () {
+Template.LogInfo.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var controller = Router.current();

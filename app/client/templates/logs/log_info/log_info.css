@@ -1,0 +1,28 @@
+.log-info {
+  border: 2px solid #ebebeb;
+  background: white;
+  padding: 25px 16px;
+  border-top: none;
+}
+
+.log-info h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.log-info .description {
+  color: #9e9ea3;
+  line-height: 20px;
+}
+
+.log-info .options {
+  margin-top: 25px;
+}
+
+.log-info .options a {
+  color: #9b9b9b;
+  font-size: 11.5px;
+  padding-right: 6px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+}

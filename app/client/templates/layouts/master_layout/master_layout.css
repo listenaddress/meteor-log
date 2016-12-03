@@ -5,12 +5,16 @@ body {
   z-index: 1;
   min-height: 60px !important;
   font-family: 'Source Sans Pro', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif  !important;
+  background-color: #f3faf6 !important;
 }
 
 body .container{
 }
 
 .main-content {
+  padding-top: 60px;
+  width: 1100px;
+  margin: 0 auto;
 }
 
 textarea:hover,
@@ -26,6 +30,6 @@ label:focus,
 .btn:active,
 .btn.active
 {
-    outline:0px !important;
-    -webkit-appearance:none;
+  outline:0px !important;
+  -webkit-appearance:none;
 }

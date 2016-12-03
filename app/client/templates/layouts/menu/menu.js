@@ -19,7 +19,7 @@ Template.Menu.events({
 });
 
 Template.Menu.onRendered(function () {
-  $('.master-layout').delegate('.dropdown', 'click', function (event) {
+  $('.top-nav').delegate('.dropdown', 'click', function (event) {
     $('.ui.dropdown').dropdown({
       action: 'nothing',
       on: 'click',

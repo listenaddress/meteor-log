@@ -1,49 +1,53 @@
 <template name="Menu">
-  <div class="ui secondary text menu master-layout">
+  <div class="menu top-nav">
     <div class="ui container">
-      <a href="/" class="header item">Log</a>
-      <div class="searchbar item">
-        {{>SearchBar}}
+      <div class="header-logo">
+        <h3><a href="/">Log</a></h3>
       </div>
-
-      <div class="right menu">
-        {{#if currentUser}}
-          <div class="item quickMessage">
-            <i class="write large icon"></i>
+      <div class="nav-container ui grid">
+        <div class="six wide column">
+          <div class="searchbar item">
+            {{>SearchBar}}
           </div>
-          <div class="item notifications">
-            {{#linkTo route="notifications"}}
-              <i class="icon large outline alarm"></i>
-              {{#if hasNotifications}}
-                <div class="ui floating mini circular red label">  {{unseenNotifications}}
-                </div>
-              {{/if}}
-            {{/linkTo}}
-          </div>
-
-          <div class="ui dropdown pointing item">
-            <div class="text">
-              <img class="ui image avatar" src="{{currentUser.profile.thumb}}">
-              {{currentUser.profile.firstName}}
-            </div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              <div class="item">
-                {{#linkTo route="user" username=currentUser.username}}
-                  Profile
+        </div>
+        <div class="ten wide column">
+          <div class="right-menu">
+            {{#if currentUser}}
+              <span class="item notifications">
+                {{#linkTo route="notifications"}}
+                  <i class="icon large outline alarm"></i>
+                  {{#if hasNotifications}}
+                    <div class="ui floating mini circular red label">  {{unseenNotifications}}
+                    </div>
+                  {{/if}}
                 {{/linkTo}}
-              </div>
-              <div class="divider"></div>
-              <a class="item" href="#" data-logout>Logout</a>
-            </div>
+              </span>
+
+              <span class="ui dropdown pointing item">
+                <div class="text">
+                  <img class="ui image avatar" src="{{currentUser.profile.thumb}}">
+                  {{currentUser.profile.firstName}}
+                </div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item">
+                    {{#linkTo route="user" username=currentUser.username}}
+                      Profile
+                    {{/linkTo}}
+                  </div>
+                  <div class="divider"></div>
+                  <a class="item" href="#" data-logout>Logout</a>
+                </div>
+              </span>
+            {{else}}
+              {{#if loggingIn}}
+                Logging in...
+              {{else}}
+                <a class="item" href="/account">Login</a>
+              {{/if}}
+            {{/if}}
           </div>
-        {{else}}
-          {{#if loggingIn}}
-            Logging in...
-          {{else}}
-            <a class="item" href="/account">Login</a>
-          {{/if}}
-        {{/if}}
+        </div>
       </div>
     </div>
   </div>
