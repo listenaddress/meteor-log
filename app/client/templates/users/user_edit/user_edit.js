@@ -1,4 +1,4 @@
-Template.editUser.helpers({
+Template.UserEdit.helpers({
   isMe: function () {
     return this._id === Meteor.userId();
   },
@@ -6,11 +6,15 @@ Template.editUser.helpers({
   userProfile: function () {
     var controller = Router.current();
     return Meteor.users.findOne({'username': controller.params.username});
+  },
+
+  uploadedUserPhoto: function () {
+    return Session.get('uploadedUserPhoto');
   }
 });
 
-Template.editUser.events({
-  'click button.upload': function () {
+Template.UserEdit.events({
+  'change .file_bag': function () {
     var files = $('input.file_bag')[0].files;
 
     S3.upload({
@@ -18,7 +22,7 @@ Template.editUser.events({
       path: ''
     }, function (error, response) {
       if (error) console.log('error', error);
-      Meteor.call('updateUserPhoto', response);
+      Session.set('uploadedUserPhoto', response);
     });
   },
 
@@ -28,9 +32,13 @@ Template.editUser.events({
     user.profile.firstName = tmpl.find('input.first-name').value;
     user.profile.lastName = tmpl.find('input.last-name').value;
     user.profile.bio = tmpl.find('textarea.bio').value;
+    var photo = Session.get('uploadedUserPhoto');
+    if (photo) user.photo = photo;
 
     Meteor.call('updateUserProfile', user, function (error) {
       if (error) throw error;
+
+      Session.set('uploadedUserPhoto', '');
       Router.go('user', {username: user.username});
     });
   }

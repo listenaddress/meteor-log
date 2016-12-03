@@ -306,7 +306,7 @@ Meteor.methods({
       user.profile.firstName = updatedUser.profile.firstName;
       user.profile.lastName = updatedUser.profile.lastName;
       user.profile.bio = updatedUser.profile.bio;
-      updateUser(user);
+      updateUser(user, updatedUser.photo);
     }
   }
 });
@@ -358,9 +358,14 @@ updateFile = Meteor.bindEnvironment(function (updateObj, id) {
   );
 });
 
-updateUser = function (updateObj) {
+updateUser = function (updateObj, photo) {
   return Meteor.users.update(Meteor.userId(), {$set: updateObj},
     function (error, response) {
+      if (photo) {
+        photo.userThumb = true;
+        saveFiles([photo]);
+      }
+
       if (error) throw error;
       return response;
     }
