@@ -21,7 +21,11 @@ Schemas.UserProfile = new SimpleSchema({
   thumb: {
     type: String,
     optional: true,
-    defaultValue: '/images/matt.jpg'
+    defaultValue: 'https://cdn.meme.am/cache/images/folder688/250x250/84688.jpg'
+  },
+  bio: {
+    type: String,
+    optional: true
   }
 });
 

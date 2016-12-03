@@ -54,21 +54,18 @@ Meteor.publishComposite('userLogs', function (userId) {
   return {
     find: function () {
       if (userId)
-        return Logs.find({creatorId: userId, privacy: 'public', hidden: false});
+        return Members.find({userId: userId});
     },
     children: [
       {
         find: function (item) {
-          return Members.find({logId: item._id});
-        },
-        children: [
-          {
-            // Find files from message
-            find: function (member, event) {
-              return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
-            }
+          if (this.userId === userId) {
+            return Logs.find({_id: item.logId, hidden: false}, {fields: {accessList: 0, hidden: 0}});
           }
-        ]
+          else {
+            return Logs.find({_id: item.logId, hidden: false, privacy: 'public'}, {fields: {accessList: 0, hidden: 0}});
+          }
+        }
       }
     ]
   }
@@ -76,31 +73,34 @@ Meteor.publishComposite('userLogs', function (userId) {
 
 Meteor.publishComposite('featuredLogs', function (userId) {
   return {
-    find: function () {
-      if (userId)
-        // custom featured logs
-        return Logs.find({privacy: 'public', hidden: false});
-      else
-        // general featured logs
-        return Logs.find({privacy: 'public', hidden: false});
+    find: function (item) {
+      return Members.find({userId: {$not: new RegExp(userId)}});
     },
     children: [
       {
         find: function (item) {
-          return Members.find({logId: item._id});
+          return Logs.find({_id: item.logId, hidden: false, privacy: 'public', creatorId: {$not: new RegExp(userId)}}, {fields: {accessList: 0, hidden: 0}});
         },
         children: [
           {
-            // Find files from message
-            find: function (member, event) {
-              return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
-            }
+            find: function (item) {
+              return Members.find({logId: item._id});
+            },
+            children: [
+              {
+                // Find files from message
+                find: function (member, event) {
+                  return Meteor.users.find({_id: member.userId}, {fields: {profile: 1, username: 1, status: 1}});
+                }
+              }
+            ]
           }
         ]
       }
     ]
   }
 });
+
 
 Meteor.publishComposite('privateUserLogs', function (userId) {
   return {

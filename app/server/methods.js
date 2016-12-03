@@ -293,16 +293,21 @@ Meteor.methods({
   },
 
   'updateUserPhoto': function (file) {
-    file.userThumb = true;
-    saveFiles([file]);
+    if (Meteor.userId()) {
+      file.userThumb = true;
+      saveFiles([file]);
+    }
   },
 
   'updateUserProfile': function (updatedUser) {
-    var user = Meteor.users.findOne(Meteor.userId());
-    user.username = updatedUser.username;
-    user.profile.firstName = updatedUser.profile.firstName;
-    user.profile.lastName = updatedUser.profile.lastName;
-    updateUser(user);
+    if (Meteor.userId()) {
+      var user = Meteor.users.findOne(Meteor.userId());
+      user.username = updatedUser.username;
+      user.profile.firstName = updatedUser.profile.firstName;
+      user.profile.lastName = updatedUser.profile.lastName;
+      user.profile.bio = updatedUser.profile.bio;
+      updateUser(user);
+    }
   }
 });
 
