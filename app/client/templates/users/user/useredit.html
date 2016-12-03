@@ -15,6 +15,11 @@
           <input class="last-name" type="text" name="first-name" value="{{profile.lastName}}"/>
         </div>
 
+        <div class="field">
+          <label>Quick Bio</label>
+          <textarea rows="2" class="bio" type="text" name="bio">{{profile.bio}}</textarea>
+        </div>
+
         {{#if profile.thumb}}
           <img style="margin: 20px; height: 100px; width: 100px; " src="{{profile.thumb}}">
         {{/if}}

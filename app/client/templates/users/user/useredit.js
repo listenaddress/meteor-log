@@ -27,6 +27,7 @@ Template.editUser.events({
     user.username = tmpl.find('input.username').value;
     user.profile.firstName = tmpl.find('input.first-name').value;
     user.profile.lastName = tmpl.find('input.last-name').value;
+    user.profile.bio = tmpl.find('textarea.bio').value;
 
     Meteor.call('updateUserProfile', user, function (error) {
       if (error) throw error;
