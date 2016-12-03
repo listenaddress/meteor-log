@@ -1,0 +1,12 @@
+.search.icon {
+  left: 0px;
+}
+
+.search-bar {
+  border: 2px solid #ebebeb !important;
+  padding-left: 35px !important;
+}
+
+.search-bar .icon {
+  color: #595959;
+}

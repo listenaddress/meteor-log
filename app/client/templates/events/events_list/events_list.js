@@ -34,7 +34,7 @@ Template.EventsList.onCreated(function () {
     if (controller.params.logId) {
       const handle = self.subscribe('logEvents', controller.params.logId, function () {
         setTimeout(function () {
-          $('.events-list').scrollTop(100000);
+          window.scrollTo(0, 100000);
         }, 0);
       });
 
@@ -44,17 +44,16 @@ Template.EventsList.onCreated(function () {
         query.observeChanges({
           added: function (id, user) {
             // If the user scroll is near the bottom, scroll down to show new message
-            const elem = $('.events-list');
-            const scrollTop = elem.scrollTop();
-            const innerHeight = elem.innerHeight();
-            const scrollHeight = elem[0].scrollHeight;
+            const scrollTop = $(window).scrollTop();
+            const windowHeight = $(window).height();
+            const documentHeight = $(document).height();
 
-            if ((scrollTop + innerHeight + 50) >= scrollHeight) {
+            if ((scrollTop + windowHeight + 50) >= documentHeight) {
               setTimeout(function () {
-                $('.events-list').scrollTop(100000);
+                window.scrollTo(0, 100000);
               }, 300);
             }
-          },
+          }
         });
       }
     }

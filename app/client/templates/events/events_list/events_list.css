@@ -3,23 +3,11 @@
 /*****************************************************************************/
 .events-list {
   font-size: 1.14285714rem;
-  height: calc(100vh - 235px);
+  padding-bottom: 33px;
   overflow: auto;
 }
 
-.events-list::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-  background: transparent;
-}
-
-.events-list::-webkit-scrollbar-thumb {
-  background-color: #eee;
-  opacity: 0.75;
-}
-
 .events-wrapper {
-  height: calc(100vh - 200px);
   padding-left: 20px;
   padding-top: 10px;
 }

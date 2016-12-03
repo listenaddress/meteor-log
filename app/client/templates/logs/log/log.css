@@ -1,12 +1,22 @@
-.sidebar {
-  height: 100vh;
-  width: 200px;
+.log-left-column {
+  padding: 0 5px !important;
+  display: inline-block;
   position: fixed;
-  float: left;
-  border-right: 2px solid rgba(34, 36, 38, 0.15);
+  width: 320px;
 }
 
-.log-content {
-  margin-left: 200px;
-  height: 100%;
+.log-main-column {
+  width: 700px;
+}
+
+.log-main-border {
+  border: 1px solid #CCC;
+  background: white;
+  margin-left: 320px;
+  width: 100%;
+}
+
+.log-container {
+  max-width: 1000px;
+  margin: 0 auto;
 }

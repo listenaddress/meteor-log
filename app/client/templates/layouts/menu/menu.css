@@ -1,3 +1,23 @@
+.top-nav {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  border-bottom: 2px solid #ebebeb !important;
+  margin: 0px !important;
+  z-index: 1;
+  min-height: 60px !important;
+  background-color: #f3faf6 !important;
+}
+
+.nav-container {
+  margin: 0 auto !important;
+  height: 60px;
+}
+
+.nav-container .column {
+  padding: 10px 10px !important;
+}
+
 .notifications .ui.floating.label {
   top: 0.2em;
   left: 85%;
@@ -16,7 +36,20 @@
   margin-top: 1.5em !important;
 }
 
-.menu .searchbar {
-  margin-left: 10% !important;
-  width: 50% !important;
+.header-logo {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.header-logo h3 {
+  margin-top: 17px;
+}
+
+.header-logo a {
+  color: #bf9ee9;
+}
+
+.right-menu {
+  float: right;
 }
