@@ -14,7 +14,7 @@
 }
 
 li.logonpage {
-  background: rgba(46, 159, 73, 0.15);
+  background: rgba(46, 159, 73, 0.10);
   border-radius: 1px;
 }
 
@@ -27,12 +27,11 @@ li.logonpage a {
   margin-left: 20px;
   margin-right: 20px;
   padding-bottom: 10px;
-  font-weight: 900;
-  border-bottom: 2px solid #ebebeb;
+  border-bottom: 1px solid #dadada;
 }
 
 .log-list .list-header .new-log {
-  color: orange;
+  color: #feac1c;
   float: right;
 }
 

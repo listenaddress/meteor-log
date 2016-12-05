@@ -2,7 +2,7 @@
   padding-right: 5px !important;
   display: inline-block;
   position: fixed;
-  width: 320px;
+  width: 290px;
 }
 
 .log-main-column {
@@ -12,12 +12,12 @@
 .log-main-border {
   border: 2px solid #ebebeb;
   background: white;
-  margin-left: 320px;
-  width: 680px;
+  margin-left: 300px;
+  width: 580px;
 }
 
 .log-container {
-  max-width: 1000px;
+  max-width: 880px;
   margin: 0 auto;
 }
 
