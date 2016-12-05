@@ -1,32 +1,40 @@
 <template name="CreateMessage">
-  <div class="create-message">
-    <div class="photo-upload">
-      <input type="file" class="file_bag">
-
-      {{#each files}}
-        <div>
-          <img src="{{secure_url}}" />
-          <p>{{percent_uploaded}}</p>
+  <div class="create-message-container">
+    <div class="create-message">
+      {{#if filesCount}}
+        <div class="preview">
+          {{#each files}}
+            <div>
+              <img src="{{secure_url}}" />
+              <p>{{percent_uploaded}}</p>
+            </div>
+          {{/each}}
         </div>
-      {{/each}}
-    </div>
-    {{#if tagging}}
-      <div class="tagging-wrapper">
-        {{#if usersToTag}}
-          <ul class="user-list">
-            {{#each usersToTag}}
-              <li data-value="{{username}}">{{username}}</li>
-            {{/each}}
-          </ul>
-        {{else}}
-          {{#if loadingUsers}}
-            <span>Loading...</span>
-          {{else}}
-            <span>No one found yet.</span>
-          {{/if}}
-        {{/if}}
+      {{/if}}
+      <div class="message-photo-upload">
+        <label for="file-upload">
+          <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
+        </label>
+        <input id="file-upload" type="file" class="file_bag">
       </div>
-    {{/if}}
-    <textarea class="message-input"></textarea>
+      {{#if tagging}}
+        <div class="tagging-wrapper">
+          {{#if usersToTag}}
+            <ul class="user-list">
+              {{#each usersToTag}}
+                <li data-value="{{username}}">{{username}}</li>
+              {{/each}}
+            </ul>
+          {{else}}
+            {{#if loadingUsers}}
+              <span>Loading...</span>
+            {{else}}
+              <span>No one found yet.</span>
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/if}}
+      <textarea class="message-input" placeholder="Type message.."></textarea>
+    </div>
   </div>
 </template>

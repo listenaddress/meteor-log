@@ -1,26 +1,87 @@
 /*****************************************************************************/
 /* CreateMessage: Style */
 /*****************************************************************************/
-.create-message {
+.create-message-container {
   position: fixed;
   bottom: 0px;
-  height: 53px;
-  width: 700px;
+  height: 77px;
+  width: 676px;
   margin: 0px;
+  padding-bottom: 30px;
   border-radius: inherit;
-  border-top: 2px solid rgba(34, 36, 38, 0.15);
+  background-color: white;
+}
+
+.create-message {
+  width: 637px;
+  margin: 0px 19px;
+  height: 100%;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 3px;
 }
 
 .create-message textarea {
   width: 100%;
   height: 100%;
+  padding-left: 69px;
+  padding-top: 12px;
   border: none;
+  resize: none;
+}
+
+.create-message input[type="file"] {
+  display: none;
+}
+
+.create-message img {
+  width: 100px;
+  height: auto;
+  max-width: 100px;
+}
+
+.create-message .preview {
+  height: 136px;
+  position: absolute;
+  top: -136px;
+  right: 20px;
+  padding: 4px;
+  border: 2px solid gray;
+  background-color: white;
+}
+
+.create-message .preview div {
+  display: inline-block;
+}
+
+.message-photo-upload {
+  position: absolute;
+}
+
+.message-photo-upload label {
+  width: 51px;
+  height: 45px;
+  position: absolute;
+  border-right: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.message-photo-upload label:hover {
+  cursor: pointer;
+}
+
+.message-photo-upload label i {
+  font-size: 1.6em;
+  margin: 12px 13px;
+  color: #888888;
+}
+
+.message-photo-upload .preview {
+
 }
 
 .tagging-wrapper {
   position: absolute;
   bottom: 52px;
-  left: -1px;
+  left: 70px;
   padding: 4px;
   background: white;
   border: 2px solid rgba(34, 36, 38, 0.15);

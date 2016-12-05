@@ -1,5 +1,5 @@
 .log-left-column {
-  padding: 0 5px !important;
+  padding-right: 5px !important;
   display: inline-block;
   position: fixed;
   width: 320px;
@@ -10,10 +10,10 @@
 }
 
 .log-main-border {
-  border: 1px solid #CCC;
+  border: 2px solid #ebebeb;
   background: white;
   margin-left: 320px;
-  width: 100%;
+  width: 680px;
 }
 
 .log-container {

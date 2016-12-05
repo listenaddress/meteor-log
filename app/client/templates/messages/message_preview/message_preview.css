@@ -1,5 +1,7 @@
-/*****************************************************************************/
-/* MessagePreview: Style */
-/*****************************************************************************/
-.message-preview {
+.comment .avatar .user {
+  border-radius: 50% !important;
+}
+
+.author a {
+  color: rgba(0, 0, 0, 0.87) !important;
 }

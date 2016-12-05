@@ -9,8 +9,16 @@
   background-color: #f3faf6 !important;
 }
 
+.menu-container {
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
 .nav-container {
   margin: 0 auto !important;
+  padding: 10px 0px;
+  display: inline-block;
   height: 60px;
 }
 
@@ -32,8 +40,16 @@
   background: none !important;
 }
 
+.dropdown .avatar {
+  margin-right: 0px !important;
+}
+
 .ui.menu .pointing.dropdown.item .menu {
   margin-top: 1.5em !important;
+}
+
+.top-nav .menu {
+  left: -23px !important;
 }
 
 .header-logo {
@@ -51,5 +67,7 @@
 }
 
 .right-menu {
-  float: right;
+  right: 0px;
+  top: 13px;
+  position: absolute;
 }

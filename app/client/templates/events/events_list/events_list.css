@@ -3,12 +3,13 @@
 /*****************************************************************************/
 .events-list {
   font-size: 1.14285714rem;
-  padding-bottom: 33px;
+  padding-bottom: 69px;
   overflow: auto;
 }
 
 .events-wrapper {
   padding-left: 20px;
+  padding-right: 20px;
   padding-top: 10px;
 }
 

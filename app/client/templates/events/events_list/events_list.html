@@ -1,91 +1,100 @@
 <template name="EventsList">
   <div class="events-wrapper">
     <div class="events-list">
-      {{#each events}}
-        <div class="ui items">
-          {{#if this.messageId}}
-            {{#with message}}
-              {{> MessagePreview}}
-            {{/with}}
-            {{#each files}}
-              <div>
-                <div>{{original_name}}</div>
-                <div class="image-container">
-                  {{#if width}}
-                    {{> Holder}}
-                    <img class="message-image" src="{{secure_url}}"/>
-                  {{/if}}
+      <div class="ui comments items">
+        {{#each events}}
+          <div class="comment">
+            {{#if this.messageId}}
+              {{#with message}}
+                {{> MessagePreview}}
+              {{/with}}
+              {{#each files}}
+                <div>
+                  <div>{{original_name}}</div>
+                  <div class="image-container">
+                    {{#if width}}
+                      {{> Holder}}
+                      <img class="message-image" src="{{secure_url}}"/>
+                    {{/if}}
+                  </div>
                 </div>
+              {{/each}}
+            {{/if}}
+
+            {{#if $eq this.type 'log_created'}}
+                {{#with user}}
+                  {{#linkTo route='user'}}
+                    {{profile.firstName}}
+                  {{/linkTo}}
+                {{/with}}
+                started a log called
+                {{#with log}}
+                  {{#linkTo route='log' logId=_id}}
+                    {{name}}.
+                  {{/linkTo}}
+                {{/with}}
+                <div class="metadata">
+                  <span class="date">{{timestamp}}</span>
+                </div>
+            {{/if}}
+
+            {{#if $eq this.type 'log_updated'}}
+              {{#with user}}
+                {{#linkTo route='user'}}
+                  {{profile.firstName}}
+                {{/linkTo}}
+              {{/with}}
+              updated his log called
+              {{#with log}}
+                {{#linkTo route='log' logId=_id}}
+                    {{name}}.
+                {{/linkTo}}
+              {{/with}}
+              <div class="metadata">
+                <span class="date">{{timestamp}}</span>
               </div>
-            {{/each}}
-          {{/if}}
+            {{/if}}
 
-          {{#if $eq this.type 'log_created'}}
-            {{#with user}}
-              {{#linkTo route='user'}}
-                {{profile.firstName}}
-              {{/linkTo}}
-            {{/with}}
-            started a log called
-            {{#with log}}
-              {{#linkTo route='log' logId=_id}}
-                {{name}}.
-              {{/linkTo}}
-            {{/with}}
-
-            {{timestamp}}
-          {{/if}}
-
-          {{#if $eq this.type 'log_updated'}}
-            {{#with user}}
-              {{#linkTo route='user'}}
-                {{profile.firstName}}
-              {{/linkTo}}
-            {{/with}}
-            updated his log called
-            {{#with log}}
-              {{#linkTo route='log' logId=_id}}
+            {{#if $eq this.type 'member_joined_log'}}
+              {{#with user}}
+                {{#linkTo route='user'}}
+                  {{profile.firstName}}
+                {{/linkTo}}
+              {{/with}}
+              has joined
+              {{#with log}}
+                {{#linkTo route='log' logId=_id}}
                   {{name}}.
-              {{/linkTo}}
-            {{/with}}
-            {{timestamp}}
-          {{/if}}
+                {{/linkTo}}
+              {{/with}}
+              <div class="metadata">
+                <span class="date">{{timestamp}}</span>
+              </div>
+            {{/if}}
 
-          {{#if $eq this.type 'member_joined_log'}}
-            {{#with user}}
-              {{#linkTo route='user'}}
-                {{profile.firstName}}
-              {{/linkTo}}
-            {{/with}}
-            has joined
-            {{#with log}}
-              {{#linkTo route='log' logId=_id}}
-                {{name}}.
-              {{/linkTo}}
-            {{/with}}
-            {{timestamp}}
-          {{/if}}
-
-          {{#if $eq this.type 'member_left_log'}}
-            {{#with user}}
-              {{#linkTo route='user'}}
-                {{profile.firstName}}
-              {{/linkTo}}
-            {{/with}}
-            has left
-            {{#with log}}
-              {{#linkTo route='log' logId=_id}}
-                  {{name}}.
-              {{/linkTo}}
-            {{/with}}
-            {{timestamp}}
-          {{/if}}
-        </div>
-      {{else}}
-        <div class="ui items">
-          Nothing here yet!
-        </div>
-      {{/each}}
+            {{#if $eq this.type 'member_left_log'}}
+              {{#with user}}
+                {{#linkTo route='user'}}
+                  {{profile.firstName}}
+                {{/linkTo}}
+              {{/with}}
+              has left
+              {{#with log}}
+                {{#linkTo route='log' logId=_id}}
+                    {{name}}.
+                {{/linkTo}}
+              {{/with}}
+              <div class="metadata">
+                <span class="date">{{timestamp}}</span>
+              </div>
+            {{/if}}
+          </div>
+        {{else}}
+          <div class="ui items">
+            Nothing here yet!
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>
