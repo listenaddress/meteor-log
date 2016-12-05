@@ -20,3 +20,7 @@
   max-width: 1000px;
   margin: 0 auto;
 }
+
+.log-content {
+  min-height: calc(100vh - 62px);
+}
