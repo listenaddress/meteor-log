@@ -1,7 +1,7 @@
 Template.MessagePreview.helpers({
   timestamp: function () {
     var now = this;
-    return moment(now.createdAt).fromNow();
+    return moment(now.createdAt).format('LT');
   },
   user: function () {
     return Meteor.users.findOne({_id: this.userId}, {fields: {username: 1, profile: 1}});

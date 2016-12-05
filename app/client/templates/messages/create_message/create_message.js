@@ -33,7 +33,7 @@ Template.CreateMessage.events({
       if (error) throw error;
       tmpl.find('.message-input').value = '';
       Session.set('tagging', false);
-      Session.set('files', []);
+      Session.set('files', false);
       S3.collection.remove({});
       setTimeout(function () {
         window.scrollTo(0, 100000);
@@ -102,5 +102,8 @@ Template.CreateMessage.helpers({
   },
   files: function () {
     return S3.collection.find();
+  },
+  filesCount: function () {
+    return S3.collection.find().count();
   }
 });

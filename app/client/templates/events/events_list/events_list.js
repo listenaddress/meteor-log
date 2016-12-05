@@ -20,7 +20,7 @@ Template.EventsList.helpers({
     return Files.find({messageId: this.messageId});
   },
   timestamp: function () {
-    return moment(this.createdAt).fromNow();
+    return moment(this.createdAt).format('LT');
   },
   creator: function () {
     return Meteor.users.findOne(this.creatorId);
