@@ -10,6 +10,6 @@ UserController = RouteController.extend({
   },
 
   edit: function () {
-    this.render('editUser');
+    this.render('UserEdit');
   }
 });

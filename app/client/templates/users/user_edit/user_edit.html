@@ -1,4 +1,4 @@
-<template name="editUser">
+<template name="UserEdit">
   <div class="ui container">
     <form class="ui form" style="margin-top: 100px">
       {{#with userProfile}}
@@ -19,15 +19,18 @@
           <label>Quick Bio</label>
           <textarea rows="2" class="bio" type="text" name="bio">{{profile.bio}}</textarea>
         </div>
-
-        {{#if profile.thumb}}
-          <img style="margin: 20px; height: 100px; width: 100px; " src="{{profile.thumb}}">
-        {{/if}}
       {{/with}}
+
+      {{#if uploadedUserPhoto}}
+        <img style="margin: 20px; height: 100px; width: 100px; " src="{{uploadedUserPhoto.secure_url}}">
+      {{else}}
+        {{#if userProfile.profile.thumb}}
+          <img style="margin: 20px; height: 100px; width: 100px; " src="{{userProfile.profile.thumb}}">
+        {{/if}}
+      {{/if}}
     </form>
     <div class="user-photo-upload">
           <input type="file" class="file_bag">
-          <button class="ui button upload">Upload</button>
           {{#each files}}
             <p>{{percent_uploaded}}</p>
           {{/each}}
