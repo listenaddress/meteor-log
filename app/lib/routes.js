@@ -78,10 +78,10 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/log/:logId/overview', {
-    name: 'log.overview',
+  Router.route('/log/:logId/about', {
+    name: 'log.about',
     controller: 'LogController',
-    action: 'overview',
+    action: 'about',
     where: 'client'
   });
 

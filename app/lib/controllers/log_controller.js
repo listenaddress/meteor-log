@@ -41,10 +41,10 @@ LogController = RouteController.extend({
     });
   },
 
-  overview: function () {
+  about: function () {
     this.render('Log', {
       data: function () {
-        return { overview: true };
+        return { about: true };
       }
     });
   },

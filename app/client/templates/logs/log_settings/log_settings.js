@@ -14,10 +14,14 @@ Template.LogSettings.events({
   'submit form': function (event) {
     event.preventDefault();
     var logName = event.target.logName.value;
+    var logDescription = event.target.logDescription.value;
+    var logAbout = event.target.logAbout.value;
     var logId = this._id;
 
     Meteor.call('updateLog', logId, {
-      name: logName
+      name: logName,
+      about: logAbout,
+      description: logDescription
     }, function (error, response) {
       if (error) throw error;
       Router.go('log', {logId: logId});
