@@ -1,7 +1,7 @@
 .log-info {
   border: 2px solid #ebebeb;
   background: white;
-  padding: 25px 16px;
+  padding: 21px 16px;
   border-top: none;
 }
 
@@ -24,4 +24,11 @@
   padding-right: 6px;
   letter-spacing: 0.2px;
   font-weight: 600;
+}
+
+.log-info .setting {
+  float: right;
+  bottom: 20px;
+  position: relative;
+  color: #9b9b9b;
 }
