@@ -7,6 +7,14 @@ Schemas.Log = new SimpleSchema({
     type: String,
     optional: true
   },
+  description: {
+    type: String,
+    optional: true
+  },
+  about: {
+    type: String,
+    optional: true
+  },
   creatorId: {
     type: String,
     optional: true

@@ -2,8 +2,16 @@
   {{#with log}}
     <form class="ui form">
       <div class="field">
-        <label>Log Name</label>
+        <label>Name</label>
         <input type="text" name="logName" placeholder="{{name}}" value="{{name}}">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <input type="text" name="logDescription" placeholder="{{description}}" value="{{description}}">
+      </div>
+      <div class="field">
+        <label>About</label>
+        <textarea name="logAbout">{{about}}</textarea>
       </div>
       <h4 class="ui dividing header">Privacy</h4>
         <div class="field">
