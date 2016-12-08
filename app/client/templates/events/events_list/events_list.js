@@ -24,8 +24,27 @@ Template.EventsList.helpers({
   },
   creator: function () {
     return Meteor.users.findOne(this.creatorId);
-  }
+  },
+  messageHover: function () {
+    return Session.get('messageHover');
+  },
 });
+
+Template.EventsList.events({
+  'mouseover .comment': function (e, tmpl) {
+    Session.set('messageHover', e.currentTarget.dataset.value);
+  },
+  'mouseout .comment': function (e, tmpl) {
+    Session.set('messageHover', false);
+  },
+  'mouseover .edit': function (e, tmpl) {
+    Session.set('messageHover', e.currentTarget.dataset.value);
+  },
+  'mouseout .edit': function (e, tmpl) {
+    Session.set('messageHover', false);
+  },
+});
+
 
 Template.EventsList.onCreated(function () {
   const self = this;

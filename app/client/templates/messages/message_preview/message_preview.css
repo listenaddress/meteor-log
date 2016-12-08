@@ -5,3 +5,9 @@
 .author a {
   color: rgba(0, 0, 0, 0.87) !important;
 }
+
+.comment .edit {
+  position: absolute;
+  top: 0px;
+  right: 30px;
+}

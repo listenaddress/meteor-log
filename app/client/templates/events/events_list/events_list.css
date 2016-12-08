@@ -30,3 +30,9 @@
   top: 0;
   left: 0;
 }
+
+.comment .edit {
+  position: absolute;
+  top: 0px;
+  right: 30px;
+}
