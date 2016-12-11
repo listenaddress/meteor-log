@@ -34,9 +34,30 @@
       <span class="date">{{timestamp}}</span>
     </div>
     <div class="text">
-      {{#if content}}
-        {{{content}}}
-      {{/if}}
+      {{#unless $eq editing _id}}
+        {{#if content}}
+          {{{content}}}
+        {{/if}}
+      {{else}}
+        <textarea class="edit-message-input">{{editingText}}</textarea>
+        {{#if editTagging}}
+          <div class="tagging-wrapper">
+            {{#if usersToTag}}
+              <ul class="user-list">
+                {{#each usersToTag}}
+                  <li data-value="{{username}}">{{username}}</li>
+                {{/each}}
+              </ul>
+            {{else}}
+              {{#if loadingUsers}}
+                <span>Loading...</span>
+              {{else}}
+                <span>No one found yet.</span>
+              {{/if}}
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/unless}}
       {{#if $eq service 'github'}}
         {{> GithubMessage}}
       {{/if}}

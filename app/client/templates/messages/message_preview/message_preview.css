@@ -11,3 +11,12 @@
   top: 0px;
   right: 30px;
 }
+
+.edit-message-input {
+  width: 100%;
+}
+
+.comment .tagging-wrapper {
+  bottom: 101px;
+  left: 56px;
+}

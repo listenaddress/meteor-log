@@ -89,10 +89,13 @@
               </div>
             {{/if}}
             {{#if $eq this.userId currentUser._id}}
-              {{#if messageHover}}
-                {{#if $eq messageHover this._id}}
-                  <button class="edit" data-value="{{this._id}}">Edit</button>
+              {{#if $eq hovering this._id}}
+                {{#if $neq editing this.messageId}}
+                  <button class="edit" data-value="{{this.messageId}}">Edit</button>
                 {{/if}}
+              {{/if}}
+              {{#if $eq editing this.messageId}}
+                <button class="save">Save</button>
               {{/if}}
             {{/if}}
           </div>
