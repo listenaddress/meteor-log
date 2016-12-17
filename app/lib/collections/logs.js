@@ -19,12 +19,16 @@ Schemas.Log = new SimpleSchema({
     type: String,
     optional: true
   },
-  createdAt: {
-    type: Date
-  },
   groupId: {
     type: String,
     optional: true
+  },
+  lastMessage: {
+    type: Date,
+    optional: true
+  },
+  createdAt: {
+    type: Date
   },
   accessList: {
     type: [String],

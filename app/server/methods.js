@@ -6,6 +6,7 @@ import http from 'http';
 var saveFiles;
 var updateFile;
 var updateUser;
+var updateLog;
 var getImageSize;
 
 Meteor.methods({
@@ -44,6 +45,7 @@ Meteor.methods({
       if (error) throw error;
 
       saveFiles(files, response, logId);
+      updateLog(logId, {lastMessage: new Date()});
 
       Meteor.call('saveEvent',
                   response,
@@ -293,6 +295,18 @@ Meteor.methods({
     });
   },
 
+  'updateLastSeenAt': function (userId, logId) {
+    return Members.update({userId: Meteor.userId(), logId: logId},
+                          {$set: {lastSeenAt: new Date()}},
+      function (error, response) {
+        console.log('response', response);
+        console.log('member', Members.findOne());
+        if (error) throw error;
+        return response;
+      }
+    );
+  },
+
   'userExists': function (username) {
     return !!Meteor.users.findOne({username: username});
   },
@@ -370,6 +384,16 @@ updateUser = function (updateObj, photo) {
         photo.userThumb = true;
         saveFiles([photo]);
       }
+
+      if (error) throw error;
+      return response;
+    }
+  );
+};
+
+updateLog = function (logId, updateObj) {
+  return Logs.update(logId, {$set: updateObj},
+    function (error, response) {
 
       if (error) throw error;
       return response;
