@@ -12,6 +12,7 @@ module.exports = {
                                                     "IntegrationController",
                                                     "NotificationController",
                                                     "HomeController",
+                                                    "SearchController",
                                                     "Logs",
                                                     "Events",
                                                     "Files",
@@ -21,7 +22,8 @@ module.exports = {
                                                     "Messages",
                                                     "Members",
                                                     "Services",
-                                                    "Github"]}]
+                                                    "Github",
+                                                    "Trello"]}]
   },
   "globals": {
     // Templates
@@ -45,6 +47,7 @@ module.exports = {
     "Members": false,
     "Services": false,
     "Github": false,
+    "Trello": false,
 
     // Controllers
 

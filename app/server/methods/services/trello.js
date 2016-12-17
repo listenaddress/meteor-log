@@ -1,7 +1,6 @@
 import P from 'bluebird';
 import request from 'request';
 import { Mongo } from 'meteor/mongo'
-var saveUserBoards;
 
 Meteor.methods({
   'disconnectTrello': function () {
@@ -18,7 +17,7 @@ Meteor.methods({
     var Trello = require('node-trello');
     var trello = new Trello(process.env.TRELLO_KEY, user.services.trello.accessToken);
 
-    trello.get("/1/members/me/boards", Meteor.bindEnvironment(function(err, data) {
+    trello.get('/1/members/me/boards', Meteor.bindEnvironment(function (err, data) {
       if (err) throw err;
       P.map(data, Meteor.bindEnvironment(function (item) {
         return _.pick(item,
@@ -35,7 +34,7 @@ Meteor.methods({
       }));
     }));
 
-    trello.get("/1/members/me/organizations", Meteor.bindEnvironment(function(err, data) {
+    trello.get('/1/members/me/organizations', Meteor.bindEnvironment(function (err, data) {
       if (err) throw err;
       P.map(data, Meteor.bindEnvironment(function (item) {
         return _.pick(item,
@@ -69,31 +68,32 @@ Meteor.methods({
 
       var body = JSON.parse(response.body);
 
-      Meteor.call('IntegrateService',
-                  logId,
-                  'trello',
-                  function (error, integrationId) {
-
-        if (error) throw error;
-        var hook = {
-          id: body.id,
-          idModel: body.idModel,
-          board: board.id
-        };
-
-        var obj = {
-          _id: _id,
-          userId: user._id,
-          hook: hook,
-          logId: logId,
-          integrationId: integrationId,
-          createdAt: new Date()
-        };
-
-        return Trello.insert(obj, function (error, response) {
+      Meteor.call(
+        'IntegrateService',
+        logId,
+        'trello',
+        function (error, integrationId) {
           if (error) throw error;
-        });
-      });
+          var hook = {
+            id: body.id,
+            idModel: body.idModel,
+            board: board.id
+          };
+
+          var obj = {
+            _id: _id,
+            userId: user._id,
+            hook: hook,
+            logId: logId,
+            integrationId: integrationId,
+            createdAt: new Date()
+          };
+
+          return Trello.insert(obj, function (error, response) {
+            if (error) throw error;
+          });
+        }
+      );
     }));
   },
 

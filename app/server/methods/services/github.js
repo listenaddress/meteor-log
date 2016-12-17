@@ -2,13 +2,14 @@ import P from 'bluebird';
 
 Meteor.methods({
   'disconnectGithub': function () {
-    return Meteor.users.update(Meteor.userId(),
-                               {$unset: {'services.github': ''}},
-                               function (error, response) {
-
-      if (error) throw error;
-      return response;
-    });
+    return Meteor.users.update(
+      Meteor.userId(),
+      {$unset: {'services.github': ''}},
+      function (error, response) {
+        if (error) throw error;
+        return response;
+      }
+    );
   },
 
   'getRepos': function () {
