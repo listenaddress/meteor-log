@@ -299,8 +299,6 @@ Meteor.methods({
     return Members.update({userId: Meteor.userId(), logId: logId},
                           {$set: {lastSeenAt: new Date()}},
       function (error, response) {
-        console.log('response', response);
-        console.log('member', Members.findOne());
         if (error) throw error;
         return response;
       }
