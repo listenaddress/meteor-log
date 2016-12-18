@@ -30,11 +30,13 @@
       {{/if}}
     </form>
     <div class="user-photo-upload">
-          <input type="file" class="file_bag">
-          {{#each files}}
-            <p>{{percent_uploaded}}</p>
-          {{/each}}
+      {{#if errorMessage}}
+        <div class="ui violet message">
+          {{errorMessage}}
         </div>
+      {{/if}}
+      <input type="file" class="file_bag">
+    </div>
     <div>
       <button class="ui button save">Save</button>
     </div>

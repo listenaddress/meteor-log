@@ -11,6 +11,11 @@
           {{/each}}
         </div>
       {{/if}}
+      {{#if errorMessage}}
+        <div class="ui violet message">
+          {{errorMessage}}
+        </div>
+      {{/if}}
       <div class="message-photo-upload">
         <label for="file-upload">
           <i class="fa fa-camera fa-2x" aria-hidden="true"></i>

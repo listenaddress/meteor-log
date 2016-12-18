@@ -1,3 +1,7 @@
+Template.CreateMessage.onCreated(function () {
+  this.lastError = new ReactiveVar(null);
+});
+
 Template.CreateMessage.onRendered(function () {
   Session.set('tagging', false);
 });
@@ -32,6 +36,7 @@ Template.CreateMessage.events({
     Meteor.call('saveMessage', message, files, logId, function (error, response) {
       if (error) throw error;
       tmpl.find('.message-input').value = '';
+      tmpl.lastError.set(null);
       Session.set('tagging', false);
       Session.set('files', false);
       S3.collection.remove({});
@@ -72,20 +77,29 @@ Template.CreateMessage.events({
     Session.set('tagging', false);
   },
 
-  'change .file_bag': function () {
-    var files = $('input.file_bag')[0].files;
+  'change .file_bag': function (e, tmpl) {
+    var file = $('input.file_bag')[0].files;
+
+    if (!file[0]) return;
+    if (file[0].size > 5000000) {
+      return tmpl.lastError.set('For now, pictures can\'t be larger than 5MB.');
+    }
 
     S3.upload({
-      files: files,
+      files: file,
       path: ''
     }, function (error, response) {
-      if (error) console.log('error', error);
+      if (error) {
+        console.log('error', error);
+        return;
+      }
 
       // Push new file onto the 'files' session variable
       var files = Session.get('files');
       if (!files || files.length < 1) files = [];
       files.push(response);
       Session.set('files', files);
+      tmpl.lastError.set(null);
     });
   }
 });
@@ -105,5 +119,8 @@ Template.CreateMessage.helpers({
   },
   filesCount: function () {
     return S3.collection.find().count();
+  },
+  errorMessage: function () {
+    return Template.instance().lastError.get();
   }
 });
