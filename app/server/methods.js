@@ -8,11 +8,11 @@ var updateFile;
 var updateUser;
 var updateLog;
 var getImageSize;
+var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
 
 Meteor.methods({
   'saveMessage': function (message, files, logId) {
     // Find users tagged and add links to their profile
-    var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
     var matches = message.match(usersTaggedPattern);
     if (matches && matches.length > 0) {
       _.map(matches, function (item) {
@@ -72,6 +72,60 @@ Meteor.methods({
     // }));
   },
 
+  'editMessage': function (message) {
+    // Wrap tagged users with <a> tags in message.content
+    var matches = message.content.match(usersTaggedPattern);
+    var event = Events.findOne({messageId: message._id});
+    var oldMessage = Messages.findOne({_id: message._id});
+    var oldMatches = oldMessage.content.match(usersTaggedPattern);
+
+    if (matches && matches.length > 0) {
+      _.map(matches, function (item) {
+        var username = item.replace('@', '');
+        var exists = !!Meteor.users.findOne({username: username});
+        if (!exists) return;
+
+        message.content = message.content.replace(item,
+          '<a href="/' + username + '">' + item + '</a>');
+
+        // If new user was tagged, save notification
+        if (oldMatches && oldMatches.length > 0) {
+          var index = oldMatches.indexOf(item);
+        }
+        var currentUser = Meteor.user();
+        if (username === currentUser.username) return;
+        if (!oldMatches || index < 0) {
+          Meteor.call('saveTaggedNotification', username, event._id);
+        }
+      });
+    }
+
+    // If user was untagged, remove their notification
+    if (oldMatches && oldMatches.length > 0) {
+      _.map(oldMatches, function (item) {
+        var username = item.replace('@', '');
+        var user = Meteor.users.findOne({username: username});
+
+        // Return if we can't find the user or if user is still tagged
+        if (!user || !user._id) return;
+        if (matches && matches.length > 0) {
+          var index = matches.indexOf(item);
+          if (index > -1) return;
+        }
+
+        Notifications.remove({userId: user._id, eventId: event._id})
+      });
+    }
+
+    // Fucking FINALLY update the message
+    return Messages.update(message._id, {$set: {content: message.content}},
+      function (error, response) {
+      if (error) throw error;
+
+      return response;
+    });
+  },
+
   'saveEvent': function (id, userId, logId, type, refType, hidden) {
     var item = {
       type: type,
@@ -114,7 +168,6 @@ Meteor.methods({
     if (refType === 'Messages') {
       // Find users tagged and save a notification for them
       var message = Messages.findOne(event.messageId);
-      var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
       if (message && message.content) {
         var matches = message.content.match(usersTaggedPattern);
         if (matches && matches.length > 0) {

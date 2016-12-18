@@ -3,7 +3,7 @@
     <div class="events-list">
       <div class="ui comments items">
         {{#each events}}
-          <div class="comment">
+          <div class="comment" data-value="{{this._id}}">
             {{#if this.messageId}}
               {{#with message}}
                 {{> MessagePreview}}
@@ -81,12 +81,22 @@
               has left
               {{#with log}}
                 {{#linkTo route='log' logId=_id}}
-                    {{name}}.
+                  {{name}}.
                 {{/linkTo}}
               {{/with}}
               <div class="metadata">
                 <span class="date">{{timestamp}}</span>
               </div>
+            {{/if}}
+            {{#if $eq this.userId currentUser._id}}
+              {{#if $eq hovering this._id}}
+                {{#if $neq editing this.messageId}}
+                  <button class="edit" data-value="{{this.messageId}}">Edit</button>
+                {{/if}}
+              {{/if}}
+              {{#if $eq editing this.messageId}}
+                <button class="save">Save</button>
+              {{/if}}
             {{/if}}
           </div>
         {{else}}

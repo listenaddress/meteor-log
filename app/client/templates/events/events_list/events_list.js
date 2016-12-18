@@ -1,3 +1,5 @@
+let editMessage;
+
 Template.EventsList.helpers({
   user: function () {
     return Meteor.users.findOne(this.userId);
@@ -24,10 +26,46 @@ Template.EventsList.helpers({
   },
   creator: function () {
     return Meteor.users.findOne(this.creatorId);
-  }
+  },
+  hovering: function () {
+    return Session.get('hovering');
+  },
+  editing: function () {
+    return Session.get('editing');
+  },
 });
 
+Template.EventsList.events({
+  'mouseover .comment': function (e, tmpl) {
+    Session.set('hovering', e.currentTarget.dataset.value);
+  },
+  'mouseout .comment': function (e, tmpl) {
+    Session.set('hovering', false);
+  },
+  'mouseover .edit': function (e, tmpl) {
+    Session.set('hovering', e.currentTarget.dataset.value);
+  },
+  'mouseout .edit': function (e, tmpl) {
+    Session.set('hovering', false);
+  },
+  'click .edit': function (e, tmpl) {
+    const message = Messages.findOne({_id: e.currentTarget.dataset.value});
+    const cleanText = message.content.replace(/<\/?[^>]+(>|$)/g, "");
+    Session.set('editingText', cleanText);
+    Session.set('editing', e.currentTarget.dataset.value);
+    Session.set('editTagging', false);
+    Session.set('usernameSearch', false);
+  },
+  'click .save': function (e, tmpl) {
+    const content = tmpl.find('.edit-message-input').value;
+    const _id = Session.get('editing');
+    editMessage({_id: _id, content: content}, tmpl);
+  },
+});
+
+
 Template.EventsList.onCreated(function () {
+  Session.set('editing', false);
   const self = this;
   self.autorun(function () {
     const controller = Router.current();
@@ -59,3 +97,12 @@ Template.EventsList.onCreated(function () {
     }
   });
 });
+
+editMessage = function (message, tmpl) {
+  Meteor.call('editMessage', message, function (error, response) {
+    if (error) return;
+    Session.set('editing', false);
+    Session.set('editTagging', false);
+    Session.set('usernameSearch', false);
+  });
+};
