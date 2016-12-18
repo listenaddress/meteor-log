@@ -11,6 +11,10 @@ Schemas.Member = new SimpleSchema({
     type: String,
     optional: true
   },
+  lastSeenAt: {
+    type: Date,
+    optional: true
+  },
   createdAt: {
     type: Date
   }

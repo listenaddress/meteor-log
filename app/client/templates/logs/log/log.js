@@ -33,6 +33,7 @@ Template.Log.onCreated(function () {
       self.subscribe('log', controller.params.logId);
       if (log) {
         self.subscribe('userInfo', log.creatorId);
+        Meteor.call('updateLastSeenAt', Meteor.userId(), log._id);
       }
     }
   });
