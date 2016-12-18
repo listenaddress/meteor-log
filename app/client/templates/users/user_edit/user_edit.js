@@ -1,3 +1,7 @@
+Template.UserEdit.onCreated(function () {
+  this.lastError = new ReactiveVar(null);
+});
+
 Template.UserEdit.helpers({
   isMe: function () {
     return this._id === Meteor.userId();
@@ -10,19 +14,28 @@ Template.UserEdit.helpers({
 
   uploadedUserPhoto: function () {
     return Session.get('uploadedUserPhoto');
-  }
+  },
+
+  errorMessage: function () {
+    return Template.instance().lastError.get();
+  },
 });
 
 Template.UserEdit.events({
-  'change .file_bag': function () {
-    var files = $('input.file_bag')[0].files;
+  'change .file_bag': function (e, tmpl) {
+    var file = $('input.file_bag')[0].files;
+    if (!file[0]) return;
+    if (file[0].size > 1000000) {
+      return tmpl.lastError.set('For now, profile pictures can\'t be larger than 1MB.');
+    }
 
     S3.upload({
-      files: files,
+      files: file,
       path: ''
     }, function (error, response) {
       if (error) console.log('error', error);
       Session.set('uploadedUserPhoto', response);
+      tmpl.lastError.set(null);
     });
   },
 
