@@ -201,7 +201,7 @@ Meteor.methods({
                         {$set: {
                           name: item.name,
                           description: item.description,
-                          about: item.about,
+                          about: item.about
                         }},
         function (error, response) {
           if (error) throw error;

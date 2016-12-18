@@ -61,8 +61,7 @@ Meteor.publishComposite('userLogs', function (userId) {
         find: function (item) {
           if (this.userId === userId) {
             return Logs.find({_id: item.logId, hidden: false}, {fields: {accessList: 0, hidden: 0}});
-          }
-          else {
+          } else {
             return Logs.find({_id: item.logId, hidden: false, privacy: 'public'}, {fields: {accessList: 0, hidden: 0}});
           }
         }
@@ -100,7 +99,6 @@ Meteor.publishComposite('featuredLogs', function (userId) {
     ]
   }
 });
-
 
 Meteor.publishComposite('privateUserLogs', function (userId) {
   return {

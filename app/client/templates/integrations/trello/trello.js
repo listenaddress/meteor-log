@@ -51,7 +51,7 @@ Template.Trello.helpers({
     return user.services.trello.organizations.find(function (item) {
       return item.id === id;
     });
-  },
+  }
 });
 
 Template.Trello.events({
@@ -104,9 +104,9 @@ Template.Trello.events({
     var options = {
       scope: ['read'],
       expiration: 'never',
-      name: 'log',
+      name: 'log'
     };
-    var callback = function(error) {
+    var callback = function (error) {
       if (error.error) {
         t.lastError.set(error.error);
       } else {
@@ -141,7 +141,6 @@ Template.Trello.onCreated(function () {
   var self = this;
   self.lastError = new ReactiveVar(null);
   self.autorun(function () {
-    var controller = Router.current();
     self.subscribe('userTrelloService');
     self.subscribe('trello', Session.get('integrationId'));
   });
