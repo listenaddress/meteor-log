@@ -12,7 +12,11 @@ Template.LogInfo.helpers({
 
     if (member) return true;
     else return false;
-  }
+  },
+
+  currentUser: function () {
+    return Meteor.user();
+  },
 });
 
 Template.LogInfo.events({
