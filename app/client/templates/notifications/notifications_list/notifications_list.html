@@ -1,42 +1,49 @@
 <template name="NotificationsList">
   <div class="ui container">
     <h2>Notifications</h2>
-    <div class="notications-panel">
-      <ul class="notications-list">
-        {{#each notifications}}
-          <li class="notication-item {{isPrivateClass}}">
-            {{#with event}}
-              {{#if logId}}
-                <!-- User joined a log -->
-                {{#if $eq type 'member_joined_log'}}
-                  {{#with user}}
-                    {{#linkTo route='user'}} {{username}} {{/linkTo}}
-                  {{/with}}
-                  joined
+    <ul class="notifications-list ui feed">
+      {{#each notifications}}
+        <li class="notication-item event {{isPrivateClass}}">
+          <div class="label">
+            <img src="{{user.profile.thumb}}">
+          </div>
+          <div class="content">
+            <div class="summary">
+              {{#with user}}
+                {{#linkTo route='user'}}
+                  {{profile.firstName}}
+                {{/linkTo}}
+              {{/with}}
+              {{#with event}}
+                {{#if logId}}
+                  <!-- User joined a log -->
+                  {{#if $eq type 'member_joined_log'}}
+                    joined
+                    {{#with log}}
+                      {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
+                    {{/with}}
+                  {{/if}}
+                {{/if}}
+
+                <!-- User tagged you in a message -->
+                {{#if messageId}}
+                  tagged you in
                   {{#with log}}
                     {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
                   {{/with}}
                 {{/if}}
-              {{/if}}
-
-              <!-- User tagged you in a message -->
-              {{#if messageId}}
-                {{#with user}}
-                  {{#linkTo route='user'}} {{username}} {{/linkTo}}
-                {{/with}}
-                tagged you in
-                {{#with log}}
-                  {{#linkTo route='log' logId=_id}} {{name}} {{/linkTo}}
-                {{/with}}
-              {{/if}}
-            {{/with}}
-          </li>
-        {{else}}
-          <li class="notication-item empty">
-            No notifications yet.
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+                <div class="meta">
+                  <span class="date">{{timestamp}}</span>
+                </div>
+              {{/with}}
+            </div>
+          </div>
+        </li>
+      {{else}}
+        <li class="notication-item empty">
+          No notifications yet.
+        </li>
+      {{/each}}
+    </ul>
   </div>
 </template>

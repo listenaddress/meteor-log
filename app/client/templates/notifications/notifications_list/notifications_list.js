@@ -13,6 +13,9 @@ Template.NotificationsList.helpers({
   },
   event: function () {
     return Events.findOne(this.eventId);
+  },
+  timestamp: function () {
+    return moment(this.createdAt).format('LT');
   }
 });
 
