@@ -27,8 +27,8 @@
 }
 
 .notifications .ui.floating.label {
-  top: 0.2em;
-  left: 85%;
+  top: 5px;
+  left: 8px;
   height: 6px;
 }
 

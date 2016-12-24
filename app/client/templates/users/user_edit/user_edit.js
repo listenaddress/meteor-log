@@ -35,6 +35,7 @@ Template.UserEdit.events({
     }, function (error, response) {
       if (error) console.log('error', error);
       Session.set('uploadedUserPhoto', response);
+      S3.collection.remove({});
       tmpl.lastError.set(null);
     });
   },
