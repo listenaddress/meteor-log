@@ -127,6 +127,10 @@ Meteor.methods({
   },
 
   'saveEvent': function (id, userId, logId, type, refType, hidden) {
+    console.log('ALLAHU AKBAR');
+    console.log('ALLAHU AKBAR');
+    console.log('JAH RASTAFARI');
+    console.log('JAH RASTAFARI');
     var item = {
       type: type,
       createdAt: new Date()
