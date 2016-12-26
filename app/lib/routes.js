@@ -133,15 +133,9 @@ if (Meteor.isServer) {
   Router.route('/integrations/:logId/:_id', { where: 'server' })
     .post(function () {
       var user = Meteor.users.findOne({_id: this.params._id});
-      console.log('this.request.body.sender.id', this.request.body.sender.id);
-      console.log('user.services.github', user.services.github);
-      console.log('this.request.body', this.request.body);
-      console.log("this.request.headers['x-github-event']", this.request.headers['x-github-event']);
-      if (this.request.body.sender.id === user.services.github.id) {
-        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], this.params.logId, function (error, response) {
-          if (error) throw error;
-        });
-      }
-      this.response.end('Thanks Github, we got your message!');
+      Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], this.params.logId, function (error, response) {
+        if (error) throw error;
+      });
+      this.response.end('allahu akbar, jah rastafari');
     });
 }
