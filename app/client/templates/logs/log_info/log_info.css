@@ -1,8 +1,19 @@
 .log-info {
-  border: 2px solid #ebebeb;
+  border: 1px solid #ebebeb;
   background: white;
   padding: 21px 16px;
   border-top: none;
+}
+
+.log-main-border .log-info {
+  position: fixed;
+  top: 60px;
+  z-index: 100;
+  width: 578px;
+  height: 46px;
+  border-left: none;
+  border-right: none;
+  padding: 13px 20px;
 }
 
 .log-info h3 {
@@ -10,13 +21,37 @@
   margin-bottom: 8px;
 }
 
+.log-main-border .log-info h3 {
+  float: left;
+  font-size: 16px;
+}
+
+.log-info h3 a {
+  color: #5e5e5f;
+  letter-spacing: 0.02em;
+}
+
 .log-info .description {
   color: #9e9ea3;
   line-height: 20px;
 }
 
+.log-main-border .log-info .description {
+  display: none;
+}
+
 .log-info .options {
   margin-top: 25px;
+}
+
+.log-main-border .log-info .options {
+  margin: 0px;
+  float: right;
+}
+
+.log-main-border .log-info {
+  float: right;
+  margin: 0px;
 }
 
 .log-info .options a {
@@ -26,9 +61,25 @@
   font-weight: 600;
 }
 
+.log-main-border .log-info .options a {
+  font-weight: 100;
+  font-size: 11px;
+}
+
+.log-main-border .log-info .options a.subscribe {
+  color: #bf9ee9;;
+}
+
 .log-info .setting {
   float: right;
   bottom: 20px;
   position: relative;
   color: #9b9b9b;
+}
+
+.log-main-border .log-info .setting {
+  bottom: 0;
+  margin-right: 12px;
+  font-size: 11px;
+  top: 0.5px;
 }

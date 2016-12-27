@@ -1,11 +1,11 @@
 <template name="Log">
   <div class="log-container">
     <div class="log-left-column">
-      {{>LogInfo}}
       {{>LogSidebar}}
     </div>
     <div class="log-main-column">
       <div class="log-main-border">
+        {{>LogInfo}}
         <div class="log-content">
           {{#if this.messages}}
             <div data-tab="messages">

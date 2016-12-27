@@ -1,18 +1,14 @@
 <template name="LogInfo">
   <div class="log-info">
     {{#with log}}
-      <h3>
-        {{name}}
-      </h3>
-      <div>{{description}}</div>
+      <h3>{{#linkTo route='log' logId=this._id}}{{name}}{{/linkTo}}</h3>
+      <div class="description">{{description}}</div>
       <div class="options">
-        {{#linkTo route='log.about' logId=this._id}}
-          <a>ABOUT</a>
-        {{/linkTo}}
+        {{#linkTo route='log.about' logId=this._id}}ABOUT{{/linkTo}}
         {{#if joined}}
-          <a href="#" class="ui leaveLog">UNSUBSCRIBE</a>
+          <a href="#" class="ui leaveLog subscribe">UNSUBSCRIBE</a>
         {{else}}
-          <a href="#" class="ui joinLog">SUBSCRIBE</a>
+          <a href="#" class="ui joinLog subscribe">SUBSCRIBE</a>
         {{/if}}
       </div>
       {{#if currentUser}}

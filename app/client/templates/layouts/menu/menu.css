@@ -2,11 +2,13 @@
   position: fixed;
   top: 0px;
   width: 100%;
-  border-bottom: 2px solid #ebebeb !important;
   margin: 0px !important;
-  z-index: 1;
-  min-height: 60px !important;
-  background-color: #f3faf6 !important;
+  z-index: 101;
+  height: 60px !important;
+  background-color: white !important;
+  -webkit-box-shadow: 0px 1px 1px grey;
+  -moz-box-shadow: 0px 1px 1px gray;
+  box-shadow: 0px 2px 2px rgba(128, 128, 128, 0.2);
 }
 
 .menu-container {
@@ -22,14 +24,42 @@
   height: 60px;
 }
 
+.nav-container h2 a {
+  position: absolute;
+  top: 14px;
+  font-size: 21px;
+  color: #bf9ee9;
+}
+
 .nav-container .column {
   padding: 10px 10px !important;
 }
 
 .notifications .ui.floating.label {
-  top: 5px;
-  left: 8px;
-  height: 6px;
+  top: 3px;
+  left: 52px;
+  height: 9px;
+  width: 9px;
+  min-width: inherit;
+  min-height: inherit;
+}
+
+.nav-container .right-menu .icon {
+  margin-right: 11px !important;
+  font-size: 1.1em;
+}
+
+.nav-container .notifications a .icon {
+  color: #7d7d7d;
+  font-weight: 600;
+  top: -1px;
+  position: relative;
+}
+
+.nav-container .notifications a .icon.alarm {
+  top: -1px;
+  position: relative;
+  margin-right: 13px !important;
 }
 
 .menu .pointing {
@@ -68,6 +98,6 @@
 
 .right-menu {
   right: 0px;
-  top: 13px;
+  top: 15px;
   position: absolute;
 }

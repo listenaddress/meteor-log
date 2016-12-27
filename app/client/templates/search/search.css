@@ -3,10 +3,32 @@
 }
 
 .search-bar {
-  border: 2px solid #ebebeb !important;
+  border: 1px solid #ebebeb !important;
   padding-left: 35px !important;
 }
 
 .search-bar .icon {
   color: #595959;
+}
+
+.right-menu .search-bar {
+  float: left;
+  height: 37px;
+  top: -5px;
+  position: relative;
+  padding-left: 40px !important;
+}
+
+.right-menu .input .link {
+  z-index: 10;
+  top: -5px !important;
+  position: absolute;
+}
+
+.right-menu .searchbar {
+  float: left;
+}
+
+.nav-container .searchbar {
+  display: inline-block;
 }

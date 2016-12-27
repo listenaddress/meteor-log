@@ -1,6 +1,12 @@
 <template name="SearchBar">
-  <div class="ui icon input">
+  {{#if searching}}
+    <div class="searchbar item">
+      <div class="ui icon input">
+        <i class="search link icon"></i>
+        <input class="search-bar" type="text" placeholder="Search...">
+      </div>
+    </div>
+  {{else}}
     <i class="search link icon"></i>
-    <input class="search-bar" type="text" placeholder="Search...">
-  </div>
+  {{/if}}
 </template>

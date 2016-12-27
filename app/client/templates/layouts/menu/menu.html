@@ -1,24 +1,17 @@
 <template name="Menu">
   <div class="menu top-nav">
     <div class="menu-container">
-      <div class="header-logo">
-        <h3>{{#linkTo route='home'}}Log{{/linkTo}}</h3>
-      </div>
       <div class="nav-container">
-        <div>
-          <div class="searchbar item">
-            {{>SearchBar}}
-          </div>
-        </div>
+        <h2>{{#linkTo route='home'}}Log{{/linkTo}}</h2>
         <div>
           <div class="right-menu">
+            {{>SearchBar}}
             {{#if currentUser}}
               <span class="item notifications">
                 {{#linkTo route="notifications"}}
                   <i class="icon large outline alarm"></i>
                   {{#if hasNotifications}}
-                    <div class="ui floating mini circular red label">  {{unseenNotifications}}
-                    </div>
+                    <div class="ui floating mini circular red label"></div>
                   {{/if}}
                 {{/linkTo}}
               </span>
