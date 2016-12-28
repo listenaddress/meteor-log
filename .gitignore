@@ -8,4 +8,5 @@ app/client/templates/.DS_Store
 dump
 app/npm-debug.log
 *.DS_Store
+.deploy
 
