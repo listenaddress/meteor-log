@@ -11,8 +11,13 @@ Template.SignUp.events({
       'username': username
     }
 
-    Accounts.createUser(user, function (error) {
+    Meteor.call('userExists', username, function (error, userExists) {
       if (error) throw error;
+      if (!userExists) {
+        Meteor.call('createAccount', user, function (error, response) {
+          if (error) throw error;
+        });
+      }
     });
   },
 });

@@ -11,6 +11,11 @@ var getImageSize;
 var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
 
 Meteor.methods({
+  'createAccount': function (user) {
+    console.log(user);
+    return Accounts.createUser(user)
+  },
+
   'saveMessage': function (message, files, logId) {
     // Find users tagged and add links to their profile
     var matches = message.match(usersTaggedPattern);

@@ -1,31 +1,33 @@
 <template name="SignUp">
   <div class="signup-content">
-    <div class="ui aligned stackable ">
-      <form class="signup">
-         <div class="ui form">
-            <div class="field">
-              <div class="ui transparent big left icon input">
-                <input type="email" placeholder="Email" name="email">
-                <i class="mail icon"></i>
+    <div class="ui stacked segment signup-form">
+      <div class="ui aligned stackable ">
+        <form class="signup">
+           <div class="ui form">
+              <div class="field">
+                <div class="ui transparent big left icon input">
+                  <input type="email" placeholder="Email" name="email">
+                  <i class="mail icon"></i>
+                </div>
               </div>
-            </div>
-            <div class="field">
-              <div class="ui transparent big left icon input">
-                <input type="password" placeholder="Password" name="password">
-                <i class="lock icon"></i>
+              <div class="field">
+                <div class="ui transparent big left icon input">
+                  <input type="password" placeholder="Password" name="password">
+                  <i class="lock icon"></i>
+                </div>
               </div>
-            </div>
-            <div class="field">
-              <div class="ui transparent big left icon input">
-                <input type="text" placeholder="Username" name="username">
-                <i class="user icon"></i>
+              <div class="field">
+                <div class="ui transparent big left icon input">
+                  <input type="text" placeholder="Username" name="username">
+                  <i class="user icon"></i>
+                </div>
               </div>
-            </div>
 
-            <button type="submit" class="signupToLog ui button">Sign Up</button>
-        </div>
-      </form>
-      {{#linkTo route="signin"}}Have an account?{{/linkTo}}
+              <button type="submit" class="signupToLog ui button">Sign Up</button>
+          </div>
+        </form>
+        {{#linkTo route="signin"}}Have an account?{{/linkTo}}
+      </div>
     </div>
   </div>
 </template>

@@ -1,0 +1,11 @@
+.signin-content {
+  max-width: 400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.signin-form {
+  padding: 50px !important;
+}
