@@ -1,0 +1,24 @@
+<template name="SignIn">
+  <div class="signin-content">
+       <div class="ui aligned stackable ">
+        <div class="ui form">
+         <form class="signin">
+            <div class="field">
+              <div class="ui transparent big left icon input">
+                <input type="text" placeholder="Email" name="email">
+                <i class="user icon"></i>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui transparent big left icon input">
+                <input type="password" placeholder="Password" name="password">
+                <i class="lock icon"></i>
+              </div>
+            </div>
+            <button type="submit" class="signinToLog ui button">Login</button>
+        </form>
+        </div>
+      </div>
+      {{#linkTo route="signup"}}Back to sign up?{{/linkTo}}
+  </div>
+</template>

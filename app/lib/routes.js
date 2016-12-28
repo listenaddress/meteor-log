@@ -29,6 +29,20 @@ if (Meteor.isClient) {
     }
   });
 
+  Router.route('/signup', {
+    name: 'signup',
+    controller: 'UserController',
+    action: 'signup',
+    where: 'client'
+  });
+
+  Router.route('/signin', {
+    name: 'signin',
+    controller: 'UserController',
+    action: 'signin',
+    where: 'client'
+  });
+
   Router.route('/notifications', {
     name: 'notifications',
     controller: 'NotificationController',
