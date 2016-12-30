@@ -12,8 +12,19 @@ var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
 
 Meteor.methods({
   'createAccount': function (user) {
-    console.log(user);
-    return Accounts.createUser(user)
+    check(user, {
+      email: String,
+      password: String,
+      username: String
+    });
+
+    if (Meteor.users.findOne({username: user.username}))
+      throw Meteor.Error('username Exists');
+
+    if (Meteor.users.findOne({email: user.email}))
+      throw Meteor.Error('email Exists, maybe signin instead');
+
+    return Accounts.createUser(user);
   },
 
   'saveMessage': function (message, files, logId) {

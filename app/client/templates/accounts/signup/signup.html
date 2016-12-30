@@ -1,32 +1,33 @@
 <template name="SignUp">
   <div class="signup-content">
     <div class="ui stacked segment signup-form">
+      <h2>{{#linkTo route='home'}}<span class="purple">Log</span>{{/linkTo}}</h2>
       <div class="ui aligned stackable ">
         <form class="signup">
-           <div class="ui form">
+           <div class="ui form signup-elements">
               <div class="field">
-                <div class="ui transparent big left icon input">
+                <div class="ui big left icon input">
                   <input type="email" placeholder="Email" name="email">
                   <i class="mail icon"></i>
                 </div>
               </div>
               <div class="field">
-                <div class="ui transparent big left icon input">
+                <div class="ui big left icon input">
                   <input type="password" placeholder="Password" name="password">
                   <i class="lock icon"></i>
                 </div>
               </div>
               <div class="field">
-                <div class="ui transparent big left icon input">
+                <div class="ui big left icon input">
                   <input type="text" placeholder="Username" name="username">
                   <i class="user icon"></i>
                 </div>
               </div>
 
-              <button type="submit" class="signupToLog ui button">Sign Up</button>
+              <button type="submit" class="signupToLog ui basic big button">Sign Up</button>
           </div>
         </form>
-        {{#linkTo route="signin"}}Have an account?{{/linkTo}}
+        {{#linkTo route="signin"}}<span class="orange">Have an account?</span>{{/linkTo}}
       </div>
     </div>
   </div>

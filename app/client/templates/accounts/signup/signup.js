@@ -16,6 +16,9 @@ Template.SignUp.events({
       if (!userExists) {
         Meteor.call('createAccount', user, function (error, response) {
           if (error) throw error;
+          Meteor.loginWithPassword(email, password, function (error, response) {
+            if (error) throw error;
+          })
         });
       }
     });

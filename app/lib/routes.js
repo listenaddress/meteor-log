@@ -33,21 +33,39 @@ if (Meteor.isClient) {
     name: 'signup',
     controller: 'UserController',
     action: 'signup',
-    where: 'client'
+    where: 'client',
+    before: function () {
+      if (Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
   });
 
   Router.route('/signin', {
     name: 'signin',
     controller: 'UserController',
     action: 'signin',
-    where: 'client'
+    where: 'client',
+    before: function () {
+      if (Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
   });
 
   Router.route('/notifications', {
     name: 'notifications',
     controller: 'NotificationController',
     action: 'detail',
-    where: 'client'
+    where: 'client',
+    before: function () {
+      if (!Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
   });
 
   Router.route('/search', {
