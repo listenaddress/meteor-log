@@ -41,8 +41,14 @@ Template.LogSettings.onCreated(function () {
   var self = this;
   self.autorun(function () {
     var controller = Router.current();
+
     if (controller.params.logId) {
-      self.subscribe('log', controller.params.logId);
+      self.subscribe('log', controller.params.logId, function () {
+        var log = Logs.findOne(controller.params.logId);
+        if (log.creatorId !== Meteor.userId()) {
+          return Router.go('log', {logId: log._id});
+        }
+      });
     }
   });
 });

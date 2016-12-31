@@ -7,14 +7,26 @@
       </h3>
       <div class="description">{{description}}</div>
       <div class="options">
+        {{#linkTo route='log.about' logId=this._id}}
+          <a>ABOUT</a>
+        {{/linkTo}}
+        {{#if currentUser._id}}
+          {{#if joined}}
+            <a href="#" class="ui leaveLog">UNSUBSCRIBE</a>
+          {{else}}
+            <a href="#" class="ui joinLog">SUBSCRIBE</a>
+          {{/if}}
+
         {{#linkTo route='log.about' logId=this._id}}ABOUT{{/linkTo}}
-        {{#if joined}}
-          <a href="#" class="ui leaveLog subscribe">UNSUBSCRIBE</a>
-        {{else}}
-          <a href="#" class="ui joinLog subscribe">SUBSCRIBE</a>
+        {{#if currentUser._id}}
+          {{#if joined}}
+            <a href="#" class="ui leaveLog subscribe">UNSUBSCRIBE</a>
+          {{else}}
+            <a href="#" class="ui joinLog subscribe">SUBSCRIBE</a>
+          {{/if}}
         {{/if}}
       </div>
-      {{#if currentUser}}
+      {{#if $eq currentUser._id this.creatorId}}
         {{#linkTo route='log.settings' logId=this._id}}
           <i class="icon setting"></i>
         {{/linkTo}}

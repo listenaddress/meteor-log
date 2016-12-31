@@ -268,6 +268,13 @@ Meteor.methods({
   },
 
   'updateLog': function (logId, item) {
+    var log = Logs.findOne(logId);
+    if (!log._id) return;
+    if (log.creatorId !== Meteor.userId()) {
+      console.log('Error: Only log creators can edit logs.');
+      throw new Meteor.Error(500, 'Only log creators can edit logs.');
+    }
+
     check(item.name, String);
     // check any other update, currently name only
 
@@ -327,9 +334,13 @@ Meteor.methods({
   },
 
   'joinLog': function (logId) {
+    if (!Meteor.userId())  {
+      throw new Meteor.Error(500, 'You need to logged in to join a log.');
+    }
     var member = Members.findOne({ logId: logId, userId: Meteor.userId() });
-    if (member) throw new Meteor.Error(500,
-      'You cannot join a log that you have already joined');
+    if (member) {
+      throw new Meteor.Error(500, 'You\'ve already joinged this log.');
+    }
 
     Members.insert({ logId: logId,
                      userId: Meteor.userId(),

@@ -1,5 +1,17 @@
 Template.UserEdit.onCreated(function () {
   this.lastError = new ReactiveVar(null);
+
+  this.autorun(function () {
+    var controller = Router.current();
+    if (!Meteor.userId()) {
+      return Router.go('user', {username: controller.params.username});
+    }
+    var user = Meteor.users.findOne({_id: Meteor.userId()});
+    if (!user) return;
+    if (controller.params.username !== user.username) {
+      return Router.go('user', {username: controller.params.username});
+    }
+  });
 });
 
 Template.UserEdit.helpers({
