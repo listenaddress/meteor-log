@@ -30,6 +30,15 @@ Template.LogInfo.events({
         if (error) throw error;
       }
     );
+  },
+
+  'click .toggle-menu': function () {
+    $('.ui.sidebar')
+      .sidebar({
+        overlay: true
+      })
+      .sidebar('toggle')
+    ;
   }
 });
 

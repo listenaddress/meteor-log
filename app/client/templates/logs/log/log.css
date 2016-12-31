@@ -26,5 +26,83 @@
 }
 
 .log-left-column {
-  margin-top: 43px;
+  margin-top: 18px;
+}
+
+/* Phone */
+@media only screen and (max-width: 736px) {
+  .main-content {
+    width: 100% !important;
+  }
+
+  i.icon.sidebar.toggle-menu {
+    display: inline-block !important;
+  }
+
+  .log-left-column {
+    display: none !important;
+  }
+
+  .log-main-column {
+    width: 100%;
+  }
+
+  .log-main-border {
+    margin: 0;
+    width: 100%;
+  }
+
+  .log-container {
+    max-width: 100%;
+  }
+
+  .log-main-border .log-info {
+    width: 100% !important;
+  }
+
+  .create-message-container {
+    width: 100% !important;
+    padding-right: 45px !important;
+  }
+
+  .create-message {
+    width: 100% !important;
+  }
+}
+
+/* Tablet */
+@media only screen and (min-width: 736px) and (max-width: 1024px) {
+  .main-content {
+    width: 100% !important;
+  }
+
+  .log-main-column {
+    width: 100%;
+  }
+
+  .log-main-border {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
+
+  .log-container {
+    max-width: 100%;
+  }
+
+  .log-left-column {
+    padding-left: 10px !important;
+    width: 250px;
+  }
+
+  .log-main-border .log-info {
+    width: calc(100% - 250px) !important;
+  }
+
+  .create-message-container {
+    width: calc(100% - 250px) !important;
+  }
+
+  .create-message {
+    width: 98% !important;
+  }
 }

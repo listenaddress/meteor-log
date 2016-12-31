@@ -9,21 +9,21 @@
     <ul>
       {{#each logs}}
         {{#if selectedLog}}
-          <li class="selected-log">
-            {{#linkTo route='log' logId=this._id}}
-              {{this.name}}
-            {{/linkTo}}
-          </li>
-        {{else}}
-          <li>
-            {{#linkTo route='log' logId=this._id}}
-              {{#if unseenMessages}}
-                <strong>{{this.name}}</strong>
-              {{else}}
+          {{#linkTo route='log' logId=this._id}}
+            <li class="selected-log">
                 {{this.name}}
-              {{/if}}
-            {{/linkTo}}
-          </li>
+            </li>
+          {{/linkTo}}
+        {{else}}
+          {{#linkTo route='log' logId=this._id}}
+            <li>
+                {{#if unseenMessages}}
+                  <strong>{{this.name}}</strong>
+                {{else}}
+                  {{this.name}}
+                {{/if}}
+            </li>
+          {{/linkTo}}
         {{/if}}
       {{/each}}
     </ul>
