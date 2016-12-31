@@ -11,5 +11,13 @@ UserController = RouteController.extend({
 
   edit: function () {
     this.render('UserEdit');
+  },
+
+  signup: function () {
+    this.render('SignUp');
+  },
+
+  signin: function () {
+    this.render('SignIn');
   }
 });
