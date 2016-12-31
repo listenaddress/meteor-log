@@ -38,4 +38,3 @@ Template.Log.onCreated(function () {
     }
   });
 });
-

@@ -107,7 +107,7 @@ Template.Trello.events({
       name: 'log'
     };
     var callback = function (error) {
-      if (error.error) {
+      if (error && error.error) {
         t.lastError.set(error.error);
       } else {
         Meteor.call('getBoards');

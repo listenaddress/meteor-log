@@ -3,7 +3,7 @@
 }
 
 .author a {
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: #5e5e5f !important;
 }
 
 .comment .edit {
@@ -17,6 +17,25 @@
 }
 
 .comment .tagging-wrapper {
-  bottom: 101px;
+  bottom: 82px;
   left: 56px;
+}
+
+.events-list .comment a {
+  color: #fdce41;
+}
+
+.events-list .comment .date {
+  color: rgba(0, 0, 0, 0.35);
+  right: 2px;
+  position: relative;
+  font-weight: 600;
+}
+
+.events-list .comment .text {
+  margin: 0.2em 0em 0.5em !important;
+}
+
+.events-list .author {
+  margin: 0.8em 0em 0em;
 }

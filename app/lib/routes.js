@@ -29,11 +29,43 @@ if (Meteor.isClient) {
     }
   });
 
+  Router.route('/signup', {
+    name: 'signup',
+    controller: 'UserController',
+    action: 'signup',
+    where: 'client',
+    before: function () {
+      if (Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
+  });
+
+  Router.route('/signin', {
+    name: 'signin',
+    controller: 'UserController',
+    action: 'signin',
+    where: 'client',
+    before: function () {
+      if (Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
+  });
+
   Router.route('/notifications', {
     name: 'notifications',
     controller: 'NotificationController',
     action: 'detail',
-    where: 'client'
+    where: 'client',
+    before: function () {
+      if (!Meteor.user()) {
+        this.redirect('/');
+      }
+      this.next();
+    }
   });
 
   Router.route('/search', {
@@ -133,11 +165,9 @@ if (Meteor.isServer) {
   Router.route('/integrations/:logId/:_id', { where: 'server' })
     .post(function () {
       var user = Meteor.users.findOne({_id: this.params._id});
-      if (this.request.body.sender.id === user.services.github.id) {
-        Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], this.params.logId, function (error, response) {
-          if (error) throw error;
-        });
-      }
-      this.response.end('Thanks Github, we got your message!');
+      Meteor.call('saveGitHubEvent', this.request.body, this.request.headers['x-github-event'], this.params.logId, function (error, response) {
+        if (error) throw error;
+      });
+      this.response.end('allahu akbar, jah rastafari');
     });
 }

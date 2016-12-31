@@ -1,0 +1,8 @@
+.notifications-list .content {
+  margin-top: 0 !important;
+}
+
+.notifications-list .meta {
+  margin-top: 0 !important;
+  display: block !important;
+}

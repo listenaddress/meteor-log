@@ -1,11 +1,14 @@
 <template name="Log">
-  <div class="log-container">
+  <div class="ui left vertical floating sidebar menu">
+    {{>LogSidebar}}
+  </div>
+  <div class="log-container pusher">
     <div class="log-left-column">
-      {{>LogInfo}}
       {{>LogSidebar}}
     </div>
     <div class="log-main-column">
       <div class="log-main-border">
+        {{>LogInfo}}
         <div class="log-content">
           {{#if this.messages}}
             <div data-tab="messages">

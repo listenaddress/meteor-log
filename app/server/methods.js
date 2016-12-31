@@ -11,6 +11,22 @@ var getImageSize;
 var usersTaggedPattern = /\B@[a-z0-9_-]+/g;
 
 Meteor.methods({
+  'createAccount': function (user) {
+    check(user, {
+      email: String,
+      password: String,
+      username: String
+    });
+
+    if (Meteor.users.findOne({username: user.username}))
+      throw Meteor.Error('username Exists');
+
+    if (Meteor.users.findOne({email: user.email}))
+      throw Meteor.Error('email Exists, maybe signin instead');
+
+    return Accounts.createUser(user);
+  },
+
   'saveMessage': function (message, files, logId) {
     // Find users tagged and add links to their profile
     var matches = message.match(usersTaggedPattern);
@@ -127,6 +143,10 @@ Meteor.methods({
   },
 
   'saveEvent': function (id, userId, logId, type, refType, hidden) {
+    console.log('ALLAHU AKBAR');
+    console.log('ALLAHU AKBAR');
+    console.log('JAH RASTAFARI');
+    console.log('JAH RASTAFARI');
     var item = {
       type: type,
       createdAt: new Date()

@@ -18,24 +18,17 @@ li.selected-log {
   border-radius: 1px;
 }
 
-li.selected-log a {
-  color: rgba(0, 0, 0, 0.87);
-}
-
 .log-list .list-header {
   color: #9b9b9b;
-  margin-left: 20px;
-  margin-right: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #dadada;
 }
 
 .log-list .list-header .new-log {
-  color: #feac1c;
+  color: #bf9ee9;
   float: right;
 }
 
 .log-list a {
-  color: rgba(0, 0, 0, 0.87);
+  color: #5e5e5f;
 }
-

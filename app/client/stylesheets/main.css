@@ -1,5 +1,33 @@
 /*****************************************************************************/
 /* main: Style */
 /*****************************************************************************/
-.main {
+body {
+  color: #5e5e5f !important;
+}
+
+a .purple {
+  color: #bf9ee9 !important;
+}
+
+a .purple:hover {
+  text-decoration: underline !important;
+  color: #bf9ee9 !important;
+}
+
+a .orange {
+  color: #F6A623 !important;
+}
+
+a .orange:hover {
+  text-decoration: underline !important;
+  color: #F6A623 !important;
+}
+
+a.black {
+  color: #4A4A4A !important;
+}
+
+a.black:hover {
+  text-decoration: underline !important;
+  color: #4A4A4A !important;
 }
