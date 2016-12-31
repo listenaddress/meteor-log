@@ -1,7 +1,10 @@
 <template name="LogInfo">
   <div class="log-info">
     {{#with log}}
-      <h3>{{#linkTo route='log' logId=this._id}}{{name}}{{/linkTo}}</h3>
+      <h3>
+        <i class="icon sidebar toggle-menu"></i>
+        {{#linkTo route='log' logId=this._id}}{{name}}{{/linkTo}}
+      </h3>
       <div class="description">{{description}}</div>
       <div class="options">
         {{#linkTo route='log.about' logId=this._id}}ABOUT{{/linkTo}}

@@ -83,3 +83,7 @@
   font-size: 11px;
   top: 0.5px;
 }
+
+i.icon.sidebar.toggle-menu {
+  display: none;
+}
