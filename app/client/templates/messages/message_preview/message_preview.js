@@ -20,6 +20,9 @@ Template.MessagePreview.helpers({
   },
   loadingUsers: function () {
     return Session.get('editLoadingUsers');
+  },
+  home: function () {
+    return !Router.current().params.logId;
   }
 });
 

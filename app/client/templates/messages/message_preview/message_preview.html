@@ -32,6 +32,18 @@
     </a>
     <div class="metadata">
       <span class="date">{{timestamp}}</span>
+      <span class="log-origin">
+        {{#if home}}
+          {{#with log}}
+            {{#linkTo route='log' logId=_id}}
+              <span class="purple">
+                <i class="arrow right icon"></i>
+                {{name}}
+              </span>
+            {{/linkTo}}
+          {{/with}}
+        {{/if}}
+      </span>
     </div>
     <div class="text">
       {{#unless $eq editing _id}}

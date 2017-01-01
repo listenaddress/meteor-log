@@ -5,10 +5,6 @@ Schemas.UserProfile = new SimpleSchema({
     type: String,
     optional: true
   },
-  lastName: {
-    type: String,
-    optional: true
-  },
   name: {
     type: String,
     optional: true
