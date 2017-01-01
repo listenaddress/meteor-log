@@ -51,7 +51,11 @@
           {{{content}}}
         {{/if}}
       {{else}}
-        <textarea class="edit-message-input">{{editingText}}</textarea>
+        <div class="ui form">
+          <div class="field">
+            <textarea class="edit-message-input" rows="1">{{editingText}}</textarea>
+          </div>
+        </div>
         {{#if editTagging}}
           <div class="tagging-wrapper">
             {{#if usersToTag}}
