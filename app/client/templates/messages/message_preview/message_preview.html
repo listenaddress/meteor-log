@@ -32,6 +32,18 @@
     </a>
     <div class="metadata">
       <span class="date">{{timestamp}}</span>
+      <span class="log-origin">
+        {{#if home}}
+          {{#with log}}
+            {{#linkTo route='log' logId=_id}}
+              <span>
+                <i class="arrow right icon"></i>
+                {{name}}
+              </span>
+            {{/linkTo}}
+          {{/with}}
+        {{/if}}
+      </span>
     </div>
     <div class="text">
       {{#unless $eq editing _id}}
@@ -39,7 +51,11 @@
           {{{content}}}
         {{/if}}
       {{else}}
-        <textarea class="edit-message-input">{{editingText}}</textarea>
+        <div class="ui form">
+          <div class="field">
+            <textarea class="edit-message-input" rows="1">{{editingText}}</textarea>
+          </div>
+        </div>
         {{#if editTagging}}
           <div class="tagging-wrapper">
             {{#if usersToTag}}

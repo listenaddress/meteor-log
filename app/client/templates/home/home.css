@@ -6,6 +6,14 @@
   display: none;
 }
 
+.home .log-container {
+  margin-top: -15px;
+}
+
+.home .events-wrapper {
+  padding-top: 25px;
+}
+
 @media only screen and (max-width: 736px) {
   .mobile-header {
     display: block;
@@ -29,5 +37,13 @@
   .mobile-header h3 {
     font-size: 16px;
     margin-bottom: 8px;
+  }
+
+  .home .log-content {
+    padding-top: 55px;
+  }
+
+  .home .events-wrapper {
+    padding-top: 10px !important;
   }
 }

@@ -1,7 +1,3 @@
-Template.Home.onCreated(function () {
-
-});
-
 Template.Home.events({
   'click .toggle-menu': function () {
     $('.ui.sidebar')
@@ -10,4 +6,11 @@ Template.Home.events({
       .sidebar('toggle')
     ;
   }
+});
+
+Template.Home.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    self.subscribe('homeEvents');
+  });
 });

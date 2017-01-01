@@ -15,6 +15,7 @@ body .container{
   padding-top: 70px;
   width: 1100px;
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 textarea:hover,

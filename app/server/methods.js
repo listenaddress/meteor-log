@@ -24,7 +24,9 @@ Meteor.methods({
     if (Meteor.users.findOne({email: user.email}))
       throw Meteor.Error('email Exists, maybe signin instead');
 
-    return Accounts.createUser(user);
+    Accounts.createUser(user);
+
+    return Meteor.users.update({username: user.username}, {$set: {'profile.firstName': user.username}});
   },
 
   'saveMessage': function (message, files, logId) {

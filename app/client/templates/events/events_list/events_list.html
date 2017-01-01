@@ -35,6 +35,18 @@
                 {{/with}}
                 <div class="metadata">
                   <span class="date">{{timestamp}}</span>
+                  <span class="log-origin">
+                    {{#if home}}
+                      {{#with log}}
+                        {{#linkTo route='log' logId=_id}}
+                          <span>
+                            <i class="arrow right icon"></i>
+                            {{name}}
+                          </span>
+                        {{/linkTo}}
+                      {{/with}}
+                    {{/if}}
+                  </span>
                 </div>
             {{/if}}
 
@@ -52,6 +64,18 @@
               {{/with}}
               <div class="metadata">
                 <span class="date">{{timestamp}}</span>
+                <span class="log-origin">
+                  {{#if home}}
+                    {{#with log}}
+                      {{#linkTo route='log' logId=_id}}
+                        <span>
+                          <i class="arrow right icon"></i>
+                          {{name}}
+                        </span>
+                      {{/linkTo}}
+                    {{/with}}
+                  {{/if}}
+                </span>
               </div>
             {{/if}}
 
@@ -69,6 +93,18 @@
               {{/with}}
               <div class="metadata">
                 <span class="date">{{timestamp}}</span>
+                <span class="log-origin">
+                  {{#if home}}
+                    {{#with log}}
+                      {{#linkTo route='log' logId=_id}}
+                        <span>
+                          <i class="arrow right icon"></i>
+                          {{name}}
+                        </span>
+                      {{/linkTo}}
+                    {{/with}}
+                  {{/if}}
+                </span>
               </div>
             {{/if}}
 
@@ -86,16 +122,30 @@
               {{/with}}
               <div class="metadata">
                 <span class="date">{{timestamp}}</span>
+                <span class="log-origin">
+                  {{#if home}}
+                    {{#with log}}
+                      {{#linkTo route='log' logId=_id}}
+                        <span>
+                          <i class="arrow right icon"></i>
+                          {{name}}
+                        </span>
+                      {{/linkTo}}
+                    {{/with}}
+                  {{/if}}
+                </span>
               </div>
             {{/if}}
             {{#if $eq this.userId currentUser._id}}
               {{#if $eq hovering this._id}}
                 {{#if $neq editing this.messageId}}
-                  <button class="edit" data-value="{{this.messageId}}">Edit</button>
+                  <button class="ui icon mini button edit" data-value="{{this.messageId}}">
+                    <i class="write icon"></i>
+                  </button>
                 {{/if}}
               {{/if}}
               {{#if $eq editing this.messageId}}
-                <button class="save">Save</button>
+                <button class="ui basic button save">Save</button>
               {{/if}}
             {{/if}}
           </div>

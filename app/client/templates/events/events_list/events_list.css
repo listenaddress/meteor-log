@@ -8,8 +8,6 @@
 }
 
 .events-wrapper {
-  padding-left: 20px;
-  padding-right: 20px;
   padding-top: 60px;
 }
 
@@ -35,4 +33,21 @@
   position: absolute;
   top: 0px;
   right: 30px;
+  margin-top: -10px;
+  background: #ffffff !important;
+  border: 1px solid #F4F4F4 !important;
+}
+
+.log-origin a {
+  color: #bf9ee9 !important;
+}
+
+.events-list .comment {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-bottom: 8px !important;
+}
+
+.events-list .comment:hover {
+  background: #F4F4F4;
 }

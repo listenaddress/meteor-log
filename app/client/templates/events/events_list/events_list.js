@@ -33,6 +33,9 @@ Template.EventsList.helpers({
   editing: function () {
     return Session.get('editing');
   },
+  home: function () {
+    return !Router.current().params.logId;
+  }
 });
 
 Template.EventsList.events({
@@ -94,6 +97,13 @@ Template.EventsList.onCreated(function () {
           }
         });
       }
+    }
+    else {
+      const handle = self.subscribe('homeEvents', function () {
+        setTimeout(function () {
+          window.scrollTo(0, 100000);
+        }, 0);
+      });
     }
   });
 });
