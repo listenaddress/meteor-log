@@ -63,7 +63,7 @@ Meteor.methods({
       token: user.services.github.accessToken
     });
 
-    var endpoint = process.env.ENDPOINT + '/integrations/' + logId + '/' + user._id;
+    var endpoint = process.env.ENDPOINT + 'integrations/' + logId + '/' + user._id;
 
     if (repo) {
       return github.repos.createHook({

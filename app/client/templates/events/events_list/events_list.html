@@ -39,7 +39,7 @@
                     {{#if home}}
                       {{#with log}}
                         {{#linkTo route='log' logId=_id}}
-                          <span class="purple">
+                          <span>
                             <i class="arrow right icon"></i>
                             {{name}}
                           </span>
@@ -68,7 +68,7 @@
                   {{#if home}}
                     {{#with log}}
                       {{#linkTo route='log' logId=_id}}
-                        <span class="purple">
+                        <span>
                           <i class="arrow right icon"></i>
                           {{name}}
                         </span>
@@ -97,7 +97,7 @@
                   {{#if home}}
                     {{#with log}}
                       {{#linkTo route='log' logId=_id}}
-                        <span class="purple">
+                        <span>
                           <i class="arrow right icon"></i>
                           {{name}}
                         </span>
@@ -126,7 +126,7 @@
                   {{#if home}}
                     {{#with log}}
                       {{#linkTo route='log' logId=_id}}
-                        <span class="purple">
+                        <span>
                           <i class="arrow right icon"></i>
                           {{name}}
                         </span>
@@ -139,7 +139,9 @@
             {{#if $eq this.userId currentUser._id}}
               {{#if $eq hovering this._id}}
                 {{#if $neq editing this.messageId}}
-                  <button class="edit" data-value="{{this.messageId}}">Edit</button>
+                  <button class="ui icon mini button edit" data-value="{{this.messageId}}">
+                    <i class="write icon"></i>
+                  </button>
                 {{/if}}
               {{/if}}
               {{#if $eq editing this.messageId}}

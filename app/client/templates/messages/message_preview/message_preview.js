@@ -23,7 +23,10 @@ Template.MessagePreview.helpers({
   },
   home: function () {
     return !Router.current().params.logId;
-  }
+  },
+  log: function () {
+    return Logs.findOne(Template.parentData(1).logId);
+  },
 });
 
 Template.MessagePreview.events({

@@ -31,3 +31,11 @@ a.black:hover {
   text-decoration: underline !important;
   color: #4A4A4A !important;
 }
+
+#nprogress .spinner {
+  display: none !important;
+}
+
+#nprogress .bar {
+  background: #F6A623 !important;
+}
