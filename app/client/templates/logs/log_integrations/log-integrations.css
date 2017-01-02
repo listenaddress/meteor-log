@@ -6,6 +6,7 @@
   border-radius: 5px;
   height: 100px;
   text-align: center;
+  position: relative;
 }
 
 .log-integrations .service span {
@@ -14,4 +15,10 @@
 
 .log-integrations .service span::first-letter {
   text-transform: uppercase;
+}
+
+.connectedDot {
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
