@@ -18,7 +18,7 @@ LogController = RouteController.extend({
   },
 
   settings: function () {
-    this.render('LogEdit', {
+    this.render('Log', {
       data: function () {
         return { settings: true };
       }
@@ -26,7 +26,7 @@ LogController = RouteController.extend({
   },
 
   integrations: function () {
-    this.render('LogEdit', {
+    this.render('Log', {
       data: function () {
         return { integrations: true };
       }
@@ -34,7 +34,7 @@ LogController = RouteController.extend({
   },
 
   integration: function () {
-    this.render('LogEdit', {
+    this.render('Log', {
       data: function () {
         return { integration: true };
       }

@@ -10,7 +10,6 @@
               {{/with}}
               {{#each files}}
                 <div>
-                  <div>{{original_name}}</div>
                   <div class="image-container">
                     {{#if width}}
                       {{> Holder}}
@@ -150,8 +149,10 @@
             {{/if}}
           </div>
         {{else}}
-          <div class="ui items">
-            Nothing here yet!
+          <div class="ui comments items">
+            <div class="comment">
+              Fetching messages..
+            </div>
           </div>
         {{/each}}
       </div>
