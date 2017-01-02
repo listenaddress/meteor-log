@@ -46,9 +46,20 @@ Meteor.publish('logs', function () {
   return logs;
 });
 
-Meteor.publish('members', function (logId) {
-  return Members.find({logId: logId});
-})
+Meteor.publishComposite('subscribers', function (logId) {
+  return {
+    find: function () {
+      return Members.find({logId: logId});
+    },
+    children: [
+      {
+        find: function (member) {
+          return Meteor.users.find({_id: member.userId}, {fields: {username: 1, profile: 1}})
+        }
+      }
+    ]
+  }
+});
 
 Meteor.publishComposite('userLogs', function (userId) {
   return {
