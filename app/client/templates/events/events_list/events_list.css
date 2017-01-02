@@ -51,3 +51,7 @@
 .events-list .comment:hover {
   background: #F4F4F4;
 }
+
+.ui.comments .comment:first-child {
+  padding-top: 0.5em !important;
+}
