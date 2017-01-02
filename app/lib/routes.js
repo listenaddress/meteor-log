@@ -11,24 +11,6 @@ if (Meteor.isClient) {
     where: 'client'
   });
 
-  Router.route('/integrations/evernote', {
-    name: 'integration.evernote',
-    controller: 'IntegrationController',
-    action: 'evernote',
-    where: 'client'
-  });
-
-  Router.route('/account', {
-    name: 'account',
-    before: function () {
-      if (Meteor.user()) {
-        this.redirect('/');
-      } else {
-        this.render('account');
-      }
-    }
-  });
-
   Router.route('/signup', {
     name: 'signup',
     controller: 'UserController',

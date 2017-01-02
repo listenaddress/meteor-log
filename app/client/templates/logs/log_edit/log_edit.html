@@ -1,37 +1,25 @@
 <template name="LogEdit">
-<!--   {{>LogSidebar}}
-  {{>LogInfo}} -->
   <div class="log-content">
-    <div class="ui container">
-      <div class="ui grid">
-        <div class="twelve wide stretched column">
-          <div class="ui segment">
-            {{#if this.settings}}
-              {{>LogSettings}}
-            {{/if}}
-            {{#if this.integrations}}
-              {{>LogIntegrations}}
-            {{/if}}
-            {{#if this.integration}}
-              {{>LogIntegration}}
-            {{/if}}
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui vertical fluid right tabular menu">
-            {{#linkTo route='log.settings' logId=log._id}}
-              <a class="item">
-                Settings
-              </a>
-            {{/linkTo}}
-            {{#linkTo route='log.integrations' logId=log._id}}
-              <a class="item">
-                Integrations
-              </a>
-            {{/linkTo}}
-          </div>
-        </div>
-      </div>
-    </div>
+    <br><br><br><br>
+    {{#linkTo route='log.settings' logId=log._id}}
+      <a class="item">
+        Settings
+      </a>
+    {{/linkTo}}
+    {{#linkTo route='log.integrations' logId=log._id}}
+      <a class="item">
+        Integrations
+      </a>
+    {{/linkTo}}
+
+    {{#if this.settings}}
+      {{>LogSettings}}
+    {{/if}}
+    {{#if this.integrations}}
+      {{>LogIntegrations}}
+    {{/if}}
+    {{#if this.integration}}
+      {{>LogIntegration}}
+    {{/if}}
   </div>
 </template>

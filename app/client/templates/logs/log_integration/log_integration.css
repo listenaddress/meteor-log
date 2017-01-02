@@ -1,0 +1,40 @@
+.log-integration {
+  padding: 55px 21px;
+}
+
+.log-settings-menu  {
+  padding: 10px 10px 20px 10px;
+}
+
+.log-settings-menu .item {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 1.2em;
+  padding-right: 10px;
+}
+
+.log-settings-menu .item.active {
+  color: #bf9ee9;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.service-description {
+  padding: 40px 10px;
+}
+
+.service-description a {
+ color: #333333;
+}
+
+.service-description h3 {
+  padding-bottom: 20px;
+}
+
+.service-description h3::first-letter {
+  text-transform: uppercase;
+}
+
+.service-description p {
+  padding-bottom: 20px;
+}
+

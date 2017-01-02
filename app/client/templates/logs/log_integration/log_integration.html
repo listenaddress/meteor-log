@@ -1,13 +1,32 @@
 <template name="LogIntegration">
-  This {{service.type}} baby!
-  <p>{{service.description}}</p>
-  <a href="{{service.website}}">{{service.website}}</a>
-  <br>
-  <hr>
-  {{#if $eq service.type 'github'}}
-    {{> Github}}
-  {{/if}}
-  {{#if $eq service.type 'trello'}}
-    {{> Trello}}
-  {{/if}}
+  <div class="log-integration">
+    <div class="log-settings-menu">
+      {{#linkTo route='log.settings' logId=log._id}}
+        <a class="item">
+          Settings
+        </a>
+      {{/linkTo}}
+      {{#linkTo route='log.integrations' logId=log._id}}
+        <a class="item active">
+          Integrations
+        </a>
+      {{/linkTo}}
+    </div>
+
+    <div class="service-description">
+      <a href="{{service.website}}" class="purple">
+        <h3>
+          {{service.type}}
+          <i class="arrow right icon"></i>
+        </h3>
+      </a>
+      <p>{{service.description}}</p>
+      {{#if $eq service.type 'github'}}
+        {{> Github}}
+      {{/if}}
+      {{#if $eq service.type 'trello'}}
+        {{> Trello}}
+      {{/if}}
+    </div>
+  </div>
 </template>
