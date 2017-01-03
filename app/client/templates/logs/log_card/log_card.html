@@ -1,0 +1,50 @@
+<template name="LogCard">
+  <div class="column log-card">
+    {{#linkTo route="log"}}
+      <div class="ui list">
+        <div class="item">
+          <div class="content">
+            {{#linkTo route='log' logId=this._id}}
+              <h3 class="header">{{name}}</h3>
+            {{/linkTo}}
+            <div class="description">{{description}}</div>
+            <div class="options">
+              {{#linkTo route='log.about' logId=this._id}}
+                ABOUT
+              {{/linkTo}}
+              <!-- {{#if currentUser}}
+                {{#if joined}}
+                  <a href="#" class="ui leaveLog subscribe">UNSUBSCRIBE</a>
+                {{else}}
+                  <a href="#" class="ui joinLog subscribe">SUBSCRIBE</a>
+                {{/if}}
+              {{/if}} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/linkTo}}
+  </div>
+  <!-- <div class="log-card">
+    <h3>
+      <i class="icon sidebar toggle-menu"></i>
+      {{#linkTo route='log' logId=this._id}}{{name}}{{/linkTo}}
+      {{#if $eq currentUser._id this.creatorId}}
+      {{#linkTo route='log.settings' logId=this._id}}
+        <i class="icon setting"></i>
+      {{/linkTo}}
+    {{/if}}
+    </h3>
+    <div class="description">{{description}}</div>
+    <div class="options">
+      {{#linkTo route='log.about' logId=this._id}}ABOUT{{/linkTo}}
+      {{#if currentUser}}
+        {{#if joined}}
+          <a href="#" class="ui leaveLog subscribe">UNSUBSCRIBE</a>
+        {{else}}
+          <a href="#" class="ui joinLog subscribe">SUBSCRIBE</a>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div> -->
+</template>

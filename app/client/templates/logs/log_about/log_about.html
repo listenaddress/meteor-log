@@ -17,29 +17,29 @@
   <div class="log-subscribers">
     <h4>Subscribers {{subscribersCount}}</h4>
     <div class="ui stackable two column grid">
-      {{#each subscribers}}
-        <div class="column">
+      <div class="column">
+        {{#each subscribers}}
           {{#with user}}
             {{#linkTo route="user"}}
-                <div class="subscriber">
-                  <div class="ui list">
-                    <div class="item">
-                      <img class="ui avatar image" src="{{profile.thumb}}">
-                      <div class="content">
-                        <span class="header">{{profile.firstName}}
-                          {{#if isCreator}}
-                            (creator)
-                          {{/if}}
-                        </span>
-                        <div class="description">@{{username}}</div>
-                      </div>
+              <div class="subscriber">
+                <div class="ui list">
+                  <div class="item">
+                    <img class="ui avatar image" src="{{profile.thumb}}">
+                    <div class="content">
+                      <span class="header">{{profile.firstName}}
+                        {{#if isCreator}}
+                          (creator)
+                        {{/if}}
+                      </span>
+                      <div class="description">@{{username}}</div>
                     </div>
                   </div>
                 </div>
+              </div>
             {{/linkTo}}
           {{/with}}
-        </div>
-      {{/each}}
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>

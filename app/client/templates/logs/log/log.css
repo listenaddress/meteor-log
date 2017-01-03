@@ -16,6 +16,16 @@
   width: 580px;
 }
 
+.search .log-main-border {
+  position: relative;
+  top: -10px;
+}
+
+.notifications .log-main-border {
+  position: relative;
+  top: -10px;
+}
+
 .log-container {
   max-width: 880px;
   margin: 0 auto;
@@ -23,6 +33,10 @@
 
 .log-content {
   min-height: calc(100vh - 62px);
+}
+
+.notifications .log-content {
+  padding: 20px;
 }
 
 .log-left-column {

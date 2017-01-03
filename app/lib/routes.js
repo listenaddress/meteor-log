@@ -39,8 +39,8 @@ if (Meteor.isClient) {
 
   Router.route('/notifications', {
     name: 'notifications',
-    controller: 'NotificationController',
-    action: 'detail',
+    controller: 'LogController',
+    action: 'notifications',
     where: 'client',
     before: function () {
       if (!Meteor.user()) {

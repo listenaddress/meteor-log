@@ -1,0 +1,13 @@
+.log-card .description {
+  margin-top: 10px;
+}
+
+.log-card .header {
+  color: #5e5e5f;
+  letter-spacing: .02em;
+}
+
+.log-card .options {
+  position: absolute;
+  bottom: 19px;
+}

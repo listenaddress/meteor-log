@@ -55,5 +55,13 @@ LogController = RouteController.extend({
         return { search: true };
       }
     });
+  },
+
+  notifications: function () {
+    this.render('Log', {
+      data: function () {
+        return { notifications: true };
+      }
+    });
   }
 });

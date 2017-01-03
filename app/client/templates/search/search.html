@@ -1,42 +1,48 @@
 <template name="Search">
-  <div class="ui container">
+  <div class="ui container search">
     <div>
-      <h1>oh, finna search?</h1>
+      <h1>Search results</h1>
       {{#if users}}
         <h3>Users</h3>
-        <ul>
+        <div class="ui stackable two column grid users">
           {{#each users}}
-            <li>
-              {{#linkTo route='user'}}
-                {{username}}
+            <div class="column">
+              {{#linkTo route="user"}}
+                <div class="ui list">
+                  <div class="item">
+                    <img class="ui avatar image" src="{{profile.thumb}}">
+                    <div class="content">
+                      <span class="header">{{profile.firstName}}</span>
+                      <div class="description">@{{username}}</div>
+                    </div>
+                  </div>
+                </div>
               {{/linkTo}}
-            </li>
+            </div>
           {{/each}}
-        </ul>
+        </div>
       {{/if}}
     </div>
 
     {{#if logs}}
       <div style="margin-top: 40px;">
         <h3>Logs</h3>
-        <ul>
+        <div class="ui stackable two column grid logs">
           {{#each logs}}
-            <li>
-              {{#linkTo route='log' logId=_id}}
-                {{name}}
-              {{/linkTo}}
-            </li>
+            {{>LogCard}}
           {{/each}}
-        </ul>
+        </div>
       </div>
     {{/if}}
 
     {{#if messages}}
-      <div style="margin-top: 40px;">
+      <div class="ui comments items events-list" style="margin-top: 40px;">
         <h3>Messages</h3>
         <ul>
           {{#each messages}}
-            {{> MessagePreview}}
+            <div class="comment">
+              {{> MessagePreview}}
+            </div>
           {{/each}}
         </ul>
       </div>

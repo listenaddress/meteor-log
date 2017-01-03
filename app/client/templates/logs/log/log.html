@@ -5,15 +5,16 @@
   <div class="log-container pusher">
     <div class="log-left-column">
       {{>LogSidebar}}
-
     </div>
-    <div class="log-main-column {{#if viewingSearch}}search{{/if}}">
+    <div class="log-main-column
+      {{#if viewingSearch}}search{{/if}}
+      {{#if viewingNotifications}}notifications{{/if}}">
       <div class="log-main-border">
-        {{#unless this.search}}
+        {{#if log}}
           {{#with log}}
             {{>LogInfo}}
           {{/with}}
-        {{/unless}}
+        {{/if}}
         <div class="log-content">
           {{#if this.messages}}
             <div data-tab="messages">
@@ -47,6 +48,10 @@
 
           {{#if this.search}}
             {{>Search}}
+          {{/if}}
+
+          {{#if this.notifications}}
+            {{>NotificationsList}}
           {{/if}}
         </div>
       </div>
