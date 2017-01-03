@@ -50,7 +50,7 @@
   left: 23px;
 }
 
-@media only screen and (min-width: 450px) {
+@media only screen and (max-width: 450px) {
   .searchbar input {
     width: 180px;
   }
