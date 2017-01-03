@@ -49,10 +49,10 @@ LogController = RouteController.extend({
     });
   },
 
-  files: function () {
+  search: function () {
     this.render('Log', {
       data: function () {
-        return { files: true };
+        return { search: true };
       }
     });
   }
