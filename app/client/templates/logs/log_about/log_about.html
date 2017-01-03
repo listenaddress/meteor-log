@@ -1,6 +1,45 @@
 <template name="LogAbout">
   <div class="log-about">
-    <h4>About</h4>
-    <div>{{log.about}}</div>
+    <h2>{{log.name}}</h2>
+    {{#if descriptionOrAbout}}
+      <div class="log-description">
+        <p>{{log.description}}</p>
+      </div>
+      <div class="log-summary">
+        <p>{{{log.about}}}</p>
+      </div>
+    {{else}}
+      <br>
+      <p>No description yet!</p>
+    {{/if}}
+  </div>
+
+  <div class="log-subscribers">
+    <h4>Subscribers {{subscribersCount}}</h4>
+    <div class="ui stackable two column grid">
+      {{#each subscribers}}
+        <div class="column">
+          {{#with user}}
+            {{#linkTo route="user"}}
+                <div class="subscriber">
+                  <div class="ui list">
+                    <div class="item">
+                      <img class="ui avatar image" src="{{profile.thumb}}">
+                      <div class="content">
+                        <span class="header">{{profile.firstName}}
+                          {{#if isCreator}}
+                            (creator)
+                          {{/if}}
+                        </span>
+                        <div class="description">@{{username}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {{/linkTo}}
+          {{/with}}
+        </div>
+      {{/each}}
+    </div>
   </div>
 </template>

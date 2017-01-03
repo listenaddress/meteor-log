@@ -6,7 +6,7 @@
           Signed in with {{userConnected.services.github.username}}
           <i class="delete icon disconnectGithub"></i>
         </div>
-        <button class="ui button icon mini refreshRepos">
+        <button class="ui button basic icon mini refreshRepos">
           <i class="icon refresh"></i>
         </button>
       </div>
@@ -14,11 +14,11 @@
         {{>dropdown}}
       </div>
       <div class="sixteen wide column">
-        <button class="ui button addRepo">Add Repo</button>
+        <button class="ui button basic addRepo">Add Repo</button>
       </div>
     {{else}}
       <div class="sixteen wide column">
-        <button class="ui button connectGithub">Connect Github</button>
+        <button class="ui button basic connectGithub">Connect Github</button>
       </div>
     {{/if}}
 
@@ -35,7 +35,7 @@
             <div class="item">
               <div class="right floated content">
                 {{#if repoOwner}}
-                  <div class="ui button remove" data-value="{{hook.id}}">Remove</div>
+                  <div class="ui button basic remove" data-value="{{hook.id}}">Remove</div>
                 {{/if}}
               </div>
               <div class="content">

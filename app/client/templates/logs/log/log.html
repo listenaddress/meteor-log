@@ -29,6 +29,18 @@
             {{>LogFiles}}
           {{/if}}
 
+          {{#if this.settings}}
+            {{>LogSettings}}
+          {{/if}}
+
+          {{#if this.integrations}}
+            {{>LogIntegrations}}
+          {{/if}}
+
+          {{#if this.integration}}
+            {{>LogIntegration}}
+          {{/if}}
+
           {{#if this.about}}
             {{>LogAbout}}
           {{/if}}

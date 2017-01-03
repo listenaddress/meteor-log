@@ -100,9 +100,7 @@ Template.EventsList.onCreated(function () {
     }
     else {
       const handle = self.subscribe('homeEvents', function () {
-        setTimeout(function () {
-          window.scrollTo(0, 100000);
-        }, 0);
+
       });
     }
   });

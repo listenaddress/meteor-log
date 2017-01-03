@@ -19,6 +19,10 @@
   position: relative;
 }
 
+.image-container .ui.image{
+  position: none !important;
+}
+
 .image-container {
   height: auto !important;
 }

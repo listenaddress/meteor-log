@@ -14,6 +14,10 @@ Schemas.Service = new SimpleSchema({
   website: {
     type: String,
     optional: true
+  },
+  thumb_url: {
+    type: String,
+    optional: true
   }
 });
 

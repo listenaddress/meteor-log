@@ -1,3 +1,34 @@
 .log-about {
-  padding: 55px 21px;
+  padding: 55px 40px;
+}
+
+.log-description p {
+  font-size: 1.5em;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: #797979;
+}
+
+.log-description h4 {
+  font-size: 0.7em;
+  padding-bottom: 20px;
+  color: #797979;
+}
+
+
+.log-summary p {
+  font-size: 1.em;
+  padding-bottom: 20px;
+  color: #797979;
+}
+
+.log-subscribers .subscriber {
+  border: #F4F4F4 1px solid;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.log-subscribers {
+  padding-left: 40px;
+  padding-right: 40px;
 }
