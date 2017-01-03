@@ -27,6 +27,11 @@ Template.MessagePreview.helpers({
   log: function () {
     return Logs.findOne(Template.parentData(1).logId);
   },
+  viewingLog: function () {
+    var controller = Router.current();
+    console.log('controller.params.logId', controller.params.logId);
+    if (controller.params.logId) return true;
+  }
 });
 
 Template.MessagePreview.events({

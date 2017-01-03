@@ -7,6 +7,10 @@
   padding-left: 35px !important;
 }
 
+.right-menu .menu {
+  position: absolute;
+}
+
 .search-bar .icon {
   color: #595959;
 }
@@ -31,4 +35,49 @@
 
 .nav-container .searchbar {
   display: inline-block;
+}
+
+.searchbar .dropdown .menu {
+  display: block;
+  width: 250px;
+  padding: 15px;
+}
+
+.right-menu .searchbar .dropdown {
+  position: absolute;
+  display: block;
+  top: 32px;
+  left: 23px;
+}
+
+@media only screen and (max-width: 450px) {
+  .searchbar input {
+    width: 180px;
+  }
+}
+
+.right-menu .dropdown .item {
+  padding: 8px 0px;
+}
+
+.container.search {
+  padding: 20px;
+}
+
+.stackable.users .item {
+  border: #F4F4F4 1px solid;
+  border-radius: 5px;
+  padding: 15px !important;
+}
+
+.stackable.logs .item {
+  border: #F4F4F4 1px solid;
+  border-radius: 5px;
+  padding: 25px !important;
+  position: relative;
+  height: 200px;
+}
+
+.search .comments ul {
+  padding: 0px;
 }

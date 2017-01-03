@@ -6,3 +6,7 @@
   margin-top: 0 !important;
   display: block !important;
 }
+
+.notifications-list {
+  padding-left: 0px;
+}

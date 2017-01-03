@@ -39,8 +39,8 @@ if (Meteor.isClient) {
 
   Router.route('/notifications', {
     name: 'notifications',
-    controller: 'NotificationController',
-    action: 'detail',
+    controller: 'LogController',
+    action: 'notifications',
     where: 'client',
     before: function () {
       if (!Meteor.user()) {
@@ -52,7 +52,7 @@ if (Meteor.isClient) {
 
   Router.route('/search', {
     name: 'search',
-    controller: 'SearchController',
+    controller: 'LogController',
     action: 'search',
     where: 'client'
   });
@@ -96,13 +96,6 @@ if (Meteor.isClient) {
     name: 'log.about',
     controller: 'LogController',
     action: 'about',
-    where: 'client'
-  });
-
-  Router.route('/log/:logId/files', {
-    name: 'log.files',
-    controller: 'LogController',
-    action: 'files',
     where: 'client'
   });
 

@@ -6,9 +6,15 @@
     <div class="log-left-column">
       {{>LogSidebar}}
     </div>
-    <div class="log-main-column">
+    <div class="log-main-column
+      {{#if viewingSearch}}search{{/if}}
+      {{#if viewingNotifications}}notifications{{/if}}">
       <div class="log-main-border">
-        {{>LogInfo}}
+        {{#if log}}
+          {{#with log}}
+            {{>LogInfo}}
+          {{/with}}
+        {{/if}}
         <div class="log-content">
           {{#if this.messages}}
             <div data-tab="messages">
@@ -38,6 +44,14 @@
 
           {{#if this.about}}
             {{>LogAbout}}
+          {{/if}}
+
+          {{#if this.search}}
+            {{>Search}}
+          {{/if}}
+
+          {{#if this.notifications}}
+            {{>NotificationsList}}
           {{/if}}
         </div>
       </div>

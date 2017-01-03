@@ -1,10 +1,49 @@
 <template name="SearchBar">
   {{#if searching}}
-    <div class="searchbar item">
+    <div class="searchbar">
       <div class="ui icon input">
         <i class="search link icon"></i>
         <input class="search-bar" type="text" placeholder="Search...">
       </div>
+      {{#if query}}
+        <div class="ui pointing dropdown link item">
+          <div class="menu">
+            {{#linkTo route='search'}}
+              Search for "{{query}}"
+            {{/linkTo}}
+            {{#if users}}
+              <div class="header">USERS</div>
+              <div class="ui middle aligned list">
+                {{#each users}}
+                  <div class="item">
+                    <img class="ui avatar image" src="{{profile.thumb}}" />
+                    <div class="content">
+                      {{#linkTo route='user'}}
+                        <span class="header">{{username}}</span>
+                      {{/linkTo}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            {{/if}}
+
+            {{#if logs}}
+              <div class="header">LOGS</div>
+              <div class="ui middle aligned list">
+                {{#each logs}}
+                  <div class="item">
+                    <div class="content">
+                      {{#linkTo route='log' logId=_id}}
+                        <span class="header">{{name}}</span>
+                      {{/linkTo}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{/if}}
     </div>
   {{else}}
     <i class="search link icon"></i>

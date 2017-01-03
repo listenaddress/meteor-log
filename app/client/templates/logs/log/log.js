@@ -17,6 +17,14 @@ Template.Log.helpers({
 
     if (member) return true;
     else return false;
+  },
+
+  viewingSearch: function () {
+    return Router.current().route.getName() === 'search';
+  },
+
+  viewingNotifications: function () {
+    return Router.current().route.getName() === 'notifications';
   }
 });
 
