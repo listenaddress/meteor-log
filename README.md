@@ -7,7 +7,7 @@ This is an experiment to build an open, social chat app with Meteor. We have lot
 - Start public or private chat logs
 - Integrate Github and Trello
 - Upload files
-- Browse & join all public logs
+- Browse and join all public logs
 - Tag users
 - Recieve notifications when you're tagged or when someone joins a log you started
 
