@@ -1,0 +1,83 @@
+{
+  "name": "thomasbeta/log",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Swiss",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/SwissHeader",
+      "article": "article/SwissArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "heading": {
+      "fontWeight": 700,
+      "letterSpacing": "-0.01em"
+    },
+    "layout": {
+      "fluid": true
+    },
+    "colors": {
+      "text": "#000",
+      "background": "#fff",
+      "primary": "#05a",
+      "secondary": "#444",
+      "highlight": "#f30",
+      "border": "#ccc",
+      "muted": "#eee"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/thomasbeta/log",
+          "text": "GitHub"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "log",
+      "subhead": "📨   Social chat app for the web ",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "log: 📨   Social chat app for the web ",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "thomasbeta",
+          "repo": "log"
+        }
+      ]
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p>This is an experiment to build an open, social chat app with Meteor. We have lots of code working but there&#x2019;s still work left.</p>\n<h2>Code that&apos;s working</h2>\n<ul>\n<li>Start public or private chat logs</li>\n<li>Integrate Github and Trello</li>\n<li>Upload files</li>\n<li>Browse and join all public logs</li>\n<li>Tag users</li>\n<li>Recieve notifications when you&apos;re tagged or when someone joins a log you started</li>\n</ul>\n<h2>To do</h2>\n<ul>\n<li>Implement message pagination</li>\n<li>Clean up message loading UI</li>\n<li>Test initial use cases</li>\n</ul>\n<h2>License</h2>\n<p><a href=\"http://opensource.org/licenses/bsd-license.php\">BSD license</a></p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/thomasbeta/log",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/thomasbeta",
+          "text": "thomasbeta"
+        }
+      ]
+    }
+  ]
+}
